@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>Markdown in Basic | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/09/sfPCjO1Jt7QwKpB.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/markdown/">markdown</a>
+        </div>
+        <h1 class="title-wrap">Markdown in Basic</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-05-13T16:00:00.000Z" itemprop="datePublished">2020-05-14</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="0-题外话：Typora主题小修改"><a href="#0-题外话：Typora主题小修改" class="headerlink" title="0 题外话：Typora主题小修改"></a>0 题外话：Typora主题小修改</h1><p>昨天在 <strong>sublime text3</strong> 上试了一下，感觉只有当保存的时候才刷新页面效果确实不如实时预览的好。有些时候换行的判定可能有误，所以导致编辑界面换了行，但是网页中并没有换。<strong>Tea</strong>的话一些Markdown的快捷键不能转换，可能是我电脑的原因？导致一些插件也装不上。没有插件的软件只有被卸载的命运。于是还是真香了 <strong>Typora</strong> 。</p>
+<p>使用过程中发现原版的Dark模式并不是纯黑的，文字也是偏灰色的。下载了几个主题发现也不太符合心意，于是自己找了个主题，修改了一下css。</p>
+<p>以 <strong>quartz-milky</strong> 主题为例，在 <strong>Typora</strong> 中打开主题文件夹，打开<code>quartz-milky.css</code>文件，按照自己的需求进行修改即可。</p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YBHp7T.png" alt="修改主题css" title="修改主题css"></p>
+<p>上图是我修改的两处，没有改成Dark模式，背景色改成了护眼绿，字体改成了黑色。</p>
+<p>另外推荐一个查颜色的网站<a href="https://encycolorpedia.cn/" target="_blank" rel="noopener">encycolorpedia</a>，感觉功能还是很全面的，搜索一个颜色，可以有颜色变化和相关色彩的推荐，但就是有点卡，以后遇到更好的再回来补上。</p>
+<p>预览一下：</p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YBLtD1.png" alt="Typora预览" title="Typora预览"></p>
+<h1 id="1-Markdown的基本语法"><a href="#1-Markdown的基本语法" class="headerlink" title="1 Markdown的基本语法"></a>1 Markdown的基本语法</h1><h2 id="1-标题"><a href="#1-标题" class="headerlink" title="1. 标题"></a>1. 标题</h2><p>输入<code>#+空格</code>就可以自动生成一级标题，同理的，几个 # 就是几级标题，Typora中限制标题级数最多到六级（大部分都是到六级）。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 一级标题</span><br><span class="hljs-section">## 二级标题</span><br><span class="hljs-section">### 三级标题</span><br><span class="hljs-section">#### 四级标题</span><br><span class="hljs-section">##### 五级标题</span><br><span class="hljs-section">###### 六级标题</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-粗体、斜体"><a href="#2-粗体、斜体" class="headerlink" title="2. 粗体、斜体"></a>2. 粗体、斜体</h2><p><em>斜体</em> 是在输入文字的两端加上一个星号 <code>*</code>，而 <strong>粗体</strong> 则是加上两个星号，<strong><em>粗斜体</em></strong>的话就加三个。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-emphasis">*斜体*</span><br><span class="hljs-strong">**粗体**</span><br><span class="hljs-strong">***粗斜体**</span>*<br></code></pre></td></tr></table></figure>
+
+<p>星号与文字之间不需要空格。</p>
+<h2 id="3-分割线"><a href="#3-分割线" class="headerlink" title="3. 分割线"></a>3. 分割线</h2><p>另起一行，输入三个星号或者三个减号就可以生成分割线。</p>
+<p>eg:</p>
+<hr>
+<p>用来分隔两段的内容。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-emphasis">***</span><br>---<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-引用"><a href="#4-引用" class="headerlink" title="4. 引用"></a>4. 引用</h2><p>输入<code>&gt;+空格</code>之后加上引用文字即可。</p>
+<p>eg：</p>
+<blockquote>
+<p>此处是引用</p>
+</blockquote>
+<h2 id="5-表格"><a href="#5-表格" class="headerlink" title="5.表格"></a>5.表格</h2><p>表格的插入还是比较麻烦的，但是 <strong>Typora</strong> 可以右键插入一个表格（当然也可以插入其他的元素），这样就可以在图形化的表格中进行编辑了。</p>
+<table>
+<thead>
+<tr>
+<th>表头1</th>
+<th>表头2</th>
+<th>表头3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容1</td>
+<td>内容2</td>
+<td>内容3</td>
+</tr>
+<tr>
+<td>内容1.1</td>
+<td>内容2.1</td>
+<td>内容3.1</td>
+</tr>
+</tbody></table>
+<p>其源代码为：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">| 表头1   | 表头2   | 表头3   |<br>| ------- | ------- | ------- |<br>| 内容1   | 内容2   | 内容3   |<br>| 内容1.1 | 内容2.1 | 内容3.1 |<br></code></pre></td></tr></table></figure>
+
+<p>其中<code>|---|---|---|</code> 中的减号数量没有啥要求。</p>
+<h2 id="6-emoji"><a href="#6-emoji" class="headerlink" title="6. emoji"></a>6. emoji</h2><p>在 <strong>Typora</strong> 中可以快速插入emoji表情（其他markdown软件可能不支持），输入<code>:+emoji描述</code>就可以快速插入emoji，例如输入<code>:star:</code>可以生成:star:。</p>
+<p>end</p>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">#markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E4%BB%8B%E7%BB%8D/" rel="tag">#软件介绍</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/HXlSoYuf9CAW4T2.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/05/15/markdown/Markdown%20Pro/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              Markdown Pro
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/5buthNLVXleUpRi.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/05/13/markdown/Markdown%20in%20Sublime/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              Markdown in Sublime
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>

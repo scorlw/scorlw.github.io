@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>Markdown Pro | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/09/HXlSoYuf9CAW4T2.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/markdown/">markdown</a>
+        </div>
+        <h1 class="title-wrap">Markdown Pro</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-05-14T16:00:00.000Z" itemprop="datePublished">2020-05-15</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <p>之前只是对Markdown的基本语法做了简单的介绍，但是Markdown却不止如此，这篇来介绍一些Markdown的进阶使用。</p>
+<h1 id="1-插入链接与图片"><a href="#1-插入链接与图片" class="headerlink" title="1 插入链接与图片"></a>1 插入链接与图片</h1><h2 id="1-插入链接"><a href="#1-插入链接" class="headerlink" title="1. 插入链接"></a>1. 插入链接</h2><p>链接的插入方式有行内链接、参考链接和自动链接三种。</p>
+<ul>
+<li><p>行内链接</p>
+<p>可以通过<code>[链接文字](链接网址 &quot;标题&quot;)</code>的方式来添加行内链接。</p>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[<span class="hljs-string">我的博客</span>](<span class="hljs-link">https://scorlw.gitee.io/ "博客"</span>)<br></code></pre></td></tr></table></figure>
+
+<p>显示效果为：</p>
+<p><a href="https://scorlw.gitee.io/" target="_blank" rel="noopener" title="博客">我的博客</a></p>
+</li>
+</ul>
+<ul>
+<li><p>参考链接</p>
+<p>常用于编辑多个链接的时候。方法为：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[<span class="hljs-string">链接文字</span>][<span class="hljs-symbol">name</span>]<br>[<span class="hljs-symbol">name</span>]: <span class="hljs-link">link "Title"</span><br></code></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[<span class="hljs-string">百度</span>][<span class="hljs-symbol">1</span>]和[<span class="hljs-string">搜狗</span>][<span class="hljs-symbol">2</span>]都是搜索网站。<br><br>[<span class="hljs-symbol">1</span>]: <span class="hljs-link">https://www.baidu.com/ "Baidu Search"</span><br>[<span class="hljs-symbol">2</span>]: <span class="hljs-link">https://www.sogou.com/ "Sogou"</span><br></code></pre></td></tr></table></figure>
+
+<p><a href="https://www.baidu.com/" target="_blank" rel="noopener" title="Baidu Search">百度</a>和<a href="https://www.sogou.com/" target="_blank" rel="noopener" title="Sogou">搜狗</a>都是搜索网站。</p>
+</li>
+</ul>
+<ul>
+<li><p>自动链接</p>
+<p>对于一些之间的网址或者邮箱等，可以使用自动链接来快速生成。</p>
+<p>方法是<code>&lt;网址&gt;</code></p>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">https:</span>//<span class="hljs-attr">www.baidu.com</span>/&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><a href="https://www.baidu.com/" target="_blank" rel="noopener">https://www.baidu.com/</a></p>
+</li>
+</ul>
+<h2 id="2-插入图片"><a href="#2-插入图片" class="headerlink" title="2. 插入图片"></a>2. 插入图片</h2><p>  图片插入的格式为<code>![图名](地址 &quot;描述&quot;)</code>,和链接差一个叹号而已。</p>
+<p>  示例：</p>
+  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">![<span class="hljs-string">cover</span>](<span class="hljs-link">https://s1.ax1x.com/2020/05/14/YBSajg.jpg "好看"</span>)<br></code></pre></td></tr></table></figure>
+
+<p>  效果：</p>
+<p>  <img src="https://s1.ax1x.com/2020/05/14/YBSajg.jpg" alt="cover" title="好看"></p>
+<p>  值得注意的是，如果地址的地方输入的是本地的地址，那么当md文件在非本地的情况下是打不开图片的，所以如果网上写博客的话建议使用图床。</p>
+<p>  关于图床的选择与使用可以到网上搜教程，可以使用Typora+picgo+图床来实现比较方便的图片上传。图床的选择可以看看<a href="https://www.jianshu.com/p/ea1eb11db63f" target="_blank" rel="noopener">markdown图床</a>这篇文章。</p>
+<h1 id="2-Markdown排版"><a href="#2-Markdown排版" class="headerlink" title="2 Markdown排版"></a>2 Markdown排版</h1><p>Markdown是支持HTML/CSS语法的，因为我也没有学过，所以本文只是罗列一些我常用的语法。</p>
+<h2 id="1-字体颜色"><a href="#1-字体颜色" class="headerlink" title="1. 字体颜色"></a>1. 字体颜色</h2><p>可以通过<code>&lt;font color=&quot;颜色十六进制&quot;&gt;文字&lt;/font&gt;</code>的方式来定义字体颜色。</p>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">font</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"#000077"</span>&gt;</span></span>这是浅蓝色的文字<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">font</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>显示效果如下：</p>
+<p><font color="#000077">这是浅蓝色的文字</font></p>
+<p>关于颜色的十六进制表示法可以去我<a href="https://scorlw.github.io/2020/05/14/markdown/Markdown%20Basic/" target="_blank" rel="noopener">上一篇</a>文中推荐的网站进行查找。</p>
+<h2 id="2-字号"><a href="#2-字号" class="headerlink" title="2. 字号"></a>2. 字号</h2><p>可以通过<code>&lt;font size=&quot;字号&quot;&gt;文字&lt;/font&gt;</code>的方式来定义字体颜色。</p>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">font</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"1"</span>&gt;</span></span>size为1<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">font</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>显示效果如下：</p>
+<p><font size="1">size为1</font></p>
+<h2 id="3-背景色"><a href="#3-背景色" class="headerlink" title="3. 背景色"></a>3. 背景色</h2><p>可以通过<code>&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=颜色十六进制&gt;文字&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code>的方式来定义字体颜色。</p>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">bgcolor</span>=<span class="hljs-string">#0000ff</span>&gt;</span></span>这是浅蓝色背景<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>显示效果如下：</p>
+<table><tr><td bgcolor=#0000ff>这是浅蓝色背景</td></tr></table>
+
+<h2 id="4-字体"><a href="#4-字体" class="headerlink" title="4. 字体"></a>4. 字体</h2><p>格式：<code>&lt;font face=&quot;字体名&quot;&gt;文字&lt;/font&gt;</code></p>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">font</span> <span class="hljs-attr">face</span>=<span class="hljs-string">"仿宋"</span>&gt;</span></span>这是仿宋字<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">font</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><font face="仿宋">这是仿宋字</font></p>
+<h2 id="5-文字位置"><a href="#5-文字位置" class="headerlink" title="5. 文字位置"></a>5. 文字位置</h2><p>居中：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">center</span>&gt;</span></span>居中<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">center</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<center>居中</center>
+
+<p>左对齐：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">align</span>=<span class="hljs-string">"left"</span>&gt;</span></span>左对齐<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p align="left">左对齐</p>
+
+<p>右对齐：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">align</span>=<span class="hljs-string">"right"</span>&gt;</span></span>右对齐<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p align="right">右对齐</p>
+
+<h2 id="6-图片大小与位置"><a href="#6-图片大小与位置" class="headerlink" title="6. 图片大小与位置"></a>6. 图片大小与位置</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">align</span>=<span class="hljs-string">center</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">width</span> = <span class="hljs-string">'350'</span> <span class="hljs-attr">height</span> = <span class="hljs-string">'200'</span> <span class="hljs-attr">src</span> = <span class="hljs-string">"https://s1.ax1x.com/2020/05/14/YBSajg.jpg"</span>/&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<div align=center><img width = '350' height = '200' src = "https://s1.ax1x.com/2020/05/14/YBSajg.jpg"/></div>
+
+
+
+<p align="right">end</p>
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">#markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E4%BB%8B%E7%BB%8D/" rel="tag">#软件介绍</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/qwlGYSfhRMZ6NUv.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/05/27/lua/CodeBlocks%E4%B8%8B%E7%9A%84lua%E6%8B%93%E5%B1%95/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              CodeBlocks下的lua拓展
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/sfPCjO1Jt7QwKpB.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/05/14/markdown/Markdown%20Basic/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              Markdown in Basic
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
