@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>剪绳子 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/14/QL1nXBHcR6SryMm.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>
+        </div>
+        <h1 class="title-wrap">剪绳子</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-06-18T16:00:00.000Z" itemprop="datePublished">2020-06-19</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="剪绳子"><a href="#剪绳子" class="headerlink" title="剪绳子"></a>剪绳子</h1><blockquote>
+<p>关键词：位运算</p>
+</blockquote>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m-1] 。请问 k[0]*k[1]*…*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
+<p>示例 1：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">输入: <span class="hljs-number">2</span><br>输出: <span class="hljs-number">1</span><br>解释: <span class="hljs-number">2</span> = <span class="hljs-number">1</span> + <span class="hljs-number">1</span>, <span class="hljs-number">1</span> × <span class="hljs-number">1</span> = <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p>示例2：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">输入: <span class="hljs-number">10</span><br>输出: <span class="hljs-number">36</span><br>解释: <span class="hljs-number">10</span> = <span class="hljs-number">3</span> + <span class="hljs-number">3</span> + <span class="hljs-number">4</span>, <span class="hljs-number">3</span> × <span class="hljs-number">3</span> × <span class="hljs-number">4</span> = <span class="hljs-number">36</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><strong>思路一：</strong></p>
+<p><strong>暴力递归(超出时间限制)</strong></p>
+<p>我们往往会在头脑中形成一种很直观的暴力解法，就是列举出所有的情况，找到乘积最大的那个解。</p>
+<p>设 F(n)为长度为 n的绳子可以得到的最大乘积，对于每一个 F(n))，可以得到如下分解：</p>
+<p>图1</p>
+<p>从上图看出我们可以把求解 F(n)的问题分解成求解 F(n−1) 的问题，以此类推，直到求解到 F(2)时，F(2)=1，递推回去，问题就得到了解决。这用到的就是分治的思想。</p>
+<p>分治思想的解决方法往往是递归，注意到我们每次将一段绳子剪成两段时，剩下的部分可以继续剪，也可以不剪， 因此我们得到了递归函数 </p>
+<p>F(n)=max(i×(n−i),i×F(n−i)),i=1,2,…,n−2。</p>
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(N^2)，对于每一个 i调用一次递归，递归的时间复杂度为 O(N)，故时间复杂度为 O(N^2)。</p>
+<p>空间复杂度：O(N^2)。</p>
+<p><strong>思路二：</strong></p>
+<p><strong>记忆化技术（自顶向下）</strong></p>
+<p>上述暴力解法会超时，但是很多进阶解法往往是暴力解法的优化。注意到上述代码中超时的原因主要是因为重复计算了 F(n)，为了避免重复计算可以使用 记忆化（memoization）技术。</p>
+<p>记忆化技术的代码中经常需要建立函数 memoize 辅助实现。我们<strong>使用数组 f 来保存长度为 i时的最大长度 f[i]</strong>，最后返回 f[n]即可。</p>
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(N^2)，原因同上，时间复杂度仍然为 O(N^2)，只是采用记忆化减少部分计算时间</p>
+<p>空间复杂度：O(N)，使用了数组f。</p>
+<p><strong>思路三：</strong></p>
+<p>动态规划（自底向上）：（本地成功，力扣失败，报错超了int 的范围）</p>
+<p>同样地，我们也可以使用动态规划，从已知值 F(2)逐步迭代到目标值 F(n)，它是一种自底向上的方法。</p>
+<p><strong>算法</strong></p>
+<p>建立一维动态数组 dp：</p>
+<p>​    边界条件：dp[1] = dp[2] = 1，表示长度为 2 的绳子最大乘积为 1；</p>
+<p>​    状态转移方程：dp[i] = max(dp[i], j * max(i - j, dp[i - j]))，可以这样理解：</p>
+<p>图2</p>
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(N^2).</p>
+<p>空间复杂度：O(N)。</p>
+<p><strong>思路四：</strong></p>
+<p><strong>动态规划优化解法</strong></p>
+<p><strong>算法</strong></p>
+<p>我们发现任何大于 333 的数都可以拆分为数字 1，2，3 的和，且它们对 3 的余数总是 0，1，2，因此我们可以仅用 dp[0]，dp[1]，dp[2] 表示所有大于 3 的值，这样空间复杂度可降到 O(1)。</p>
+<p>图3</p>
+<p>这样重复使用 dp 数组，只须一趟遍历即可完成，可使时间复杂度降到 O(N)。</p>
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(N).</p>
+<p>空间复杂度：O(1)。</p>
+<p><strong>思路五：</strong></p>
+<p><strong>数学方法</strong>（在面试时尽量按照常规思路去解）</p>
+<p>贪心法则：尽可能分解出多的 3，3 的个数为 a，得到余数 b 可能为 0，1，2：</p>
+<pre><code>b = 0，返回 3^a；
+b = 1，我们将末尾的 3+1 分解成 2×2，因此返回 3 &lt; 4
+b = 2，返回 3^a×2；</code></pre><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>思路一：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cuttingRope</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> res = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br>        res = <span class="hljs-built_in">max</span>(res, <span class="hljs-built_in">max</span>(i * cuttingRope(n - i), i * (n - i)));<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>思路二：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">int</span> f[<span class="hljs-number">59</span>] = &#123;<span class="hljs-number">0</span>&#125;;<span class="hljs-comment">//因为n的范围是2-58，数组的开始是0，所以数组的大小可以设为59。</span><br>    <span class="hljs-comment">//vector&lt;int&gt; f;//也可以使用vector</span><br>    <span class="hljs-comment">//vector&lt;int&gt; f(59,0);//error!报错：应输入类型说明符。因为在.h文件中不能调用vector的构造函数来进行赋值（但是在下面的具体函数实现中可以）</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">memoize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span><span class="hljs-comment">//记忆函数，将每次计算结果保存在数组f中</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-comment">//if(n &lt; 2 || n &gt; 58) return 0;//如果上面的数组定义大小为57，下面代码使用f[n - 2]的话，这句需要加上</span><br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (f[n] != <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> f[n];<br>        <span class="hljs-keyword">int</span> res = <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>        &#123;<br>            res = <span class="hljs-built_in">max</span>(res, <span class="hljs-built_in">max</span>(i * (n - i), i * memoize(n - i)));<br>        &#125;<br>        f[n] = res;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cuttingRope</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> res = <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>        &#123;<br>            res = memoize(i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>思路三：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cuttingRope</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">2</span> || n &gt; <span class="hljs-number">58</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> dp[n + <span class="hljs-number">1</span>];<span class="hljs-comment">//int dp[n + 1] = &#123;0&#125;;error!因为变长度的数组不能在声明时初始化。</span><br>    dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>    dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>    dp[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>;<span class="hljs-comment">//因为m &gt; 0 所以 n = 2的话一定要剪成1、1.</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>;i &lt;= n; i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= i; j++)&#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(dp[i], j * <span class="hljs-built_in">max</span>(i - j, dp[i - j]));<span class="hljs-comment">//dp[i - j]并不包括i - j（因为必须剪）</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[n];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>思路四：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cuttingRope</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">2</span> || n &gt; <span class="hljs-number">58</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> dp[<span class="hljs-number">3</span>] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>&#125;;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++)&#123;<br>        dp[i % <span class="hljs-number">3</span>] = max(max(max(dp[(i - <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>], i - <span class="hljs-number">1</span>),<br>        <span class="hljs-number">2</span> * max(dp[(i - <span class="hljs-number">2</span>) % <span class="hljs-number">3</span>], i - <span class="hljs-number">2</span>)),<br>        <span class="hljs-number">3</span> * max(dp[(i - <span class="hljs-number">3</span>) % <span class="hljs-number">3</span>], i - <span class="hljs-number">3</span>));<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[n % <span class="hljs-number">3</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>思路五：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cuttingRope</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">2</span> || n &gt; <span class="hljs-number">58</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">4</span>) <span class="hljs-keyword">return</span> n - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> a = n / <span class="hljs-number">3</span>;<br>    <span class="hljs-keyword">int</span> b = n % <span class="hljs-number">3</span>;<br>    <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">pow</span>(<span class="hljs-number">3</span>, a);<span class="hljs-comment">//pow需要#include &lt;cmath&gt;</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(b == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">pow</span>(<span class="hljs-number">3</span>, a - <span class="hljs-number">1</span>) * <span class="hljs-number">4</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(b == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">pow</span>(<span class="hljs-number">3</span>, a) * <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li><a href="https://scorlw.github.io/2020/07/02/C++/min%E4%B8%8Emax/" target="_blank" rel="noopener">max函数</a></li>
+<li><a href="https://scorlw.github.io/2020/07/02/C++/vector/" target="_blank" rel="noopener">vector的用法</a></li>
+<li><a href="https://scorlw.github.io/2020/07/02/C++/C++%20%E6%95%B0%E7%BB%84/" target="_blank" rel="noopener">c++数组</a></li>
+</ol>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vector/" rel="tag">#vector</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">#动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%94%E7%94%A8/" rel="tag">#数组的应用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A/" rel="tag">#自底向上</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" rel="tag">#自顶向下</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%AD%E4%BB%A3/" rel="tag">#迭代</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/UFBIYmKOT6QJtSN.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/06/28/win/%E6%8D%A2%E7%94%B5%E8%84%91%E5%90%8E%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%BD%AC%E7%A7%BB/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              换电脑后博客的转移
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/xi5ahdpm7uVkreT.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/06/18/%E5%88%B7%E9%A2%98/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              反转链表
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
