@@ -130,6 +130,27 @@
       <section class="article-entry">
         <p>找了挺多的Markdown软件的，网易云笔记，typora，Tea……各有各的好处，但是偶然看到sublime text3也有Markdown的插件，因为平时自己用sublime text多一些，所以安装了对应的插件，感觉效果还不错，安装过程记录一下。<br>尝试了四个插件，有一个不大适合我，所以后来只是安装了三个。</p>
 <h2 id="1-MarkdownEditing"><a href="#1-MarkdownEditing" class="headerlink" title="1. MarkdownEditing"></a>1. MarkdownEditing</h2><p>可以说是一个基础，可以高亮显示Markdown的语法，也可以自动匹配星号、下划线及反引号，总之是简化了一些操作，可以安装。</p>
+<p><strong>修改黑暗主题：</strong></p>
+<ol>
+<li><p><strong>打开Default和User</strong></p>
+<p>ctrl+shift+p打开命令输入:</p>
+<p><code>Preference: MarkdownEditing Setting</code></p>
+<p>然后会出现下面两个选项，分别打开:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">Preference: MarkdownEditing Setting: Default<br>Preference: MarkdownEditing Setting: User<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>复制user</strong></p>
+<p>将<strong>Preference: MarkdownEditing Setting: Default</strong>对应文件全部内容复制到<strong>Preference: MarkdownEditing Setting: User</strong>中。</p>
+</li>
+<li><p><strong>修改User</strong></p>
+<p>在Preference: MarkdownEditing Setting: User中修改.</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-string">"color_scheme"</span>: <span class="hljs-string">"Packages/MarkdownEditing/MarkdownEditor.tmTheme"</span>,<br><span class="hljs-regexp">//</span> <span class="hljs-string">"color_scheme"</span>: <span class="hljs-string">"Packages/MarkdownEditing/MarkdownEditor-Dark.tmTheme"</span>,<br></code></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> <span class="hljs-string">"color_scheme"</span>: <span class="hljs-string">"Packages/MarkdownEditing/MarkdownEditor.tmTheme"</span>,<br> <span class="hljs-string">"color_scheme"</span>: <span class="hljs-string">"Packages/MarkdownEditing/MarkdownEditor-Dark.tmTheme"</span>,<br></code></pre></td></tr></table></figure>
+
+<p>也可以针对<code>//Layout</code>里面的东西进行修改。</p>
+</li>
+</ol>
 <h2 id="2-MarkdownLivePreview（不推荐）"><a href="#2-MarkdownLivePreview（不推荐）" class="headerlink" title="2. MarkdownLivePreview（不推荐）"></a>2. MarkdownLivePreview（不推荐）</h2><p>可以实时预览Markdown文件，安装之后要经过 <strong>Preferences -&gt; Package Settings -&gt; MarkdownLivePreview -&gt; Settings</strong> 的设置的右侧加一条“ <code>&quot;markdown_live_preview_on_open&quot;: true,</code> ”，重启sublime即可使用。<br><strong>存在问题</strong><br>实际预览结果并不是很美观，不能横向滚动，而且没有自动换行，所以有些文字是看不到的，就很难受。</p>
 <h2 id="3-MarkdownPreview"><a href="#3-MarkdownPreview" class="headerlink" title="3. MarkdownPreview"></a>3. MarkdownPreview</h2><p>可以在浏览器中预览Markdown文件。</p>
 <h3 id="操作方法一："><a href="#操作方法一：" class="headerlink" title="操作方法一："></a>操作方法一：</h3><ol>
