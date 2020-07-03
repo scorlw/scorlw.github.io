@@ -20,7 +20,7 @@
 
   
 
-  <title>min与max | scorlw</title>
+  <title>C++的双冒号 | scorlw</title>
 
   
 
@@ -93,18 +93,18 @@
   
   
     <div class="header-content">
-      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/14/zq3jwGogZnVKPTQ.jpg)"></div>
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/14/6zEe2rOwBIVFkaJ.jpg)"></div>
       <div class="post-text">
         <div class="type-wrap">
           <a class="article-category-link" href="/categories/C/">C++</a>
         </div>
-        <h1 class="title-wrap">min与max</h1>
+        <h1 class="title-wrap">C++的双冒号</h1>
         <h2 class="title-sub-wrap">
           <strong>scorlw</strong>
           <span>发布于</span>
           
   <a href="javascript:;" class="article-date">
-    <time datetime="2020-07-01T16:00:00.000Z" itemprop="datePublished">2020-07-02</time>
+    <time datetime="2020-07-02T16:00:00.000Z" itemprop="datePublished">2020-07-03</time>
   </a>
 
         </h2>
@@ -128,32 +128,25 @@
       
 
       <section class="article-entry">
-        <h1 id="min与max"><a href="#min与max" class="headerlink" title="min与max"></a>min与max</h1><blockquote>
+        <h1 id="C-的双冒号"><a href="#C-的双冒号" class="headerlink" title="C++的双冒号::"></a>C++的双冒号::</h1><blockquote>
 <p>c++</p>
 </blockquote>
-<p>包含在c++标准库中头文件<algorithm>中，在头文件&lt;windows.h&gt;中定义了min,max的宏，若在包含<algorithm>的同时包含&lt;windows.h&gt;会导致函数无法使用。</p>
-<p>&lt;windows.h&gt;提供了_cpp_min等函数来代替min函数的功能。</p>
-<p>C++11标准：<algorithm>中min函数的原型</p>
-<p>default (1) </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt; <span class="hljs-title">const</span> <span class="hljs-title">T</span>&amp; <span class="hljs-title">min</span> (<span class="hljs-title">const</span> <span class="hljs-title">T</span>&amp; <span class="hljs-title">a</span>, <span class="hljs-title">const</span> <span class="hljs-title">T</span>&amp; <span class="hljs-title">b</span>);</span><br></code></pre></td></tr></table></figure>
+<p>“::”在C++中表示作用域和所属关系。”::”是运算符中等级最高的，它分为三种，分别如下：</p>
+<h2 id="一、作用域符号："><a href="#一、作用域符号：" class="headerlink" title="一、作用域符号："></a>一、作用域符号：</h2><p>作用域符号”::“的前面一般是类名称，后面一般是该类的成员名称，C++为例避免不同的类有名称相同的成员而采用作用域的方式进行区分。</p>
+<p>例如：A,B表示两个类，在A,B中都有成员member。</p>
+<p>那么：</p>
+<p>1、A::member就表示类A中的成员member。</p>
+<p>2、B::member就表示类B中的成员member。</p>
+<h2 id="二、全局作用域符号："><a href="#二、全局作用域符号：" class="headerlink" title="二、全局作用域符号："></a>二、全局作用域符号：</h2><p>全局作用域符号：当全局变量在局部函数中与其中某个变量重名，那么就可以用::来区分，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>&gt; data, min_d;<br>    <br>    MinStack() &#123;<br>        min_d.push((<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">40</span>);    <br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;<br>        data.push(x);<br>        min_d.push(::<span class="hljs-built_in">min</span>(min_d.top(), (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)x));<span class="hljs-comment">//::min因为类里面有一个min函数，直接使用min的话会调用类中的函数，加上::后调用的是全局的min函数。</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">min</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> min_d.top();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<p>custom (2)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>, <span class="hljs-title">class</span> <span class="hljs-title">Compare</span>&gt;</span><br><span class="hljs-class"><span class="hljs-title">const</span> <span class="hljs-title">T</span>&amp; <span class="hljs-title">min</span> (<span class="hljs-title">const</span> <span class="hljs-title">T</span>&amp; <span class="hljs-title">a</span>, <span class="hljs-title">const</span> <span class="hljs-title">T</span>&amp; <span class="hljs-title">b</span>, <span class="hljs-title">Compare</span> <span class="hljs-title">comp</span>);</span><br></code></pre></td></tr></table></figure>
-
-<p>initializer list (3) </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt; <span class="hljs-title">T</span> <span class="hljs-title">min</span> (<span class="hljs-title">initializer_list</span>&lt;T&gt; <span class="hljs-title">il</span>);</span><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>, <span class="hljs-title">class</span> <span class="hljs-title">Compare</span>&gt;</span><br><span class="hljs-class"><span class="hljs-title">T</span> <span class="hljs-title">min</span> (<span class="hljs-title">initializer_list</span>&lt;T&gt; <span class="hljs-title">il</span>, <span class="hljs-title">Compare</span> <span class="hljs-title">comp</span>);</span><br></code></pre></td></tr></table></figure>
-
-<p>例程：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">var</span> &#123;</span><br>	<span class="hljs-keyword">char</span> *name;<br>	<span class="hljs-keyword">int</span> key;<br>	var(<span class="hljs-keyword">char</span> *a,<span class="hljs-keyword">int</span> k):name(a),key(k)&#123;&#125;<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">comp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> var&amp; l, <span class="hljs-keyword">const</span> var&amp; r)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> l.key &lt; r.key;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-function">var <span class="hljs-title">v1</span><span class="hljs-params">(<span class="hljs-string">"var1"</span>, <span class="hljs-number">2</span>)</span></span>;<br>	<span class="hljs-function">var <span class="hljs-title">v2</span><span class="hljs-params">(<span class="hljs-string">"var2"</span>, <span class="hljs-number">3</span>)</span></span>;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">min</span>(v1, v2,comp).name &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">var1<br></code></pre></td></tr></table></figure>
-
+<h2 id="三、作用域分解运算符："><a href="#三、作用域分解运算符：" class="headerlink" title="三、作用域分解运算符："></a>三、作用域分解运算符：</h2><p>::是C++里的作用域分解运算符，“比如声明了一个类A，类A里声明了一个成员函数voidf()，但没有在类的声明里给出f的定义，那么在类外定义f时，就要写成voidA::f()，表示这个f()函数是类A的成员函数。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CA</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">int</span> ca_var;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>;<br>&#125;;<br><span class="hljs-comment">//那么在实现这个函数时，必须这样书写</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">CA::add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><span class="hljs-comment">//另外，双冒号也常常用于在类变量内部作为当前类实例的元素进行表示，比如：</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">CA::add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> a + ::ca_var;<span class="hljs-comment">//表示当前实例中的变量ca_var</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
       </section>
 
       <section class="article-footer">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%BD%E6%95%B0/" rel="tag">#函数</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">#C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E5%86%92%E5%8F%B7/" rel="tag">#双冒号</a></li></ul>
       </section>
 
       <section class="article-navs">
@@ -164,13 +157,13 @@
       <div id="article-nav-newer" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/7M1ZDlViB35LoSx.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/Uomj4I19QsGhZew.jpg)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/07/02/C++/C++%20%E6%95%B0%E7%BB%84/"></a>
+          <a class="card-link article-nav-link" href="/2020/07/03/C++/C++%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8B%E6%A0%88%EF%BC%88stack%EF%BC%89%E5%92%8C%E9%98%9F%E5%88%97%EF%BC%88queue%EF%BC%89/"></a>
           <strong class="article-nav-caption">Newer</strong>
           <p class="article-nav-title">
             
-              C++ 数组
+              C++标准库之栈（stack）和队列（queue）
             
           </p>
         </article>
@@ -180,13 +173,13 @@
       <div id="article-nav-older" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/DAwV1ThzCIYEnMr.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/7M1ZDlViB35LoSx.jpg)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/07/02/C++/vector/"></a>
+          <a class="card-link article-nav-link" href="/2020/07/02/C++/C++%20%E6%95%B0%E7%BB%84/"></a>
           <strong class="article-nav-caption">Older</strong>
           <p class="article-nav-title">
             
-              vector
+              C++ 数组
             
           </p>
         </article>
