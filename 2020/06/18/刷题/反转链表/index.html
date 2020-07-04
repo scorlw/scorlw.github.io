@@ -141,12 +141,14 @@
 <p>每次让 pre 的 next 指向 cur ，实现一次局部反转；</p>
 <p>局部反转完成之后， pre 和 cur 同时往前移动一个位置</p>
 <p>循环上述过程，直至 pre 到达链表尾部</p>
+<p><img src="/2020/06/18/%E5%88%B7%E9%A2%98/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/%E5%8F%8C%E6%8C%87%E9%92%881.gif" alt="双指针1"></p>
 <p><strong>思路二：</strong></p>
 <p>简洁的递归</p>
 <p>使用递归函数，一直递归到链表的最后一个结点，该结点就是反转后的头结点，记作 ret .</p>
 <p>此后，每次函数在返回的过程中，让当前结点的下一个结点的 next 指针指向当前节点。</p>
 <p>同时让当前结点的 next指针指向 NULL ，从而实现从链表尾部开始的局部反转；</p>
 <p>当递归函数全部出栈后，链表反转完成。</p>
+<p><img src="/2020/06/18/%E5%88%B7%E9%A2%98/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/%E9%80%92%E5%BD%92.gif" alt="递归"></p>
 <p><strong>思路三：</strong></p>
 <p>妖魔化的双指针</p>
 <p>原链表的头结点就是反转之后链表的尾结点，使用 head 标记 .</p>
@@ -154,6 +156,7 @@
 <p>每次都让 head 下一个结点的 next 指向 cur ，实现一次局部反转</p>
 <p>局部反转完成之后，cur和 head的 next 指针同时 往前移动一个位置</p>
 <p>循环上述过程，直至 cur 到达链表的最后一个结点 .</p>
+<p><img src="/2020/06/18/%E5%88%B7%E9%A2%98/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/%E5%8F%8C%E6%8C%87%E9%92%882.gif" alt="双指针2"></p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>思路一：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>&#123;<br>        ListNode* cur = <span class="hljs-literal">NULL</span>, *pre = head;<br>        <span class="hljs-keyword">while</span> (pre != <span class="hljs-literal">NULL</span>) &#123;<br>            ListNode* t = pre-&gt;next;<br>            pre-&gt;next = cur;<br>            cur = pre;<br>            pre = t;<br>        &#125;<br>        <span class="hljs-keyword">return</span> cur;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
