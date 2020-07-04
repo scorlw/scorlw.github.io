@@ -142,7 +142,7 @@
 <p><strong>暴力递归(超出时间限制)</strong></p>
 <p>我们往往会在头脑中形成一种很直观的暴力解法，就是列举出所有的情况，找到乘积最大的那个解。</p>
 <p>设 F(n)为长度为 n的绳子可以得到的最大乘积，对于每一个 F(n))，可以得到如下分解：</p>
-<p><a href="https://pic.leetcode-cn.com/86e7c3368e2edd8c4bfc907b322204198b56cce7e82e7da9a43a8bbaab50cf9e-14.png" target="_blank" rel="noopener">图一</a></p>
+<p><img src="/2020/06/19/%E5%88%B7%E9%A2%98/%E5%89%AA%E7%BB%B3%E5%AD%90/1.png" alt="1"></p>
 <p>从上图看出我们可以把求解 F(n)的问题分解成求解 F(n−1) 的问题，以此类推，直到求解到 F(2)时，F(2)=1，递推回去，问题就得到了解决。这用到的就是分治的思想。</p>
 <p>分治思想的解决方法往往是递归，注意到我们每次将一段绳子剪成两段时，剩下的部分可以继续剪，也可以不剪， 因此我们得到了递归函数 </p>
 <p>F(n)=max(i×(n−i),i×F(n−i)),i=1,2,…,n−2。</p>
@@ -163,7 +163,7 @@
 <p>建立一维动态数组 dp：</p>
 <p>​    边界条件：dp[1] = dp[2] = 1，表示长度为 2 的绳子最大乘积为 1；</p>
 <p>​    状态转移方程：dp[i] = max(dp[i], j * max(i - j, dp[i - j]))，可以这样理解：</p>
-<p><a href="https://pic.leetcode-cn.com/82b25ac6bcb742f31e5202e4af993d98abfea6a0c385379b214440bbb84b9bb4-14.jpg" target="_blank" rel="noopener">图2</a></p>
+<p><img src="/2020/06/19/%E5%88%B7%E9%A2%98/%E5%89%AA%E7%BB%B3%E5%AD%90/2.jpg" alt="2"></p>
 <p><strong>复杂度分析</strong></p>
 <p>时间复杂度：O(N^2).</p>
 <p>空间复杂度：O(N)。</p>
@@ -171,7 +171,7 @@
 <p><strong>动态规划优化解法</strong></p>
 <p><strong>算法</strong></p>
 <p>我们发现任何大于 333 的数都可以拆分为数字 1，2，3 的和，且它们对 3 的余数总是 0，1，2，因此我们可以仅用 dp[0]，dp[1]，dp[2] 表示所有大于 3 的值，这样空间复杂度可降到 O(1)。</p>
-<p><a href="https://pic.leetcode-cn.com/3be12f435b2a0668eecd747c5d08188128fde7764b99116123b86880280f62ca-14.gif" target="_blank" rel="noopener">图3</a></p>
+<p><img src="/2020/06/19/%E5%88%B7%E9%A2%98/%E5%89%AA%E7%BB%B3%E5%AD%90/3.gif" alt="3"></p>
 <p>这样重复使用 dp 数组，只须一趟遍历即可完成，可使时间复杂度降到 O(N)。</p>
 <p><strong>复杂度分析</strong></p>
 <p>时间复杂度：O(N).</p>
