@@ -20,7 +20,7 @@
 
   
 
-  <title>Markdown in Basic | scorlw</title>
+  <title>第一个只出现一次的字符 | scorlw</title>
 
   
 
@@ -98,13 +98,13 @@
         <div class="type-wrap">
           <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>
         </div>
-        <h1 class="title-wrap">Markdown in Basic</h1>
+        <h1 class="title-wrap">第一个只出现一次的字符</h1>
         <h2 class="title-sub-wrap">
           <strong>scorlw</strong>
           <span>发布于</span>
           
   <a href="javascript:;" class="article-date">
-    <time datetime="2020-06-05T16:00:00.000Z" itemprop="datePublished">2020-06-06</time>
+    <time datetime="2020-06-22T16:00:00.000Z" itemprop="datePublished">2020-06-23</time>
   </a>
 
         </h2>
@@ -131,36 +131,36 @@
         <h1 id="第一个只出现一次的字符"><a href="#第一个只出现一次的字符" class="headerlink" title="第一个只出现一次的字符"></a>第一个只出现一次的字符</h1><blockquote>
 <p>关键词：位运算</p>
 </blockquote>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。</p>
 <p>示例 1：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">输入：<span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">4</span>, <span class="hljs-number">1</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span><br>输出：<span class="hljs-number">1</span>-&gt;<span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">s = <span class="hljs-string">"abaccdeff"</span><br>返回 <span class="hljs-string">"b"</span><br><br>s = <span class="hljs-string">""</span> <br>返回 <span class="hljs-string">" "</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h3 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h3><p><strong>思路：</strong></p>
-<ul>
-<li><p>根据题目描述， 链表 l1 , l2 是 递增 的，因此容易想到使用双指针 l1 和 l2 遍历两链表，根据 l1.val和 l2.val 的大小关系确定节点添加顺序，两节点指针交替前进，直至遍历完毕。</p>
-</li>
-<li><p><strong>引入伪头节点：</strong> 由于初始状态合并链表中无节点，因此循环第一轮时无法将节点添加到合并链表中。解决方案：初始化一个辅助节点 dum作为合并链表的伪头节点，将各节点添加至 dum之后。</p>
-</li>
-</ul>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>本题考察 <strong>哈希表</strong> 的使用，本文介绍 “哈希表” 和 “有序哈希表” 两种解法。<br> 其中，在字符串很长时， “有序哈希表” 解法理论上效率更高。</p>
+<h3 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h3><p><strong>思路：</strong></p>
+<p>哈希表：</p>
+<ol>
+<li>遍历字符串 <code>s</code> ，使用哈希表统计 “各字符数量是否 &gt;1 ”。</li>
+<li>再遍历字符串 <code>s</code> ，在哈希表中找到首个 “数量为 1 的字符”，并返回。</li>
+</ol>
 <p><strong>算法流程：</strong></p>
 <ol>
-<li><p>初始化： 伪头节点 dum ，节点 cur指向 dum 。</p>
-</li>
-<li><p>循环合并： 当 l1 或 l2 为空时跳出；</p>
-<p>当 l1.val&lt;l2.val时： cur 的后继节点指定为 l1 ，并 l1向前走一步；</p>
-<p>当 l1.val≥l2.val时： cur 的后继节点指定为 l2 ，并 l2向前走一步 ；</p>
-<p>节点 cur向前走一步，即 cur=cur.next 。</p>
-<p>合并剩余尾部： 跳出时有两种情况，即 l1为空 或 l2为空。</p>
-<pre><code>若 l1≠null： 将 l1 添加至节点 cur 之后；
-否则： 将 l2 添加至节点 cur之后。</code></pre><p>返回值： 合并链表在伪头节点 dum 之后，因此返回 dum.next 即可。</p>
-</li>
+<li>哈希表：初始化大小为26，初始值为0的哈希表；</li>
+<li>遍历s，统计各个字符的数量；</li>
+<li>再次遍历s，返回第一个数量为1的字符；</li>
+<li>如果没有返回，那么返回空格。</li>
 </ol>
 <p><strong>代码：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">ListNode *<span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode *l1, ListNode *l2)</span></span><br><span class="hljs-function"></span>&#123;<br>    ListNode *cur = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);<br>    ListNode *dum = cur;<br>    <span class="hljs-keyword">while</span> (l1 &amp;&amp; l2)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (l1-&gt;val &lt; l2-&gt;val)<br>        &#123;<br>            cur-&gt;next = l1;<br>            l1 = l1-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            cur-&gt;next = l2;<br>            l2 = l2-&gt;next;<br>        &#125;<br>        cur = cur-&gt;next;<br>    &#125;<br>    cur-&gt;next = l1 ? l1 : l2;<br>    <span class="hljs-keyword">return</span> dum-&gt;next;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">firstUniqChar</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">hashs</span><span class="hljs-params">(<span class="hljs-number">26</span>, <span class="hljs-number">0</span>)</span></span>;<br>    <span class="hljs-built_in">string</span> res = <span class="hljs-string">""</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : s)<br>    &#123;<br>        hashs[c - <span class="hljs-string">'a'</span>]++;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : s)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (hashs[c - <span class="hljs-string">'a'</span>] == <span class="hljs-number">1</span>)<br>        &#123;<br>            res.push_back(c);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (res.empty())<br>        res = <span class="hljs-string">" "</span>;<br>    <span class="hljs-keyword">return</span> res[<span class="hljs-number">0</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h3><p><strong>思路：</strong></p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><br></code></pre></td></tr></table></figure>
+<p>有序哈希表：</p>
+<p>在哈希表的基础上，有序哈希表中的键值对是 <strong>按照插入顺序排序</strong> 的。基于此，可通过遍历有序哈希表，实现搜索首个 “数量为 1 的字符”。</p>
+<p>哈希表是 <strong>去重</strong> 的，即哈希表中键值对的数量 ≤ 字符串 s 的长度。因此，相比于方法一，方法二减少了第二轮遍历的循环次数。当字符串很长（重复字符很多）时，方法二则效率更高。</p>
+<p><strong>复杂度分析：</strong></p>
+<p>时间和空间复杂度均与 “方法一” 相同，而具体分析时间复杂度：</p>
+<pre><code>方法一 O(2N) ： N 为字符串 s 的长度；需遍历 s 两轮；
+方法二 O(N) ：遍历 s 一轮，遍历 dic 一轮。因为dic的长度&lt;=26 ,最多就是全部字母都有。所以遍历dic 是O(1)常量</code></pre><p><strong>代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">firstUniqChar</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> s)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (s.empty())	<span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>;<br>	<span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; ch;<br>	<span class="hljs-keyword">int</span> id=<span class="hljs-number">0</span>,first=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (id &lt; s.<span class="hljs-built_in">size</span>())<br>	&#123;<br>		<span class="hljs-keyword">if</span> (ch.<span class="hljs-built_in">find</span>(s[id]) == ch.<span class="hljs-built_in">end</span>())	ch[s[id]] = <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">else</span> ch[s[id]] += <span class="hljs-number">1</span>;<br>		id++;<br>	&#125;<br>	<span class="hljs-keyword">while</span> (first &lt; ch.<span class="hljs-built_in">size</span>()) &#123; <br>		<span class="hljs-keyword">if</span> (ch[first] == <span class="hljs-number">1</span>)  <span class="hljs-keyword">return</span> s[first];<br>		first++;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
 <li>unordered_set的使用，特性，count等函数；</li>
@@ -181,13 +181,13 @@
       <div id="article-nav-newer" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://s1.ax1x.com/2020/05/14/YBSajg.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/UFBIYmKOT6QJtSN.jpg)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/06/06/C++/C++%E5%9F%BA%E7%A1%80/"></a>
+          <a class="card-link article-nav-link" href="/2020/06/28/win/%E6%8D%A2%E7%94%B5%E8%84%91%E5%90%8E%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%BD%AC%E7%A7%BB/"></a>
           <strong class="article-nav-caption">Newer</strong>
           <p class="article-nav-title">
             
-              Markdown in Basic
+              换电脑后博客的转移
             
           </p>
         </article>
@@ -197,13 +197,13 @@
       <div id="article-nav-older" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/rKMWE5qfGPB2mSe.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/mFY6QyWsD5vqpr4.jpg)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/06/06/%E5%88%B7%E9%A2%98/%E9%A1%BA%E6%97%B6%E9%92%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5/"></a>
+          <a class="card-link article-nav-link" href="/2020/06/22/%E5%88%B7%E9%A2%98/%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/"></a>
           <strong class="article-nav-caption">Older</strong>
           <p class="article-nav-title">
             
-              顺时针打印矩阵
+              连续子数组的最大和
             
           </p>
         </article>
