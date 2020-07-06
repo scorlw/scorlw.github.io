@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>unordered_map | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/14/t2sjC5FKf6bLTr7.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/C/">C++</a>
+        </div>
+        <h1 class="title-wrap">unordered_map</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-07-05T16:00:00.000Z" itemprop="datePublished">2020-07-06</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<h2 id="1-std-unordered-map-的定义与特性"><a href="#1-std-unordered-map-的定义与特性" class="headerlink" title="1.std::unordered_map 的定义与特性"></a>1.std::unordered_map 的定义与特性</h2><p>所在头文件：<unordered_map></unordered_map></p>
+<p>std::unorederd_map 类模板：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span> &lt; <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Key</span>,                                   // <span class="hljs-title">unordered_map</span>:</span>:key_type<br>           <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>,                                     // <span class="hljs-title">unordered_map</span>:</span>:mapped_type<br>           <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hash</span> = <span class="hljs-title">hash</span>&lt;Key&gt;,                      // <span class="hljs-title">unordered_map</span>:</span>:hasher<br>           <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pred</span> = <span class="hljs-title">equal_to</span>&lt;Key&gt;,                  // <span class="hljs-title">unordered_map</span>:</span>:key_equal<br>           <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Alloc</span> = <span class="hljs-title">allocator</span>&lt; pair&lt;const Key,T&gt; &gt; // <span class="hljs-title">unordered_map</span>:</span>:allocator_type<br>           &gt; <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">unordered_map</span>;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>关联性：std::unorederd_map 是一个关联容器，其中的元素根据键来引用，而不是根据索引来引用。</li>
+<li>无序性：在内部，std::unordered_map中的元素不会根据其键值或映射值按任何特定顺序排序，而是根据其哈希值组织到桶中，以允许通过键值直接快速访问各个元素（常量的平均时间复杂度）。</li>
+<li>唯一性：std::unorederd_map中的元素的键是唯一的。</li>
+</ul>
+<h2 id="2-构造-std-unordered-map"><a href="#2-构造-std-unordered-map" class="headerlink" title="2.构造 std::unordered_map"></a>2.构造 std::unordered_map</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// constructing unordered_maps</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>,<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&gt; stringmap;<br><br><span class="hljs-function">stringmap <span class="hljs-title">merge</span> <span class="hljs-params">(stringmap a,stringmap b)</span> </span>&#123;<span class="hljs-comment">//合并a和b</span><br>  	<span class="hljs-function">stringmap <span class="hljs-title">temp</span><span class="hljs-params">(a)</span></span>; <br>  	temp.insert(b.<span class="hljs-built_in">begin</span>(),b.<span class="hljs-built_in">end</span>()); <br>  	<span class="hljs-keyword">return</span> temp;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>	  stringmap first;                              <span class="hljs-comment">// empty</span><br><br>	  <span class="hljs-comment">// 一个元素为：&#123;key, value&#125;</span><br>	  <span class="hljs-function">stringmap <span class="hljs-title">second</span> <span class="hljs-params">( &#123;&#123;<span class="hljs-string">"apple"</span>,<span class="hljs-string">"red"</span>&#125;, &#123;<span class="hljs-string">"lemon"</span>,<span class="hljs-string">"yellow"</span>&#125;&#125; )</span></span>;       <span class="hljs-comment">// init list</span><br>	  <span class="hljs-function">stringmap <span class="hljs-title">third</span> <span class="hljs-params">( &#123;&#123;<span class="hljs-string">"orange"</span>,<span class="hljs-string">"orange"</span>&#125;, &#123;<span class="hljs-string">"strawberry"</span>,<span class="hljs-string">"red"</span>&#125;, &#123;<span class="hljs-string">"apple"</span>,<span class="hljs-string">"green"</span>&#125;&#125; )</span></span>;  <span class="hljs-comment">// init list</span><br>	  <span class="hljs-function">stringmap <span class="hljs-title">fourth</span> <span class="hljs-params">(second)</span></span>;                    <span class="hljs-comment">// copy</span><br>	  <span class="hljs-function">stringmap <span class="hljs-title">fifth</span> <span class="hljs-params">(merge(third,fourth))</span></span>;        <span class="hljs-comment">// move</span><br>	  <span class="hljs-function">stringmap <span class="hljs-title">sixth</span> <span class="hljs-params">(fifth.<span class="hljs-built_in">begin</span>(),fifth.<span class="hljs-built_in">end</span>())</span></span>;  <span class="hljs-comment">// range</span><br>	<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"sixth contains:"</span>;<br>	  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; x: sixth) <br>	  		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; x.first &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; x.second;<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>      system(<span class="hljs-string">"pause"</span>);<br>	  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>IO：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">sixth contains: orange:orange lemon:yellow apple:green strawberry:red<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-赋值操作"><a href="#3-赋值操作" class="headerlink" title="3.赋值操作"></a>3.赋值操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// assignment operator with unordered_map</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>,<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&gt; stringmap;<br><br><span class="hljs-function">stringmap <span class="hljs-title">merge</span> <span class="hljs-params">(stringmap a,stringmap b)</span> </span>&#123;<br>  	<span class="hljs-function">stringmap <span class="hljs-title">temp</span><span class="hljs-params">(a)</span></span>; <br>  	temp.insert(b.<span class="hljs-built_in">begin</span>(),b.<span class="hljs-built_in">end</span>()); <br>  	<span class="hljs-keyword">return</span> temp;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>	  stringmap first, second, third;<br>	  <br>	  first = &#123;&#123;<span class="hljs-string">"AAPL"</span>,<span class="hljs-string">"Apple"</span>&#125;, &#123;<span class="hljs-string">"MSFT"</span>,<span class="hljs-string">"Microsoft"</span>&#125;&#125;;  <span class="hljs-comment">// init list</span><br>	  second = &#123;&#123;<span class="hljs-string">"GOOG"</span>,<span class="hljs-string">"Google"</span>&#125;, &#123;<span class="hljs-string">"ORCL"</span>,<span class="hljs-string">"Oracle"</span>&#125;&#125;;   <span class="hljs-comment">// init list</span><br>	  third = merge(first,second);                       <span class="hljs-comment">// move</span><br>	  first = third;                                     <span class="hljs-comment">// copy</span><br>	<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"first contains:"</span>;<br>	  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; elem: first) <br>	  		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; elem.first &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; elem.second;<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	<br>	  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>IO：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">first contains: GOOG:Google MSFT:Microsoft ORCL:Oracle AAPL:Apple<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-迭代器操作"><a href="#4-迭代器操作" class="headerlink" title="4.迭代器操作"></a>4.迭代器操作</h2><p>4.1 指向整个容器中的元素</p>
+<p>即，“第一个”指整个容器中的第一个，“尾后”指整个容器中的尾后。</p>
+<table>
+<thead>
+<tr>
+<th>函数声明</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iterator begin() noexcept;<br>const_iterator begin() const noexcept;</td>
+<td>返回一个迭代器，指向第一个元素</td>
+</tr>
+<tr>
+<td>iterator end() noexcept;<br>const_iterator end() const noexcept;</td>
+<td>返回一个迭代器，指向尾后元素</td>
+</tr>
+<tr>
+<td>const_iterator cbegin() const noexcept;</td>
+<td>返回一个常量迭代器，指向第一个元素</td>
+</tr>
+<tr>
+<td>const_iterator cend() const noexcept;</td>
+<td>返回一个常量迭代器，指向尾后元素</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// unordered_map::cbegin/cend example</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>,<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&gt; mymap;<br>	  mymap = &#123;&#123;<span class="hljs-string">"Australia"</span>,<span class="hljs-string">"Canberra"</span>&#125;,&#123;<span class="hljs-string">"U.S."</span>,<span class="hljs-string">"Washington"</span>&#125;,&#123;<span class="hljs-string">"France"</span>,<span class="hljs-string">"Paris"</span>&#125;&#125;;<br>	<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"mymap contains:"</span>;<br>	  <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">auto</span> it = mymap.cbegin(); it != mymap.cend(); ++it )<br>	      <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; it-&gt;second;  <span class="hljs-comment">// cannot modify *it</span><br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"mymap's buckets contain:\n"</span>;<br>	  <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">unsigned</span> i = <span class="hljs-number">0</span>; i &lt; mymap.bucket_count(); ++i) &#123;<br>	      <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"bucket #"</span> &lt;&lt; i &lt;&lt; <span class="hljs-string">" contains:"</span>;<br>	      <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">auto</span> local_it = mymap.cbegin(i); local_it!= mymap.cend(i); ++local_it )<br>	          <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; local_it-&gt;first &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; local_it-&gt;second;<br>	      <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	  &#125;<br>	<br>	  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>IO:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++">mymap contains: France:Paris U.S.:Washington Australia:Canberra<br>mymap<span class="hljs-number">'</span>s buckets contain:<br>bucket #<span class="hljs-number">0</span> contains: U.S.:Washington<br>bucket #<span class="hljs-number">1</span> contains:<br>bucket #<span class="hljs-number">2</span> contains:<br>bucket #<span class="hljs-number">3</span> contains: France:Paris<br>bucket #<span class="hljs-number">4</span> contains: Australia:Canberra<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-容量操作"><a href="#5-容量操作" class="headerlink" title="5. 容量操作"></a>5. 容量操作</h2><table>
+<thead>
+<tr>
+<th>函数声明</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bool <strong>empty()</strong> const noexcept;</td>
+<td>unordered_map 是否为空</td>
+</tr>
+<tr>
+<td>size_type <strong>size()</strong> const noexcept;</td>
+<td>获取unordered_map 中元素的数量</td>
+</tr>
+</tbody></table>
+<h2 id="6-访问操作"><a href="#6-访问操作" class="headerlink" title="6. 访问操作"></a>6. 访问操作</h2><table>
+<thead>
+<tr>
+<th>访问方式</th>
+<th>函数声明</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用方括号（[]）</td>
+<td>mapped_type&amp; operator[] (key_type&amp;&amp; k);</td>
+<td>如果 k 匹配容器中某个元素的键，则该函数返回该映射值的引用。<br>如果 k 与容器中任何元素的键都不匹配，则该函数将使用该键插入一个新元素，并返回该映射值的引用。</td>
+</tr>
+<tr>
+<td>使用 at()</td>
+<td>mapped_type&amp; at (const key_type&amp; k);<br>const mapped_type&amp; at (const key_type&amp; k) const;</td>
+<td>如果 k 匹配容器中某个元素的键，则该函数返回该映射值的引用。<br>如果 k 与容器中任何元素的键都不匹配，则该函数将抛出 out_of_range 异常。</td>
+</tr>
+</tbody></table>
+<p><strong>注意</strong>：const std::unordered_map 不能使用 operator[] 操作！！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// unordered_map::at</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>,<span class="hljs-keyword">int</span>&gt; mymap = &#123;<br>	                &#123; <span class="hljs-string">"Mars"</span>, <span class="hljs-number">3000</span>&#125;,<br>	                &#123; <span class="hljs-string">"Saturn"</span>, <span class="hljs-number">60000</span>&#125;,<br>	                &#123; <span class="hljs-string">"Jupiter"</span>, <span class="hljs-number">70000</span> &#125; &#125;;<br>	<br>	  mymap.at(<span class="hljs-string">"Mars"</span>) = <span class="hljs-number">3396</span>;<br>	  mymap.at(<span class="hljs-string">"Saturn"</span>) += <span class="hljs-number">272</span>;<br>	  mymap.at(<span class="hljs-string">"Jupiter"</span>) = mymap.at(<span class="hljs-string">"Saturn"</span>) + <span class="hljs-number">9638</span>;<br>	<br>	  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; x: mymap) &#123;<br>	    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; x.first &lt;&lt; <span class="hljs-string">": "</span> &lt;&lt; x.second &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	  &#125;<br>	<br>	  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>IO：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">Jupiter: <span class="hljs-number">69910</span><br>Saturn: <span class="hljs-number">60272</span><br>Mars: <span class="hljs-number">3396</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="8-删除操作"><a href="#8-删除操作" class="headerlink" title="8. 删除操作"></a>8. 删除操作</h2><table>
+<thead>
+<tr>
+<th>删除方式</th>
+<th>函数声明</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>根据元素位置</td>
+<td>iterator erase (const_iterator position);</td>
+<td>返回一个迭代器，指向被删除元素的后一个元素</td>
+</tr>
+<tr>
+<td>根据元素的键</td>
+<td>size_type erase (const key_type&amp; k);</td>
+<td>返回被删除元素的数目，此处为1</td>
+</tr>
+<tr>
+<td>由一对范围迭代器指定删除的范围</td>
+<td>iterator erase (const_iterator first, const_iterator last);</td>
+<td>返回一个迭代器，指向最后一个被删除元素的后一个元素</td>
+</tr>
+<tr>
+<td>删除所有元素</td>
+<td>void clear() noexcept;</td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// unordered_map::erase</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>,<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&gt; mymap;<br>	<br>	  <span class="hljs-comment">// populating container:</span><br>	  mymap[<span class="hljs-string">"U.S."</span>] = <span class="hljs-string">"Washington"</span>;<br>	  mymap[<span class="hljs-string">"U.K."</span>] = <span class="hljs-string">"London"</span>;<br>	  mymap[<span class="hljs-string">"France"</span>] = <span class="hljs-string">"Paris"</span>;<br>	  mymap[<span class="hljs-string">"Russia"</span>] = <span class="hljs-string">"Moscow"</span>;<br>	  mymap[<span class="hljs-string">"China"</span>] = <span class="hljs-string">"Beijing"</span>;<br>	  mymap[<span class="hljs-string">"Germany"</span>] = <span class="hljs-string">"Berlin"</span>;<br>	  mymap[<span class="hljs-string">"Japan"</span>] = <span class="hljs-string">"Tokyo"</span>;<br>	<br>    <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">auto</span>&amp; x: mymap )<br>	      <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; x.first &lt;&lt; <span class="hljs-string">": "</span> &lt;&lt; x.second &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>; <br>	  <span class="hljs-comment">// erase examples:</span><br>	  mymap.erase ( mymap.<span class="hljs-built_in">begin</span>() );      <span class="hljs-comment">// erasing by iterator</span><br>	  mymap.erase (<span class="hljs-string">"France"</span>);             <span class="hljs-comment">// erasing by key</span><br>	  mymap.erase ( mymap.<span class="hljs-built_in">find</span>(<span class="hljs-string">"U.S."</span>), mymap.<span class="hljs-built_in">end</span>() ); <span class="hljs-comment">// erasing by range</span><br>	<br>	  <span class="hljs-comment">// show content:</span><br>	  <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">auto</span>&amp; x: mymap )<br>	      <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; x.first &lt;&lt; <span class="hljs-string">": "</span> &lt;&lt; x.second &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	system(<span class="hljs-string">"pause"</span>);<br>	  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>IO：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++">U.K.: London<br>Russia: Moscow<br>Germany: Berlin<br>U.S.: Washington<br>France: Paris<br>Japan: Tokyo<br>China: Beijing<br><br>Russia: Moscow<br>Germany: Berlin<br></code></pre></td></tr></table></figure>
+
+<h2 id="9-查找操作"><a href="#9-查找操作" class="headerlink" title="9. 查找操作"></a>9. 查找操作</h2><table>
+<thead>
+<tr>
+<th>函数声明</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iterator find (const key_type&amp; k);<br>const_iterator find (const key_type&amp; k) const;</td>
+<td>在容器中搜索键值等于 k 的元素，如果找到，则返回一个指向该元素的迭代器，否则返回一个指向unordered_map :: end的迭代器。</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// unordered_map::find</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>,<span class="hljs-keyword">double</span>&gt; mymap = &#123;<br>	     &#123;<span class="hljs-string">"mom"</span>,<span class="hljs-number">5.4</span>&#125;,<br>	     &#123;<span class="hljs-string">"dad"</span>,<span class="hljs-number">6.1</span>&#125;,<br>	     &#123;<span class="hljs-string">"bro"</span>,<span class="hljs-number">5.9</span>&#125; &#125;;<br>	<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> input;<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"who? "</span>;<br>	  getline (<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cin</span>,input);<br>	<br>	  <span class="hljs-comment">// 查找</span><br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>,<span class="hljs-keyword">double</span>&gt;::const_iterator got = mymap.<span class="hljs-built_in">find</span> (input);<br>	<br>	  <span class="hljs-keyword">if</span> ( got == mymap.<span class="hljs-built_in">end</span>() )<br>	      <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"not found"</span>;<br>	  <span class="hljs-keyword">else</span><br>	      <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; got-&gt;first &lt;&lt; <span class="hljs-string">" is "</span> &lt;&lt; got-&gt;second;<br>	<br>	  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	<br>	  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="10-桶操作"><a href="#10-桶操作" class="headerlink" title="10. 桶操作"></a>10. 桶操作</h2><table>
+<thead>
+<tr>
+<th>函数声明</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>size_type bucket_count() const noexcept;</td>
+<td>获取容器中桶的数目</td>
+</tr>
+<tr>
+<td>size_type bucket_size ( size_type n ) const;</td>
+<td>获取第 n 个桶中元素的数量</td>
+</tr>
+<tr>
+<td>size_type bucket ( const key_type&amp; k ) const;</td>
+<td>获取键为 k 的元素所在桶的序号</td>
+</tr>
+</tbody></table>
+<h2 id="11-c-map与unordered-map区别"><a href="#11-c-map与unordered-map区别" class="headerlink" title="11.c++ map与unordered_map区别"></a>11.c++ map与unordered_map区别</h2><p><strong>需要引入的头文件不同</strong></p>
+<p> map: #include &lt; map &gt;</p>
+<p> unordered_map: #include &lt; unordered_map &gt;</p>
+<p><strong>内部实现机理不同</strong></p>
+<p> map：  map内部实现了一个<strong>红黑树</strong>（红黑树是非严格平衡二叉搜索树，而AVL是严格平衡二叉搜索树），红黑树具有自动排序的功能，因此map内部的所有元素都是有序的，红黑树的每一个节点都代表着map的一个元素。因此，对于map进行的查找，删除，添加等一系列的操作都相当于是对红黑树进行的操作。map中的元素是按照二叉搜索树（又名二叉查找树、二叉排序树，特点就是左子树上所有节点的键值都小于根节点的键值，右子树所有节点的键值都大于根节点的键值）存储的，使用中序遍历可将键值按照从小到大遍历出来。</p>
+<p> unordered_map: unordered_map内部实现了一个<strong>哈希表</strong>（也叫散列表，通过把关键码值映射到Hash表中一个位置来访问记录，查找的时间复杂度可达到O(1)，其在海量数据处理中有着广泛应用）。因此，其元素的排列顺序是无序的。</p>
+<p><strong>优缺点以及适用处</strong></p>
+<p> map：</p>
+<p><strong>优点：</strong></p>
+<p>有序性，这是map结构最大的优点，其元素的有序性在很多应用中都会简化很多的操作<br> 红黑树，内部实现一个红黑书使得map的很多操作在lgn的时间复杂度下就可以实现，因此效率非常的高</p>
+<p> <strong>缺点：</strong></p>
+<p> 空间占用率高，因为map内部实现了红黑树，虽然提高了运行效率，但是因为每一个节点都需要额外保存父节点、孩子节点和红/黑性质，使得每一个节点都占用大量的空间</p>
+<p><strong>适用处：</strong>对于那些有顺序要求的问题，用map会更高效一些</p>
+<p>unordered_map：</p>
+<p><strong>优点：</strong></p>
+<p>因为内部实现了哈希表，因此其查找速度非常的快</p>
+<p> <strong>缺点：</strong> </p>
+<p>哈希表的建立比较耗费时间</p>
+<p> <strong>适用处：</strong>对于查找问题，unordered_map会更加高效一些，因此遇到查找问题，常会考虑一下用unordered_map</p>
+<p> <strong>总结</strong>：</p>
+<p>内存占有率的问题就转化成红黑树 VS hash表 , 还是unorder_map占用的内存要高。</p>
+<p> 但是unordered_map执行效率要比map高很多</p>
+<p> 对于unordered_map或unordered_set容器，其遍历顺序与创建该容器时输入的顺序不一定相同，因为遍历是按照哈希表从前往后依次遍历的</p>
+<p><strong>map和unordered_map的使用</strong></p>
+<p> unordered_map的用法和map是一样的，提供了 insert，size，count等操作，并且里面的元素也是以pair类型来存贮的。其底层实现是完全不同的，上方已经解释了，但是就外部使用来说却是一致的。</p>
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/fcku_88/article/details/88353431" target="_blank" rel="noopener">https://blog.csdn.net/fcku_88/article/details/88353431</a></p>
+<p><a href="https://blog.csdn.net/qq_21997625/article/details/84672775" target="_blank" rel="noopener">https://blog.csdn.net/qq_21997625/article/details/84672775</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unordered-map/" rel="tag">#unordered_map</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/XtU6LlDKJOgnaYi.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/05/C++/c_str%E5%87%BD%E6%95%B0/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              c_str函数
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>

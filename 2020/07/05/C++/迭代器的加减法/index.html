@@ -137,6 +137,7 @@
 <ul>
 <li>vector、string、deque的迭代器是有加减法的；</li>
 <li>而map、set、multimap、multiset、list的迭代器是没有加减法的。他们仅支持<code>++itr</code>、<code>–itr</code>这些操作。</li>
+<li>unordered_map 容器迭代器的类型为前向迭代器（又称正向迭代器）。这意味着，假设 p 是一个前向迭代器，则其只能进行 *p、p++、++p 操作，且 2 个前向迭代器之间只能用 == 和 != 运算符做比较。（unordered_set）应该也是。</li>
 </ul>
 <p><strong>it++与++it的区别</strong></p>
 <p>在STL中的容器使用迭代器进行遍历时，可以有it++与++it的效果是相同的，遍历的次数也是相同的，但是在STL中效率却不同：</p>
