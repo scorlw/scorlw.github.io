@@ -93,7 +93,7 @@
   
   
     <div class="header-content">
-      <div class="post-image" style="background-image: url(https://s1.ax1x.com/2020/05/14/YBSajg.jpg)"></div>
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/14/gX2toryqLWE65Mb.jpg)"></div>
       <div class="post-text">
         <div class="type-wrap">
           <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>
@@ -163,7 +163,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//本地可以，力扣不行，原因未找到</span><br><span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">firstUniqChar</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> s)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (s.empty())	<span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>;<br>	<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; ch;<br>    <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">char</span>&gt; st;<br>	<span class="hljs-keyword">int</span> id=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (id &lt; s.<span class="hljs-built_in">size</span>())<br>	&#123;<br>		<span class="hljs-keyword">if</span> (ch.<span class="hljs-built_in">find</span>(s[id]) == ch.<span class="hljs-built_in">end</span>())	ch[s[id]] = <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">else</span> ch[s[id]] += <span class="hljs-number">1</span>;<br>		id++;<br>	&#125;<br>	<span class="hljs-keyword">auto</span> it = ch.<span class="hljs-built_in">begin</span>();<br><br>    <span class="hljs-keyword">while</span> (it != ch.<span class="hljs-built_in">end</span>())<br>    &#123;<br>        <span class="hljs-keyword">if</span>((*it).second == <span class="hljs-number">1</span>) st.push((*it).first);<br>        it++;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> st.empty() ? <span class="hljs-string">' '</span> : st.top();<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
-<li>unordered_map的使用，特性，count等函数；</li>
+<li><a href="https://scorlw.github.io/2020/07/06/C++/unordered_map/" target="_blank" rel="noopener">unordered_map</a>的使用，特性，count等函数；</li>
 <li>哈希表和有序哈希表的思路。</li>
 </ol>
 
@@ -181,13 +181,13 @@
       <div id="article-nav-newer" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/UFBIYmKOT6QJtSN.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/QhpYbGCAsZS9HEL.jpg)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/06/28/win/%E6%8D%A2%E7%94%B5%E8%84%91%E5%90%8E%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%BD%AC%E7%A7%BB/"></a>
+          <a class="card-link article-nav-link" href="/2020/06/24/%E5%88%B7%E9%A2%98/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/"></a>
           <strong class="article-nav-caption">Newer</strong>
           <p class="article-nav-title">
             
-              换电脑后博客的转移
+              两个链表的第一个公共节点
             
           </p>
         </article>
