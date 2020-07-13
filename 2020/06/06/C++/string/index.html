@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>string | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://s1.ax1x.com/2020/05/14/YBSajg.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/C/">C++</a>
+        </div>
+        <h1 class="title-wrap">string</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-06-05T16:00:00.000Z" itemprop="datePublished">2020-06-06</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<p>string类本<strong>不是STL的容器</strong>，但是它与STL容器有着很多相似的操作，之所以抛弃char<em>的字符串而选用C++标准程序库中的string类，是因为他和前者比较起来，*</em>不必担心内存是否足够、字符串长度**等等，而且作为一个类出现，他集成的操作函数足以完成我们大多数情况下的需要。</p>
+<h2 id="一、声明："><a href="#一、声明：" class="headerlink" title="一、声明："></a>一、声明：</h2><p>使用字符串，要先包含头文件 ： #include<string></string></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">string</span> s;  <span class="hljs-comment">// 生成一个空字符串s </span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(str)</span> </span>; <span class="hljs-comment">// 拷贝构造函数生成str的复制品 </span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(str, stridx)</span></span>;  <span class="hljs-comment">// 将字符串str内"始于位置stridx"的部分当作字符串的初值 </span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(str, stridx, <span class="hljs-built_in">strlen</span>)</span> </span>; <span class="hljs-comment">// 将字符串str内"始于stridx且长度顶多strlen"的部分作为字符串的初值 </span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(cstr)</span> </span>;  <span class="hljs-comment">// 将C字符串（以NULL结束）作为s的初值 </span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(chars, chars_len)</span> </span>;  <span class="hljs-comment">// 将C字符串前chars_len个字符作为字符串s的初值。 </span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(num, ‘c’)</span> </span>;  <span class="hljs-comment">// 生成一个字符串，包含num个c字符 </span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(“value”)</span></span>;  <span class="hljs-built_in">string</span> s=“value”;  <span class="hljs-comment">// 将s初始化为一个字符串字面值副本</span><br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(<span class="hljs-built_in">begin</span>, <span class="hljs-built_in">end</span>)</span></span>;  <span class="hljs-comment">// 以区间begin/end(不包含end)内的字符作为字符串s的初值 </span><br>s.~<span class="hljs-built_in">string</span>();  <span class="hljs-comment">//销毁所有字符，释放内存</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="二、string对象的操作"><a href="#二、string对象的操作" class="headerlink" title="二、string对象的操作"></a>二、string对象的操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">string</span> s;<br>s.empty();  <span class="hljs-comment">// s为空串 返回true</span><br>s.<span class="hljs-built_in">size</span>();  <span class="hljs-comment">// 返回s中字符个数 类型应为：string::size_type</span><br>s[n];  <span class="hljs-comment">// 从0开始相当于下标访问</span><br>s1+s2;  <span class="hljs-comment">// 把s1和s2连接成新串 返回新串 </span><br>s1=s2;  <span class="hljs-comment">// 把s1替换为s2的副本</span><br>s1==s2;  <span class="hljs-comment">// 比较，相等返回true</span><br>`!=, &lt;, &lt;=, &gt;, &gt;=`  <span class="hljs-comment">//惯有操作 任何一个大写字母都小于任意的小写字母</span><br><span class="hljs-built_in">string</span> s1(<span class="hljs-string">"hello"</span>);<br><span class="hljs-built_in">string</span> s3=s1+<span class="hljs-string">"world"</span>;  <span class="hljs-comment">//合法操作</span><br><span class="hljs-built_in">string</span> s4=<span class="hljs-string">"hello"</span>+<span class="hljs-string">"world"</span>;  <span class="hljs-comment">//非法操作：两个字符串字面值相加or报错</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="三、字符串操作函数"><a href="#三、字符串操作函数" class="headerlink" title="三、字符串操作函数"></a>三、字符串操作函数</h2><p>1、 string类函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++">=, s.assign() <span class="hljs-comment">// 赋以新值 </span><br>swap() <span class="hljs-comment">// 交换两个字符串的内容 </span><br>+=, s.append(), s.push_back() <span class="hljs-comment">// 在尾部添加字符 </span><br>s.insert() <span class="hljs-comment">// 插入字符 </span><br>s.erase() <span class="hljs-comment">// 删除字符 </span><br>s.<span class="hljs-built_in">clear</span>() <span class="hljs-comment">// 删除全部字符 </span><br>s.replace() <span class="hljs-comment">// 替换字符 </span><br>+ <span class="hljs-comment">// 串联字符串 </span><br>==,!=,&lt;,&lt;=,&gt;,&gt;=,compare() <span class="hljs-comment">// 比较字符串 </span><br><span class="hljs-built_in">size</span>(),length() <span class="hljs-comment">// 返回字符数量 </span><br>max_size() <span class="hljs-comment">// 返回字符的可能最大个数 </span><br>s.empty() <span class="hljs-comment">// 判断字符串是否为空 </span><br>s.capacity() <span class="hljs-comment">// 返回重新分配之前的字符容量 </span><br>reserve() <span class="hljs-comment">// 保留一定量内存以容纳一定数量的字符 </span><br>[ ], at() <span class="hljs-comment">// 存取单一字符 </span><br>&gt;&gt;,getline() <span class="hljs-comment">// 从stream读取某值 </span><br>&lt;&lt; <span class="hljs-comment">// 将谋值写入stream </span><br>copy() <span class="hljs-comment">// 将某值赋值为一个C_string </span><br>c_str() <span class="hljs-comment">// 返回一个指向正规C字符串(C_string)的指针 内容与本string串相同 有’\0’ </span><br>data() <span class="hljs-comment">// 将内容以字符数组形式返回 无’\0’ </span><br>s.substr() <span class="hljs-comment">// 返回某个子字符串 </span><br><span class="hljs-built_in">begin</span>() <span class="hljs-built_in">end</span>() <span class="hljs-comment">// 提供类似STL的迭代器支持 </span><br>rbegin() rend() <span class="hljs-comment">// 逆向迭代器 </span><br>get_allocator() <span class="hljs-comment">// 返回配置器</span><br></code></pre></td></tr></table></figure>
+
+<p>2、 函数说明</p>
+<p>1) s.assign();</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">s.assign(str);<br>s.assign(str,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>); <span class="hljs-comment">// 如果str是"iamangel" 就是把"ama"赋给字符串 </span><br>s.assign(str,<span class="hljs-number">2</span>,<span class="hljs-built_in">string</span>::npos); <span class="hljs-comment">// 把字符串str从索引值2开始到结尾赋给s </span><br>s.assign(<span class="hljs-string">"gaint"</span>);<br>s.assign(<span class="hljs-string">"nico"</span>,<span class="hljs-number">5</span>); <span class="hljs-comment">// 把’n’ ‘I’ ‘c’ ‘o’ ‘\0’赋给字符串 </span><br>s.assign(<span class="hljs-number">5</span>,<span class="hljs-string">'x'</span>); <span class="hljs-comment">// 把五个x赋给字符串</span><br></code></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">string</span> str = <span class="hljs-string">"hello"</span>;<br><span class="hljs-built_in">string</span> s;<br>s.assign(str); <span class="hljs-comment">// 不说 </span><br><span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;<br>s.assign(str,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>); <span class="hljs-comment">// 如果str是"iamangel" 就是把"ama"赋给字符串 </span><br><span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;<br>s.assign(str,<span class="hljs-number">2</span>,<span class="hljs-built_in">string</span>::npos); <span class="hljs-comment">// 把字符串str从索引值2开始到结尾赋给s </span><br><span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;<br>s.assign(<span class="hljs-string">"gaint"</span>); <span class="hljs-comment">// 不说 </span><br><span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;<br>s.assign(<span class="hljs-string">"nico"</span>,<span class="hljs-number">5</span>); <span class="hljs-comment">// 把’n’ ‘I’ ‘c’ ‘o’ ‘\0’赋给字符串 </span><br><span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;<br>s.assign(<span class="hljs-number">5</span>,<span class="hljs-string">'x'</span>); <span class="hljs-comment">// 把五个x赋给字符串</span><br><span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;<br></code></pre></td></tr></table></figure>
+
+<p>I/O：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">hello<br>ell<br>llo<br>gaint<br>nico<br>xxxxx<br></code></pre></td></tr></table></figure>
+
+<p>2) 大小和容量函数</p>
+<p>一个C++字符串存在三种大小： </p>
+<ol>
+<li>现有的字符数，函数是<code>s.size()和s.length()</code>，他们等效。<code>s.empty()</code>用来检查字符串是否为空。 </li>
+<li><code>max_size()</code>; 这个大小是指当前C++字符串最多能包含的字符数，很可能和机器本身的限制或者字符串所在位置连续内存的大小有关系。 </li>
+<li><code>capacity()</code>重新分配内存之前string所能包含的最大字符数。 </li>
+</ol>
+<p>这里另一个需要指出的是<code>reserve()</code>函数，这个函数为string重新分配内存。重新分配的大小由其参数决定，默认参数为0，这时候会对string进行非强制性缩减。</p>
+<p>3) 元素存取</p>
+<p>我们可以使用<code>下标操作符[]和函数at()</code>对元素包含的字符进行访问。</p>
+<p>但是应该注意的是<strong>操作符[]并不检查索引是否有效</strong>（有效索引0~str.length()），如果索引失效，会引起未定义的行为。而at()会检查，如果使用at()的时候索引无效，会抛出out_of_range异常。</p>
+<p>有一个例外不得不说，const string a;的操作符[]对索引值是a.length()仍然有效，其返回值是’\0’。其他的各种情况，a.length()索引都是无效的。</p>
+<p>4) 比较函数</p>
+<p>C ++字符串支持常见的比较操作符（&gt;,&gt;=,&lt;,&lt;=,==,!=），甚至支持string与C-string的比较(如 str&lt;”hello”)。在使用&gt;,&gt;=,&lt;,&lt;=这些操作符的时候是根据”当前字符特性”将字符按字典顺序进行逐一的比较。字典排序靠前的字符小，比较的顺序是从前向后比较，遇到不相等的字符就按这个位置上的两个字符的比较结果确定两个字符串的大小。 </p>
+<p>另一个功能强大的比较函数是成员函数compare()。他支持多参数处理，支持用索引值和长度定位子串来进行比较。他返回一个整数来表示比较结果，返回值意义如下：0-相等 、&gt;0-大于、&lt;0-小于。</p>
+<p>5) 插入字符</p>
+<p>也许你需要在string中间的某个位置插入字符串，这时候你可以用insert()函数，这个函数需要你指定一个安插位置的索引，被插入的字符串将放在这个<strong>索引的后面</strong>。 </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    ios::sync_with_stdio(<span class="hljs-literal">false</span>);<span class="hljs-comment">//关闭缓存</span><br>    <span class="hljs-built_in">string</span> str2 = <span class="hljs-string">"abcdefghijklmn"</span>;<br>    <span class="hljs-built_in">string</span> str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-built_in">string</span> str3 = <span class="hljs-string">"ABCDEFGHIJKLMN"</span>;<br>    <span class="hljs-built_in">string</span>::iterator it;<br><br>    <span class="hljs-comment">//s.insert(pos,str)//在s的pos位置插入str</span><br>    str.insert(<span class="hljs-number">6</span>,str2);                 <span class="hljs-comment">//012345abcdefghijklmn6789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//s.insert(pos,str,a,n)在s的pos位置插入str中插入位置a到后面的n个字符</span><br>    str.insert(<span class="hljs-number">6</span>,str3,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>);             <span class="hljs-comment">//012345DEFG6789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//s.insert(pos,cstr,n)//在pos位置插入cstr字符串从开始到后面的n个字符</span><br>    str.insert(<span class="hljs-number">3</span>,<span class="hljs-string">"that is cool"</span>,<span class="hljs-number">8</span>);    <span class="hljs-comment">//012that is 3456789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//s.insert(pos,cstr)在s的pos位置插入cstr</span><br>    str.insert(<span class="hljs-number">3</span>,<span class="hljs-string">"to be "</span>);            <span class="hljs-comment">//012to be 3456789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//s.insert(pos,n,ch)在s.pos位置上面插入n个ch</span><br>    str.insert(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-string">':'</span>);               <span class="hljs-comment">//012:3456789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//s.insert(s.it,ch)在s的it指向位置前面插入一个字符ch，返回新插入的位置的迭代器</span><br>    it = str.insert(str.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">5</span>,<span class="hljs-string">','</span>); <span class="hljs-comment">//01234,56789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//,</span><br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//s.insert(s.it,n,ch)//在s的it所指向位置的前面插入n个ch</span><br>    str.insert (str.<span class="hljs-built_in">end</span>(),<span class="hljs-number">3</span>,<span class="hljs-string">'.'</span>);       <span class="hljs-comment">//0123456789...</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//s.insert(it,str.ita,str.itb)在it所指向的位置的前面插入[ita,itb)的字符串</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//5</span><br>    str.insert (it+<span class="hljs-number">2</span>,str3.<span class="hljs-built_in">begin</span>(),str3.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">3</span>); <span class="hljs-comment">//0123456ABC789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这种形式的insert()函数<strong>不支持传入单个字符</strong>，这时的单个字符必须写成字符串形式。为了插入单个字符，insert()函数提供了两个对插入单个字符操作的重载函数： </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">insert(size_type index, size_type num, chart c);<br>insert(iterator pos, size_type num, chart c);<br></code></pre></td></tr></table></figure>
+
+<p>其中size_type是无符号整数，iterator是char*,</p>
+<p>所以，你这么调用insert函数是不行的： </p>
+<p><code>insert(0, 1, ‘j’);</code>这时候第一个参数将转换成哪一个呢？ </p>
+<p>所以你必须这么写：<code>insert((string::size_type)0, 1, ‘j’)</code>！ </p>
+<p>第二种形式指出了使用迭代器安插字符的形式。</p>
+<p>6) 提取子串s.substr()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++">s.substr(); <span class="hljs-comment">// 返回s的全部内容 </span><br>s.substr(<span class="hljs-number">11</span>); <span class="hljs-comment">// 从索引11往后的子串 </span><br>s.substr(<span class="hljs-number">5</span>,<span class="hljs-number">6</span>); <span class="hljs-comment">// 从索引5开始6个字符</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    ios::sync_with_stdio(<span class="hljs-literal">false</span>);<br>    <span class="hljs-built_in">string</span> s=<span class="hljs-string">"abcdefg"</span>;<br><br>    <span class="hljs-comment">//s.substr(pos1,n)返回字符串位置为pos1后面的n个字符组成的串</span><br>    <span class="hljs-built_in">string</span> s2=s.substr(<span class="hljs-number">1</span>,<span class="hljs-number">5</span>);<span class="hljs-comment">//bcdef</span><br><br>    <span class="hljs-comment">//s.substr(pos)//得到一个pos到结尾的串</span><br>    <span class="hljs-built_in">string</span> s3=s.substr(<span class="hljs-number">4</span>);<span class="hljs-comment">//efg</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>7) 删除函数erase</p>
+<p>用来执行删除操作 </p>
+<p> 删除操作有三种</p>
+<ul>
+<li>指定pos和len，其中pos为为起始位置，pos以及后面len-1个字符串都删除</li>
+<li>迭代器，删除迭代器指向的字符</li>
+<li>迭代器范围，删除这一范围的字符串，范围左闭右开</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">str</span><span class="hljs-params">(<span class="hljs-string">"0123456789"</span>)</span></span>;<br>    <span class="hljs-comment">//直接指定删除的字符串位置第3个后面的4个字符</span><br>    str.erase(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>);<span class="hljs-comment">//012789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//删除迭代器指向的字符</span><br>    str.erase(str.<span class="hljs-built_in">begin</span>() + <span class="hljs-number">2</span>);<span class="hljs-comment">//013456789</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    str = <span class="hljs-string">"0123456789"</span>;<br>    <span class="hljs-comment">//删除迭代器范围的字符</span><br>    str.erase(str.<span class="hljs-built_in">begin</span>() + <span class="hljs-number">2</span>, str.<span class="hljs-built_in">end</span>() - <span class="hljs-number">2</span>);<span class="hljs-comment">//0189</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>8) 追加与替换：append和replace操作</p>
+<p>append函数可以用来在字符串的末尾追加字符和字符串。由于string重载了运算符，也可以用+=操作实现 。</p>
+<p> repalce顾名思义，就是替换的意思，先删除，后增加。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">string</span> str;<br>    <span class="hljs-built_in">string</span> str2=<span class="hljs-string">"Writing "</span>;<br>    <span class="hljs-built_in">string</span> str3=<span class="hljs-string">"print 10 and then 5 more"</span>;<br><br>    <span class="hljs-comment">//直接追加一个str2的字符串</span><br>    str.append(str2);                       <span class="hljs-comment">// "Writing "</span><br>    <span class="hljs-comment">//后面追加str3第6个字符开始的3个字符串</span><br>    str.append(str3,<span class="hljs-number">6</span>,<span class="hljs-number">3</span>);                   <span class="hljs-comment">// "10 "</span><br>    <span class="hljs-comment">//追加字符串形参的前5个字符</span><br>    str.append(<span class="hljs-string">"dots are cool"</span>,<span class="hljs-number">5</span>);          <span class="hljs-comment">// "dots "</span><br>    <span class="hljs-comment">//直接添加</span><br>    str.append(<span class="hljs-string">"here: "</span>);                   <span class="hljs-comment">// "here: "</span><br>    <span class="hljs-comment">//添加10个'.'</span><br>    str.append(<span class="hljs-number">10u</span>,<span class="hljs-string">'.'</span>);                    <span class="hljs-comment">// ".........."</span><br>    <span class="hljs-comment">//10u是unsigned int，直接写10也是可以的</span><br>    <span class="hljs-comment">//添加str3迭代器范围的字符串</span><br>    str.append(str3.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">8</span>,str3.<span class="hljs-built_in">end</span>());  <span class="hljs-comment">// " and then 5 more"</span><br>    <span class="hljs-comment">//最后这个比较特殊，意思是添加5个'A'，实际上参数里面的65对应的asc码就是65</span><br>    <span class="hljs-comment">//str.append&lt;int&gt;(5,65);                // "....."</span><br>    <span class="hljs-comment">//本地没有成功</span><br>    <span class="hljs-comment">//字符串追加也可以用重载运算符实现</span><br>    str+=<span class="hljs-string">"lalala"</span>;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-string">'\n'</span>;<br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">string</span> base=<span class="hljs-string">"this is a test string."</span>;<br>    <span class="hljs-built_in">string</span> str2=<span class="hljs-string">"n example"</span>;<br>    <span class="hljs-built_in">string</span> str3=<span class="hljs-string">"sample phrase"</span>;<br>    <span class="hljs-built_in">string</span> str4=<span class="hljs-string">"useful."</span>;<br><br>    <span class="hljs-comment">// replace signatures used in the same order as described above:</span><br><br>    <span class="hljs-comment">// Using positions:                 0123456789*123456789*12345</span><br>    <span class="hljs-built_in">string</span> str=base;           <span class="hljs-comment">// "this is a test string."</span><br>    <span class="hljs-comment">//第9个字符以及后面的4个字符被str2代替</span><br>    str.replace(<span class="hljs-number">9</span>,<span class="hljs-number">5</span>,str2);          <span class="hljs-comment">// "this is an example string." (1)</span><br>    <span class="hljs-comment">//第19个字符串以及后面的5个字符用str的第7个字符以及后面的5个字符代替</span><br>    str.replace(<span class="hljs-number">19</span>,<span class="hljs-number">6</span>,str3,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>);     <span class="hljs-comment">// "this is an example phrase." (2)</span><br>    <span class="hljs-comment">//第8个字符以及后面的9个字符用字符串参数代替</span><br>    str.replace(<span class="hljs-number">8</span>,<span class="hljs-number">10</span>,<span class="hljs-string">"just a"</span>);     <span class="hljs-comment">// "this is just a phrase."     (3)</span><br>    <span class="hljs-comment">//第8个字符以及后面的5个字符用字符串参数的前7个字符替换</span><br>    str.replace(<span class="hljs-number">8</span>,<span class="hljs-number">6</span>,<span class="hljs-string">"a shorty"</span>,<span class="hljs-number">7</span>);  <span class="hljs-comment">// "this is a short phrase."    (4)</span><br>    <span class="hljs-comment">//第22以及后面的0个字符用3个叹号替换</span><br>    str.replace(<span class="hljs-number">22</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-string">'!'</span>);        <span class="hljs-comment">// "this is a short phrase!!!"  (5)</span><br>    <span class="hljs-comment">//迭代器的原理同上</span><br>    <span class="hljs-comment">// Using iterators:                                               0123456789*123456789*</span><br>    str.replace(str.<span class="hljs-built_in">begin</span>(),str.<span class="hljs-built_in">end</span>()<span class="hljs-number">-3</span>,str3);                    <span class="hljs-comment">// "sample phrase!!!"      (1)</span><br>    str.replace(str.<span class="hljs-built_in">begin</span>(),str.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">6</span>,<span class="hljs-string">"replace"</span>);             <span class="hljs-comment">// "replace phrase!!!"     (3)</span><br>    str.replace(str.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">8</span>,str.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">14</span>,<span class="hljs-string">"is coolness"</span>,<span class="hljs-number">7</span>);    <span class="hljs-comment">// "replace is cool!!!"    (4)</span><br>    str.replace(str.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">12</span>,str.<span class="hljs-built_in">end</span>()<span class="hljs-number">-4</span>,<span class="hljs-number">4</span>,<span class="hljs-string">'o'</span>);                <span class="hljs-comment">// "replace is cooool!!!"  (5)</span><br>    str.replace(str.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">11</span>,str.<span class="hljs-built_in">end</span>(),str4.<span class="hljs-built_in">begin</span>(),str4.<span class="hljs-built_in">end</span>());<span class="hljs-comment">// "replace is useful."    (6)</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="hljs-string">'\n'</span>; <br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>9) 搜索操作</p>
+<p>find和rfind函数:</p>
+<p>find函数主要是查找一个字符串是否在调用的字符串中出现过，大小写敏感。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="四、字符串流stringstream操作"><a href="#四、字符串流stringstream操作" class="headerlink" title="四、字符串流stringstream操作"></a>四、字符串流stringstream操作</h2><p>iostream标准库支持内存中的输入输出，只要将流与存储在程序内存中的string对象捆绑起来即可。此时，可使用iostream输入和输出操作符读写这个stream对象。使用stringstream，我们必须包含头文件<code>#include &lt;sstream&gt;</code>。</p>
+<p>1、 stringstream特定的操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">1</span>)  <span class="hljs-built_in">stringstream</span> strm; <span class="hljs-comment">// 创建自由的stringstream对象</span><br><span class="hljs-number">2</span>)  <span class="hljs-function"><span class="hljs-built_in">stringstream</span> <span class="hljs-title">strm</span><span class="hljs-params">(s)</span></span>; <span class="hljs-comment">// 创建存储s的副本的stringstream对象，s是stringstream类型</span><br><span class="hljs-number">3</span>)  strm.str(); <span class="hljs-comment">// 返回strm中存储的string类型对象</span><br><span class="hljs-number">4</span>)  strm.str(s); <span class="hljs-comment">// 将string类型的s复制给strm 返回void</span><br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/livecoldsun/article/details/25011413" target="_blank" rel="noopener">https://blog.csdn.net/livecoldsun/article/details/25011413</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">#markdown</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://s1.ax1x.com/2020/05/14/YBSajg.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/06/06/C++/C++%E5%9F%BA%E7%A1%80/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              string
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/rKMWE5qfGPB2mSe.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/06/06/%E5%88%B7%E9%A2%98/%E9%A1%BA%E6%97%B6%E9%92%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              顺时针打印矩阵
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
