@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>set | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://s1.ax1x.com/2020/05/14/YBSajg.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/C/">C++</a>
+        </div>
+        <h1 class="title-wrap">set</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-07-14T16:00:00.000Z" itemprop="datePublished">2020-07-15</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="set"><a href="#set" class="headerlink" title="set"></a>set</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<h2 id="一、关于set"><a href="#一、关于set" class="headerlink" title="一、关于set"></a>一、关于set</h2><h3 id="1）为何map和set的插入删除效率比其他序列容器高？"><a href="#1）为何map和set的插入删除效率比其他序列容器高？" class="headerlink" title="1）为何map和set的插入删除效率比其他序列容器高？"></a>1）为何map和set的插入删除效率比其他序列容器高？</h3><p>因为<strong>对于关联容器来说，不需要做内存拷贝和内存移动</strong>。set容器内所有元素都是以节点的方式来存储，其节点结构和链表差不多，指向父节点和子节点。结构图可能如下：</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">   A<br> /   \<br> B    C<br>/ \  / \<br>D  E F G<br></code></pre></td></tr></table></figure>
+
+<p>因此插入的时候只需要稍做变换，把节点的指针指向新的节点就可以了。删除的时候类似，稍做变换后把指向删除节点的指针指向其他节点也OK了。这里的一切操作就是指针换来换去，和内存移动没有关系。</p>
+<h3 id="2）为何每次insert后，以前保存的iterator不会失效？"><a href="#2）为何每次insert后，以前保存的iterator不会失效？" class="headerlink" title="2）为何每次insert后，以前保存的iterator不会失效？"></a>2）为何每次insert后，以前保存的iterator不会失效？</h3><p>iterator这里就相当于<strong>指向节点的指针</strong>，<strong>内存没有变，指向内存的指针怎么会失效呢</strong>(当然被删除的那个<strong>元素本身已经失效了</strong>)。</p>
+<p>相对于vector来说，每一次删除和插入，指针都有可能失效，调用push_back在尾部插入也是如此。因为为了保证内部数据的连续存放，iterator指向的那块内存在删除和插入过程中可能已经被其他内存覆盖或者内存已经被释放了。即使时push_back的时候，容器内部空间可能不够，需要一块新的更大的内存，只有把以前的内存释放，申请新的更大的内存，复制已有的数据元素到新的内存，最后把需要插入的元素放到最后，那么以前的内存指针自然就不可用了。特别时在和find等算法在一起使用的时候，牢记这个原则：<strong>不要使用过期的iterator</strong>。</p>
+<h3 id="3）当数据元素增多时，set的插入和搜索速度变化如何？"><a href="#3）当数据元素增多时，set的插入和搜索速度变化如何？" class="headerlink" title="3）当数据元素增多时，set的插入和搜索速度变化如何？"></a>3）当数据元素增多时，set的插入和搜索速度变化如何？</h3><p>在set中查找是使用二分查找，也就是说，如果有16个元素，最多需要比较4次就能找到结果，有32个元素，最多比较5次。那么有10000个呢？最多比较的次数为log10000，最多为14次，如果是20000个元素呢？最多不过15次。看见了吧，当数据量增大一倍的时候，搜索次数只不过多了1次，多了1/14的搜索时间而已。</p>
+<h2 id="二、set中的常用方法"><a href="#二、set中的常用方法" class="headerlink" title="二、set中的常用方法"></a>二、set中的常用方法</h2><h3 id="1）基础函数"><a href="#1）基础函数" class="headerlink" title="1）基础函数"></a>1）基础函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">begin</span>()     　　 ,返回<span class="hljs-built_in">set</span>容器第一个元素的迭代器<br><span class="hljs-built_in">end</span>() 　　　　 ,返回一个指向当前<span class="hljs-built_in">set</span>末尾元素的下一位置的迭代器.<br><span class="hljs-built_in">clear</span>()   　　     ,删除<span class="hljs-built_in">set</span>容器中的所有的元素<br>empty() 　　　,判断<span class="hljs-built_in">set</span>容器是否为空<br>max_size() 　 ,返回<span class="hljs-built_in">set</span>容器可能包含的元素最大个数<br><span class="hljs-built_in">size</span>() 　　　　 ,返回当前<span class="hljs-built_in">set</span>容器中的元素个数<br>rbegin()　　　　 ,返回的值和<span class="hljs-built_in">end</span>()相同<br>rend()　　　　 ,返回的值和<span class="hljs-built_in">begin</span>()相同<br></code></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; s;<br>    s.insert(<span class="hljs-number">1</span>);<br>    s.insert(<span class="hljs-number">2</span>);<br>    s.insert(<span class="hljs-number">3</span>);<br>    s.insert(<span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"set 的 size 值为 ："</span> &lt;&lt; s.<span class="hljs-built_in">size</span>() &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"set 的 maxsize的值为 ："</span> &lt;&lt; s.max_size() &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"set 中的第一个元素是 ："</span> &lt;&lt; *s.<span class="hljs-built_in">begin</span>() &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"set 中的最后一个元素是:"</span> &lt;&lt; *s.<span class="hljs-built_in">end</span>() &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    s.<span class="hljs-built_in">clear</span>();<br>    <span class="hljs-keyword">if</span> (s.empty())<br>    &#123;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"set 为空 ！！！"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    &#125;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"set 的 size 值为 ："</span> &lt;&lt; s.<span class="hljs-built_in">size</span>() &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"set 的 maxsize的值为 ："</span> &lt;&lt; s.max_size() &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>I/O:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">set</span> 的 <span class="hljs-built_in">size</span> 值为 ：<span class="hljs-number">3</span><br><span class="hljs-built_in">set</span> 的 maxsize的值为 ：<span class="hljs-number">461168601842738790</span><br><span class="hljs-built_in">set</span> 中的第一个元素是 ：<span class="hljs-number">1</span><br><span class="hljs-built_in">set</span> 中的最后一个元素是:<span class="hljs-number">3</span><br><span class="hljs-built_in">set</span> 为空 ！！！<br><span class="hljs-built_in">set</span> 的 <span class="hljs-built_in">size</span> 值为 ：<span class="hljs-number">0</span><br><span class="hljs-built_in">set</span> 的 maxsize的值为 ：<span class="hljs-number">461168601842738790</span><br></code></pre></td></tr></table></figure>
+
+<p>小结：<strong>插入3之后虽然插入了一个1，但是我们发现set中最后一个值仍然是3，这就是set 。还要注意begin() 和 end()函数是不检查set是否为空的，使用前最好使用empty()检验一下set是否为空.</strong></p>
+<h3 id="2）计数count"><a href="#2）计数count" class="headerlink" title="2）计数count()"></a>2）计数count()</h3><p>用来查找set中某个某个键值出现的次数。这个函数在set并不是很实用，因为<strong>一个键值在set只可能出现0或1次</strong>，这样就变成了<strong>判断某一键值是否在set出现过</strong>了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;set&gt;</span></span><br> <br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br> <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; s;<br>	s.insert(<span class="hljs-number">1</span>);<br>	s.insert(<span class="hljs-number">2</span>);<br>	s.insert(<span class="hljs-number">3</span>);<br>	s.insert(<span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"set 中 1 出现的次数是 ："</span>&lt;&lt;s.count(<span class="hljs-number">1</span>)&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"set 中 4 出现的次数是 ："</span>&lt;&lt;s.count(<span class="hljs-number">4</span>)&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>I/O:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">set</span> 中 <span class="hljs-number">1</span> 出现的次数是 ：<span class="hljs-number">1</span><br><span class="hljs-built_in">set</span> 中 <span class="hljs-number">4</span> 出现的次数是 ：<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3）equal-range"><a href="#3）equal-range" class="headerlink" title="3）equal_range()"></a>3）equal_range()</h3><p>equal_range()是c++ STL中一种二分查找的方法。set中包含了自己的equal_range()函数。</p>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; s;<br>	<span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator iter;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= <span class="hljs-number">5</span>; ++i)<br>	&#123;<br>		<span class="hljs-keyword">int</span> x;<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;x);<br>		s.insert(x); <span class="hljs-comment">//向set中加入数据</span><br>	&#125;<br>	<span class="hljs-keyword">for</span>(iter = s.<span class="hljs-built_in">begin</span>() ; iter != s.<span class="hljs-built_in">end</span>() ; ++iter)<br>	&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; *iter &lt;&lt; <span class="hljs-string">" "</span>;  <span class="hljs-comment">//输出set中的数据</span><br>	&#125;<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	pair&lt;<span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt;::const_iterator,<span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt;::const_iterator&gt; pr;<br>	pr = s.equal_range(<span class="hljs-number">3</span>);<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"第一个大于等于 3 的数是 ："</span>&lt;&lt;*pr.first&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"第一个大于 3的数是 ： "</span>&lt;&lt;*pr.second&lt;&lt;<span class="hljs-built_in">endl</span>;<br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/Strawberry_595/article/details/81188509" target="_blank" rel="noopener">https://blog.csdn.net/Strawberry_595/article/details/81188509</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/set/" rel="tag">#set</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/za92LmeQpXUH81b.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/15/C++/equal_range/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              equal_range
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/RYanzwjv3QLqSFA.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/14/Qt/QT%E6%89%93%E5%BC%80PDF%E6%96%87%E4%BB%B6%E6%88%96%E5%9B%BE%E7%89%87/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              QT打开PDF文件或图片
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
