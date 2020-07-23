@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>C++抽象基类与虚基类 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/07/16/K3FWj7Bc8AOJIox.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/C/">C++</a>
+        </div>
+        <h1 class="title-wrap">C++抽象基类与虚基类</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-07-19T16:00:00.000Z" itemprop="datePublished">2020-07-20</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="C-抽象基类与虚基类"><a href="#C-抽象基类与虚基类" class="headerlink" title="C++抽象基类与虚基类"></a>C++抽象基类与虚基类</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<h2 id="抽象基类（abstract-base-class，ABC）"><a href="#抽象基类（abstract-base-class，ABC）" class="headerlink" title="抽象基类（abstract base class，ABC）"></a>抽象基类（abstract base class，ABC）</h2><p>抽象基类是解决如下问题：</p>
+<p>加入现在需要开发一个图形类，表示圆与椭圆（注意，圆是一种特殊的椭圆）。所以初步考虑从椭圆类中派生出圆类。但是现在遇到一个问题，圆与椭圆的面积计算公式不同，所以需要建立一个ABC，抽象出圆与椭圆的共性，圆类、椭圆类都继承ABC。</p>
+<p>圆类与椭圆类相异的方法（求面积）需要在ABC中声明成纯虚函数。</p>
+<p>下面为纯虚函数的声明方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Area</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>= <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>ABC至少要包含一个纯虚函数；</li>
+<li>一旦类包含纯虚函数，将不能创建该类的对象；</li>
+<li>被声明成纯虚函数的方法，在ABC中只能声明，不能被定义；</li>
+</ul>
+<h2 id="虚基类"><a href="#虚基类" class="headerlink" title="虚基类"></a>虚基类</h2><p>虚基类解决如下问题：</p>
+<p>类B、C继承类A；类D继承类B、C；按照正常的公有继承方式，类D中将包含2份类A的对象/方法。这样浪费存储空间，而且使用对象/方法时需要说明是从哪一个父类继承而来的。<br>所以继承时将基类声明成虚基类，同一个虚基类的对象/方法，在子类中只会出现一次。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> :</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> A &#123;...&#125;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> :</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">public</span> A &#123;...&#125;<br></code></pre></td></tr></table></figure>
+
+<p>虚基类的使用注意事项：</p>
+<ul>
+<li>使用虚基类时，必须在初始化列表最前方，显式的调用虚基类的构造函数；否则虚基类将调用默认构造函数初始化变量（因为多继承原因，无法中间类的构造函数初始化虚基类变量）；</li>
+<li>可以使用域作用符调用中间类同名的方法；</li>
+<li>推荐在派生类中重定义同名的方法，里面显式的调用中间类方法；</li>
+<li>混合使用虚基类和基类（这里指同一个类），派生类中将会有n+1个基类（使用虚基类的所有中间类提供一个，不使用虚基类的n个中间类提供n个）；</li>
+<li>派生类中变量/方法将优于其父类的同名变量/方法被调用；</li>
+</ul>
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/pix_csdn/article/details/89761780" target="_blank" rel="noopener">https://blog.csdn.net/pix_csdn/article/details/89761780</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B1%BB/" rel="tag">#类</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/6OqUfRcdeK8kC9Z.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/20/C++/C++%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              C++函数模板及实现原理
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/nhMqL3YxKPeTjEs.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/20/C++/%E5%9B%9B%E7%A7%8D%E5%BF%85%E9%A1%BB%E4%BD%BF%E7%94%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E6%83%85%E5%86%B5/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              四种必须使用初始化列表情况
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>

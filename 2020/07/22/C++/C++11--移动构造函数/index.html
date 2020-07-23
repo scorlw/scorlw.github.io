@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>C++11--移动构造函数 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/07/16/3NnumwbZ8Xf1UAL.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/C/">C++</a>
+        </div>
+        <h1 class="title-wrap">C++11--移动构造函数</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-07-21T16:00:00.000Z" itemprop="datePublished">2020-07-22</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="C-11–移动构造函数"><a href="#C-11–移动构造函数" class="headerlink" title="C++11–移动构造函数"></a>C++11–移动构造函数</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A_2</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	A_2() :m_ptr(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">0</span>))<br>	&#123;<br> <br>	&#125;<br> <br>	~A_2()<br>	&#123;<br>		<span class="hljs-keyword">delete</span> m_ptr;<span class="hljs-comment">//出现异常</span><br>	&#125;<br> <br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-keyword">int</span>* m_ptr;<br>&#125;;<br> <br><span class="hljs-function">A_2 <span class="hljs-title">Get</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> flag)</span></span><br><span class="hljs-function"></span>&#123;<br>	A_2 a;<br>	A_2 b;<br>	<span class="hljs-keyword">if</span> (flag)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">right_value_ref2</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	A_2 a = Get(<span class="hljs-literal">false</span>);  <span class="hljs-comment">//运行报错,a按照默认的拷贝函数浅拷贝了Get()里的b，即a的m_ptr和b的m_ptr指向的是同一块内存。但由于Get()里的b是局部变量，函数结束后会被析构，此时a里面的m_ptr就成了野指针，在析构a的时候就会报错。</span><br> <br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    right_value_ref2();<br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在上面的代码中，默认构造函数是浅拷贝，a和b会指向同一指针m_ptr，在析构函数会导致重复删除该指针。</p>
+<p>正确的做法是提供深拷贝的拷贝构造函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">A_2(<span class="hljs-keyword">const</span> A_2&amp; a):m_ptr(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(*a.m_ptr)) <span class="hljs-comment">//深拷贝</span><br>&#123;<br>	<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"copy construct"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样就可以保证拷贝构造时的安全性，但有时这种拷贝构造却是不必要的，上面代码中的拷贝构造就是不必要的。上面代码中的Get函数会返回临时变量，然后通过这个临时变量拷贝构造一个新的对象b,临时变量在拷贝构造完成之后就销毁了，如果堆内存很大，那么，这个拷贝构造的代价会很大，带来了额外的性能损耗。</p>
+<p>有没有办法避免临时对象的拷贝构造呢？答案是肯定的。看下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A_2</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	A_2() :m_ptr(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">0</span>))<br>	&#123;<br>		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"construct"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	&#125;<br> <br>	A_2(<span class="hljs-keyword">const</span> A_2&amp; a):m_ptr(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(*a.m_ptr)) <span class="hljs-comment">//深拷贝</span><br>	&#123;<br>		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"copy construct"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	&#125;<br> <br>	A_2(A_2&amp;&amp; a) :m_ptr(a.m_ptr)<br>	&#123;<br>		a.m_ptr = <span class="hljs-literal">nullptr</span>;<br>		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"move construct:"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>	&#125;<br> <br>	~A_2()<br>	&#123;<br>		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"destruct"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<br>		<span class="hljs-keyword">delete</span> m_ptr;<br>	&#125;<br> <br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-keyword">int</span>* m_ptr;<br>&#125;;<br> <br><span class="hljs-function">A_2 <span class="hljs-title">Get</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> flag)</span></span><br><span class="hljs-function"></span>&#123;<br>	A_2 a;<br>	A_2 b;<br>	<span class="hljs-keyword">if</span> (flag)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">right_value_ref2</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	A_2 a = Get(<span class="hljs-literal">false</span>);<br> <br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的代码中没有了拷贝构造，取而代之的是移动构造（Move  Construct）。从移动构造函数的实现可以看到，它的参数是一个右值引用类型的参数A&amp;&amp;，这里没有深拷贝，只有浅拷贝，这样就避免了临时对象的深拷贝，提供了性能。这里的A&amp;&amp;用来根据参数是左值还是右值来建立分支，如果是临时值，则会选择移动构造函数。移动构造函数只是将临时对象的资源做了浅拷贝，不需要对其进行深拷贝，从而避免了额外的拷贝，提高性能。这也就是所谓的移动语义（move 语义），右值引用的一个重要目的是用来支持移动语义的。</p>
+<p>​    移动语义可以将资源（堆、系统对象等）通过浅拷贝方式从一个对象转移到另一个对象，这样能减少不必要的临时对象的创建、拷贝以及销毁，可以大幅度提高C++应用程序的性能，消除临时对象的维护(创建和销毁)对性能的影响。</p>
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/weiqing00/article/details/80929788" target="_blank" rel="noopener">https://blog.csdn.net/weiqing00/article/details/80929788</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="tag">#移动构造函数</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/4LT7cjCVaWxuiAq.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/23/C++/%E6%82%AC%E7%A9%BA%E6%8C%87%E9%92%88%E4%B8%8E%E9%87%8E%E6%8C%87%E9%92%88/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              悬空指针与野指针
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/KHNyjaQL92bS87A.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/22/C++/C++%E5%9F%BA%E7%A1%80/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              函数指针与指针函数
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
