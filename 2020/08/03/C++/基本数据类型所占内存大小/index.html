@@ -20,7 +20,7 @@
 
   
 
-  <title>重载的运算符是成员函数时 | scorlw</title>
+  <title>C/C++中基本数据类型所占内存大小 | scorlw</title>
 
   
 
@@ -93,18 +93,18 @@
   
   
     <div class="header-content">
-      <div class="post-image" style="background-image: url(https://i.loli.net/2020/07/16/zGVJWSorKlsPbRQ.jpg)"></div>
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/07/16/aquQ7FKU62hdGlS.jpg)"></div>
       <div class="post-text">
         <div class="type-wrap">
           <a class="article-category-link" href="/categories/C/">C++</a>
         </div>
-        <h1 class="title-wrap">重载的运算符是成员函数时</h1>
+        <h1 class="title-wrap">C/C++中基本数据类型所占内存大小</h1>
         <h2 class="title-sub-wrap">
           <strong>scorlw</strong>
           <span>发布于</span>
           
   <a href="javascript:;" class="article-date">
-    <time datetime="2020-07-26T16:00:00.000Z" itemprop="datePublished">2020-07-27</time>
+    <time datetime="2020-08-02T16:00:00.000Z" itemprop="datePublished">2020-08-03</time>
   </a>
 
         </h2>
@@ -128,20 +128,108 @@
       
 
       <section class="article-entry">
-        <h1 id="重载的运算符是成员函数时"><a href="#重载的运算符是成员函数时" class="headerlink" title="重载的运算符是成员函数时"></a>重载的运算符是成员函数时</h1><blockquote>
+        <h1 id="C-C-中基本数据类型所占内存大小"><a href="#C-C-中基本数据类型所占内存大小" class="headerlink" title="C/C++中基本数据类型所占内存大小"></a>C/C++中基本数据类型所占内存大小</h1><blockquote>
 <p>c++</p>
 </blockquote>
-<p>当重载的运算符是成员函数时，this绑定到左侧运算符对象（例如重载+运算符，则默认+左侧的参数为this（或者this的成员））。成员运算符函数的参数数量比运算符对象的数量少一个；至少含有一个类类型的参数；</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CWeight</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	CWeight(<span class="hljs-keyword">int</span> iIn)&#123;m_iWeight = iIn;&#125;;<br>	CWeight <span class="hljs-keyword">operator</span>+(<span class="hljs-keyword">const</span> CWeight&amp; other);<br>	CWeight&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> CWeight&amp; other);<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-keyword">int</span> m_iWeight;<br>&#125;;<br>CWeight CWeight::<span class="hljs-keyword">operator</span>+(<span class="hljs-keyword">const</span> CWeight&amp; other)<br>&#123;<br>	<span class="hljs-keyword">return</span> CWeight(<span class="hljs-keyword">this</span>-&gt;m_iWeight + other.m_iWeight);  <span class="hljs-comment">// 注意这里, 调用了实际的加法,但是本实例的数据作为了左操作数, 我特意加了this-&gt;,其实是可以省略的.</span><br>&#125;<br>CWeight&amp; CWeight::<span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> CWeight&amp; other)<br>&#123;<br>   m_iWeight = other.m_iWeight;<br>   <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-function">CWeight <span class="hljs-title">w1</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>	<span class="hljs-function">CWeight <span class="hljs-title">w2</span><span class="hljs-params">(<span class="hljs-number">20</span>)</span></span>;<br>	CWeight w3 = w1 + w2;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"w1 = %d, w2 = %d, w3 = %d\n"</span>, w1.m_iWeight, w2.m_iWeight, w3.m_iWeight);<br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">w1 = <span class="hljs-number">10</span>, w2 = <span class="hljs-number">20</span>, w3 = <span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
-
+<h2 id="C中不同数据类型所占的字节大小，在不同的操作系统和编译器下，是不同的，一般主要说gcc下，32位或64位系统的，做了个表如下："><a href="#C中不同数据类型所占的字节大小，在不同的操作系统和编译器下，是不同的，一般主要说gcc下，32位或64位系统的，做了个表如下：" class="headerlink" title="C中不同数据类型所占的字节大小，在不同的操作系统和编译器下，是不同的，一般主要说gcc下，32位或64位系统的，做了个表如下："></a>C中不同数据类型所占的字节大小，在不同的操作系统和编译器下，是不同的，一般主要说gcc下，32位或64位系统的，做了个表如下：</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>32位</th>
+<th>64位</th>
+<th>取值范围（32位）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>1</td>
+<td>1</td>
+<td>-128~127</td>
+</tr>
+<tr>
+<td>unsigned char(当byte使用)</td>
+<td>1</td>
+<td>1</td>
+<td>0~255</td>
+</tr>
+<tr>
+<td>short int /short</td>
+<td>2</td>
+<td>2</td>
+<td>–32,768~32,767</td>
+</tr>
+<tr>
+<td>unsigned  short</td>
+<td>2</td>
+<td>2</td>
+<td>0~65,535</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4</td>
+<td>4</td>
+<td>-2,147,483,648~2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td>4</td>
+<td>4</td>
+<td>0~4,294,967,295</td>
+</tr>
+<tr>
+<td>long int /long（不同）</td>
+<td>4</td>
+<td>8</td>
+<td>–2,147,483,648~2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned long（不同）</td>
+<td>4</td>
+<td>8</td>
+<td>0~4,294,967,295</td>
+</tr>
+<tr>
+<td>long long int/long long</td>
+<td>8</td>
+<td>8</td>
+<td>-9,223,372,036,854,775,808 ~9,223,372,036,854,775,807</td>
+</tr>
+<tr>
+<td>指针　（不同）</td>
+<td>4</td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>4</td>
+<td>3.4E +/- 38 (7 digits)</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8</td>
+<td>8</td>
+<td>1.7E +/- 308 (15 digits)</td>
+</tr>
+</tbody></table>
+<p>注意：  </p>
+<ol>
+<li><p>求数组大小时，如果数组作为参数传递时，退化为指针，所以sizeof(arr)大小为该系统下指针的大小</p>
+</li>
+<li><p>对于C字符串，需要牢记C/C++中一个汉字占两个字节(Linux下3个字节)。</p>
+</li>
+<li><p>求struct 或者 class 的大小时候，除了基本的数据类型大小，特别要考虑的是字节对齐问题，如果是C++的还涉及虚函数的虚表问题，需要加上虚表指针的大小。</p>
+</li>
+</ol>
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/zcyzsy/article/details/77935651?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">https://blog.csdn.net/zcyzsy/article/details/77935651?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param</a></p>
+</blockquote>
 
       </section>
 
       <section class="article-footer">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/" rel="tag">#函数重载</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98/" rel="tag">#内存</a></li></ul>
       </section>
 
       <section class="article-navs">
@@ -152,13 +240,13 @@
       <div id="article-nav-newer" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/2mIjRNr9E5Vly6q.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/M9eNt8HdzRVbwms.jpg)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/07/27/C++/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E5%90%88%E6%88%90%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/"></a>
+          <a class="card-link article-nav-link" href="/2020/08/03/C++/c++%E5%8D%95%E7%BB%A7%E6%89%BF%E3%80%81%E5%A4%9A%E7%BB%A7%E6%89%BF%E3%80%81%E8%8F%B1%E5%BD%A2%E7%BB%A7%E6%89%BF%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%EF%BC%88%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E7%BB%93%E6%9E%84%EF%BC%89/"></a>
           <strong class="article-nav-caption">Newer</strong>
           <p class="article-nav-title">
             
-              编译器什么情况下，合成构造函数
+              c++单继承、多继承、菱形继承内存布局（虚函数表结构）
             
           </p>
         </article>
@@ -168,13 +256,13 @@
       <div id="article-nav-older" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/SmUIEdR81z7heOu.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/9USJAz365ix2LVt.jpg)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/07/27/C++/%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%EF%BC%88%E5%A4%9A%E6%80%81%EF%BC%89/"></a>
+          <a class="card-link article-nav-link" href="/2020/08/01/C++/C++%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
           <strong class="article-nav-caption">Older</strong>
           <p class="article-nav-title">
             
-              静态绑定和动态绑定（多态）
+              C++内存布局
             
           </p>
         </article>
