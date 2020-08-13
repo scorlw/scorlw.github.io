@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
   images.forEach(item => {
     item.addEventListener("error", function () {
-      this.src = "/images/image-error.jpg";
+      this.src = "/images/image-error.gif";
     });
   });
 
