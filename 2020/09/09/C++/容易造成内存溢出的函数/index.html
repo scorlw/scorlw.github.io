@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>容易造成内存溢出的函数 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://qiniu.miiiku.xyz/src/images/banner.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/C/">C++</a>
+        </div>
+        <h1 class="title-wrap">容易造成内存溢出的函数</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-09-08T16:00:00.000Z" itemprop="datePublished">2020-09-09</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="容易造成内存溢出的函数"><a href="#容易造成内存溢出的函数" class="headerlink" title="容易造成内存溢出的函数"></a>容易造成内存溢出的函数</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<h2 id="1、strcpy"><a href="#1、strcpy" class="headerlink" title="1、strcpy"></a>1、strcpy</h2><p>是一种C语言的标准库函数，strcpy把含有’\0’结束符的字符串复制到另一个地址空间，返回值的类型为char*。</p>
+<p>头文件：<code>#include &lt;string.h&gt; 和 #include &lt;stdio.h&gt;</code></p>
+<p>原型声明：<code>char *strcpy(char* dest, const char *src);</code></p>
+<p>功能：把从src地址开始且含有NULL结束符的字符串复制到以dest开始的地址空间</p>
+<p>说明：src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。返回指向dest的指针。</p>
+<p>源码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">strcpy</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* des,<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* source)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">char</span>* r=des;<br>	assert((des != <span class="hljs-literal">NULL</span>) &amp;&amp; (source != <span class="hljs-literal">NULL</span>));<br>	<span class="hljs-keyword">while</span>((*r++ = *source++)!=<span class="hljs-string">'\0'</span>);<br>	<span class="hljs-keyword">return</span> des;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">char</span> a[<span class="hljs-number">10</span>],b[]=&#123;<span class="hljs-string">"COPY"</span>&#125;;<br><span class="hljs-comment">//定义字符数组a,b</span><br><span class="hljs-built_in">strcpy</span>(a,b);<br><span class="hljs-comment">//将b中的COPY复制到a中</span><br><br><span class="hljs-comment">//or</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">strcpytst</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">char</span> str[<span class="hljs-number">4</span>] = &#123;<span class="hljs-string">'6'</span>,<span class="hljs-string">'2'</span>,<span class="hljs-string">'3'</span>&#125;;<span class="hljs-comment">//默认第四个是'\0'，如果&#123;'6','2','3'，'4'&#125;就没有'\0'，此时strcpy函数运行到遇到'\0'为止</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; &amp;str &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//0x6dfedc</span><br>    <span class="hljs-keyword">int</span> a[<span class="hljs-number">100</span>] = &#123;<span class="hljs-number">0</span>&#125;;<span class="hljs-comment">//防止str与str1有重复内存</span><br><br>    <span class="hljs-keyword">char</span> str2[<span class="hljs-number">4</span>] = &#123;<span class="hljs-string">'a'</span>,<span class="hljs-string">'s'</span>,<span class="hljs-string">'d'</span>,<span class="hljs-string">'f'</span>&#125;;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; &amp;str2 &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//0x6dfd48</span><br>    <span class="hljs-keyword">char</span> str1[<span class="hljs-number">1</span>];<br>    <span class="hljs-built_in">cout</span> &lt;&lt; &amp;str1 &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//0x6dfd47</span><br>    <span class="hljs-built_in">strcpy</span>(str1, str);<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(str) &lt;&lt;<span class="hljs-built_in">endl</span>;<span class="hljs-comment">//4</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(str1) &lt;&lt;<span class="hljs-built_in">endl</span>;<span class="hljs-comment">//1</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s and %s\n"</span>, str, str1);<span class="hljs-comment">//623 and 623</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str1[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; str1[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; str1[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; str1[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-string">" "</span>  &lt;&lt; str1[<span class="hljs-number">4</span>] &lt;&lt; <span class="hljs-string">" "</span>&lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//6 2 3   f</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; str2[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; str2[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; str2[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; str2[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-string">" "</span>  &lt;&lt; str2[<span class="hljs-number">4</span>] &lt;&lt; <span class="hljs-string">" "</span>&lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//2 3   f</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>解决方法：</p>
+<p>strncpy</p>
+<p>strncpy函数用于将指定长度的字符串复制到字符数组中。</p>
+<p>头文件：<code>#include &lt;string.h&gt; 和 #include &lt;stdio.h&gt;</code></p>
+<p>原型声明：<code>char *strncpy(char *destinin, char *source, int maxlen);</code></p>
+<p>功能：把source指向的字符串的前size_t  n个字符（不包括\0，\0得自己手动加在*destin被复制之后）复制到destin指向的字符串中。如果要复制的*source的部分有\0，就把\0复制进去，之后就提前结束，即使没复制到第size_t n个字符也是。返回指向*destin的指针。</p>
+<p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">strncpytst</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">char</span> name[]=&#123;<span class="hljs-string">"Chinanet"</span>&#125;,destin[<span class="hljs-number">20</span>]=&#123;&#125;;<br>    <span class="hljs-built_in">strncpy</span>(destin,name,<span class="hljs-number">3</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,destin);<span class="hljs-comment">//Chi</span><br>    <span class="hljs-built_in">strncpy</span>(destin,name,<span class="hljs-number">8</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,destin);<span class="hljs-comment">//Chinanet</span><br>    <span class="hljs-built_in">strncpy</span>(destin,name,<span class="hljs-number">9</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,destin);<span class="hljs-comment">//Chinanet</span><br>    <span class="hljs-keyword">char</span> destin1[<span class="hljs-number">8</span>] = &#123;&#125;;<br>    <span class="hljs-built_in">strncpy</span>(destin1,name,<span class="hljs-number">9</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,destin1);<span class="hljs-comment">//Chinanet</span><br>    <span class="hljs-keyword">char</span> destin4[<span class="hljs-number">9</span>] = &#123;<span class="hljs-string">'4'</span>,<span class="hljs-string">'5'</span>,<span class="hljs-string">'6'</span>,<span class="hljs-string">'7'</span>,<span class="hljs-string">'8'</span>,<span class="hljs-string">'9'</span>,<span class="hljs-string">'0'</span>,<span class="hljs-string">'p'</span>,<span class="hljs-string">'q'</span>&#125;;<br>    <span class="hljs-keyword">char</span> destin2[<span class="hljs-number">2</span>] = &#123;&#125;;<br>    <span class="hljs-keyword">char</span> destin3[<span class="hljs-number">4</span>] = &#123;<span class="hljs-string">'1'</span>,<span class="hljs-string">'2'</span>,<span class="hljs-string">'3'</span>&#125;;<br>    <span class="hljs-built_in">strncpy</span>(destin2,name,<span class="hljs-number">9</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,destin2);<span class="hljs-comment">//Chinanet</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; destin3[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin3[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin3[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin3[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-string">" "</span>  &lt;&lt; destin3[<span class="hljs-number">4</span>] &lt;&lt; <span class="hljs-string">" "</span>&lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//1 2 3   C//destin4第四位默认为'\0'</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; destin4[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin4[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin4[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin4[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-string">" "</span>  &lt;&lt; destin4[<span class="hljs-number">4</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin4[<span class="hljs-number">5</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin4[<span class="hljs-number">6</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin4[<span class="hljs-number">7</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin4[<span class="hljs-number">8</span>] &lt;&lt; <span class="hljs-string">" "</span>  &lt;&lt; destin4[<span class="hljs-number">9</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//i n a n e t   p q C//name字符串后默认补'\0'</span><br>    <span class="hljs-keyword">char</span> name1[]=&#123;<span class="hljs-string">'C'</span>,<span class="hljs-string">'h'</span>,<span class="hljs-string">'i'</span>,<span class="hljs-string">'n'</span>,<span class="hljs-string">'a'</span>,<span class="hljs-string">'n'</span>,<span class="hljs-string">'e'</span>,<span class="hljs-string">'t'</span>&#125;,destin6[<span class="hljs-number">9</span>] = &#123;<span class="hljs-string">'1'</span>,<span class="hljs-string">'2'</span>,<span class="hljs-string">'3'</span>,<span class="hljs-string">'4'</span>,<span class="hljs-string">'5'</span>,<span class="hljs-string">'6'</span>,<span class="hljs-string">'7'</span>,<span class="hljs-string">'8'</span>,<span class="hljs-string">'9'</span>&#125;, destin5[<span class="hljs-number">5</span>]=&#123;&#125;;<br>    <span class="hljs-built_in">strncpy</span>(destin5,name1,<span class="hljs-number">8</span>);<br>    <span class="hljs-built_in">cout</span> &lt;&lt; destin6[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin6[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin6[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin6[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-string">" "</span>  &lt;&lt; destin6[<span class="hljs-number">4</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin6[<span class="hljs-number">5</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin6[<span class="hljs-number">6</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin6[<span class="hljs-number">7</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; destin6[<span class="hljs-number">8</span>] &lt;&lt; <span class="hljs-string">" "</span>  &lt;&lt; destin6[<span class="hljs-number">9</span>] &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//n e t 4 5 6 7 8 9 C//strncpy不会自动添加'\0'，最后的C是name1的</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://baike.baidu.com/item/strcpy/5494519?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/strcpy/5494519?fr=aladdin</a></p>
+<h2 id="2、strcat"><a href="#2、strcat" class="headerlink" title="2、strcat"></a>2、strcat</h2><p>是一种C语言的标准库函数，将两个char类型连接，返回值的类型为char*。</p>
+<p>头文件：<code>#include &lt;string.h&gt; 和 #include &lt;stdio.h&gt;</code></p>
+<p>原型声明：<code>extern char *strcat(char *dest, const char *src);</code></p>
+<p>功能：把src所指向的字符串（包括“\0”）复制到dest所指向的字符串后面（删除*dest原来末尾的“\0”）。要保证*dest足够长，以容纳被复制进来的*src。*src中原有的字符不变。返回指向dest的指针。</p>
+<p>说明：src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。返回指向dest的指针。</p>
+<p>代码实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">mystrcat</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *dst,<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *src)</span> <span class="hljs-comment">//用自己的方式实现strcat函数功能</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">char</span> *p=dst;  <span class="hljs-comment">//下面的操作会改变目的指针指向，先定义一个指针记录dst</span><br>	<span class="hljs-keyword">while</span>(*p!=<span class="hljs-string">'\0'</span>)p++;<br>	<span class="hljs-keyword">while</span>(*src != <span class="hljs-string">'\0'</span>)*p++=*src++;<br>	*p=<span class="hljs-string">'\0'</span>;<br>	<span class="hljs-keyword">return</span> dst;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">strcattst</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">char</span> d[<span class="hljs-number">20</span>] = <span class="hljs-string">"GoldenGlobal"</span>;<br>    <span class="hljs-keyword">char</span>* s = <span class="hljs-string">"View"</span>;<br>    <span class="hljs-built_in">strcat</span>(d,s);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,d);<span class="hljs-comment">//GoldenGlobalView</span><br><br>    <span class="hljs-keyword">char</span> d2[<span class="hljs-number">5</span>] = <span class="hljs-string">"1234"</span>;<br>    <span class="hljs-keyword">char</span> d1[<span class="hljs-number">4</span>] = <span class="hljs-string">"123"</span>;<br>    <span class="hljs-keyword">char</span>* s1 = <span class="hljs-string">"456"</span>;<br>    <span class="hljs-built_in">strcat</span>(d1,s1);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,d1);<span class="hljs-comment">//123456</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,d2);<span class="hljs-comment">//56//strcat自动加'\0'</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>解决方法：</p>
+<p>strncat</p>
+<p>strncat()主要功能是在字符串的结尾追加n个字符。</p>
+<p>头文件：<code>#include &lt;string.h&gt; 和 #include &lt;stdio.h&gt;</code></p>
+<p>原型声明：<code>char *strncat(char *dest,char *src,int n);</code></p>
+<p>功能：把src所指字符串的前n个字符添加到dest所指字符串的结尾处，并覆盖dest所指字符串结尾的’\0’，从而实现字符串的连接。strncat()会将dest字符串最后的’\0’覆盖掉，字符追加完成后，再追加’\0’。</p>
+<p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">strncattst</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">char</span> dest[<span class="hljs-number">20</span>] = <span class="hljs-string">"Hello"</span>;<br>    <span class="hljs-keyword">char</span> src[<span class="hljs-number">10</span>] = <span class="hljs-string">"World"</span>;<br>    <span class="hljs-built_in">strncat</span>(dest, src, <span class="hljs-number">5</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>, dest);<span class="hljs-comment">//HelloWorld</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://baike.baidu.com/item/strncat" target="_blank" rel="noopener">https://baike.baidu.com/item/strncat</a></p>
+<p><a href="https://baike.baidu.com/item/strcat" target="_blank" rel="noopener">https://baike.baidu.com/item/strcat</a></p>
+<h2 id="3、gets"><a href="#3、gets" class="headerlink" title="3、gets"></a>3、gets</h2><p>gets从标准输入设备读字符串函数，其可以无限读取，不会判断上限，以回车结束读取，所以程序员应该确保buffer的空间足够大，以便在执行读操作时不发生溢出。</p>
+<p>头文件：<code>#include &lt;stdio.h&gt;</code></p>
+<p>原型声明：<code>char * gets (char * str);</code></p>
+<p>功能：从stdin流中读取字符串，直至接受到换行符或EOF时停止，并将读取的结果存放在buffer指针所指向的字符数组中。换行符不作为读取串的内容，读取的换行符被转换为‘\0’空字符，并由此来结束字符串。</p>
+<p>说明：由于可以无限读取，所以在2011年12月，ANSI 采纳了 ISO/IEC 9899:2011 标准，标准中删除了 gets()函数，使用一个新的更安全的函数gets_s()替代（具体用法看下面示例）。</p>
+<p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">char</span> s[<span class="hljs-number">5</span>];  <span class="hljs-comment">//不要char*p，然后gets(p)，这是错误的，因为p没有指向有效的内存，它可能指向任何非法地址地方的未知大小的内存块，这样以来，就可能修改了不属于本程序的内存的内容</span><br>gets(s);<span class="hljs-comment">//123</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>, s);<span class="hljs-comment">//123</span><br><br><span class="hljs-keyword">char</span> str0[<span class="hljs-number">4</span>];<br><span class="hljs-keyword">char</span> str[<span class="hljs-number">3</span>];<br>gets(str);<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s and %s\n"</span>, str0, str);<span class="hljs-comment">//456789 and 123456789</span><br></code></pre></td></tr></table></figure>
+
+<p>gets(s)函数与<strong>scanf(“%s”,s)</strong>相似，但不完全相同，使用scanf(“%s”,s) 函数输入字符串时存在一个问题，就是如果输入了空格会认为字符串结束，空格后的字符将作为下一个输入项处理，但gets()函数将接收输入的整个字符串直到遇到换行为止。</p>
+<p>gets()函数读取到\n（我们输入的回车）于是停止读取，但是它不会把\n包含到字符串里面去。然而，和它配合使用的puts函数，却在输出字符串的时候自动换行。</p>
+<p>解决方法：</p>
+<p>fgets</p>
+<p>fgets函数功能为从指定的流中读取数据，每次读取一行。</p>
+<p>头文件：<code>#include &lt;string.h&gt; 和 #include &lt;stdio.h&gt;</code></p>
+<p>原型声明：<code>char *fgets(char *str, int n, FILE *stream);</code></p>
+<p>功能：从指定的流 stream 读取一行，并把它存储在 str 所指向的字符串内。当读取 (n-1) 个字符时，或者读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定。</p>
+<p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">char</span> str1[<span class="hljs-number">9</span>];<br><span class="hljs-keyword">char</span> str2[<span class="hljs-number">3</span>];<br>fgets(str2,<span class="hljs-number">5</span>,<span class="hljs-built_in">stdin</span>);<span class="hljs-comment">//123456789 //5包括'\0'</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s and %s"</span>, str1, str2);<span class="hljs-comment">//4 and 1234</span><br></code></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://baike.baidu.com/item/gets" target="_blank" rel="noopener">https://baike.baidu.com/item/gets</a></p>
+<p><a href="https://baike.baidu.com/item/fgets" target="_blank" rel="noopener">https://baike.baidu.com/item/fgets</a></p>
+<h2 id="4、sprintf"><a href="#4、sprintf" class="headerlink" title="4、sprintf"></a>4、sprintf</h2><p>把格式化的数据写入某个字符串中，即发送格式化输出到 string 所指向的字符串。</p>
+<p>头文件：<code>#include &lt;stdio.h&gt;</code></p>
+<p>原型声明：<code>int sprintf(char *string, char *format [,argument,...]);</code></p>
+<p>功能：主要功能是把格式化的数据写入某个字符串中，即发送格式化输出到 string 所指向的字符串。sprintf 是个变参函数。使用sprintf 对于写入buffer的字符数是没有限制的，这就存在了buffer溢出的可能性。</p>
+<p>返回值</p>
+<p>如果成功，则返回写入的字符总数，不包括字符串追加在字符串末尾的空字符。如果失败，则返回一个负数。</p>
+<p>sprintf 返回以format为格式argument为内容组成的结果被写入string的字节数，结束字符‘\0’不计入内。即，如果“Hello”被写入空间足够大的string后，函数sprintf 返回5。</p>
+<p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sprintftst</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">char</span>  <span class="hljs-built_in">buffer</span>[<span class="hljs-number">200</span>], s[] = <span class="hljs-string">"computer"</span>, c = <span class="hljs-string">'l'</span>;<br>    <span class="hljs-keyword">int</span>   i = <span class="hljs-number">35</span>, j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">float</span> fp = <span class="hljs-number">1.7320534f</span>;<br>    <span class="hljs-comment">// 格式化并打印各种数据到buffer</span><br>    j  = <span class="hljs-built_in">sprintf</span>( <span class="hljs-built_in">buffer</span>,    <span class="hljs-string">"   String:    %s\n"</span>, s );<br>    <span class="hljs-built_in">printf</span>( <span class="hljs-string">"j = %d\n"</span>,j);<span class="hljs-comment">//23</span><br>    j += <span class="hljs-built_in">sprintf</span>( <span class="hljs-built_in">buffer</span> + j, <span class="hljs-string">"   Character: %c\n"</span>, c );<br>    <span class="hljs-built_in">printf</span>( <span class="hljs-string">"j = %d\n"</span>,j);<span class="hljs-comment">//39</span><br>    j += <span class="hljs-built_in">sprintf</span>( <span class="hljs-built_in">buffer</span> + j, <span class="hljs-string">"   Integer:   %d\n"</span>, i );<br>    <span class="hljs-built_in">printf</span>( <span class="hljs-string">"j = %d\n"</span>,j);<span class="hljs-comment">//56</span><br>    j += <span class="hljs-built_in">sprintf</span>( <span class="hljs-built_in">buffer</span> + j, <span class="hljs-string">"   Real:      %f\n"</span>, fp );<br>    <span class="hljs-built_in">printf</span>( <span class="hljs-string">"j = %d\n"</span>,j);<span class="hljs-comment">//79</span><br><br>    <span class="hljs-built_in">printf</span>( <span class="hljs-string">"Output:\n%s\ncharacter count = %d\n"</span>, <span class="hljs-built_in">buffer</span>, j );<br>    <span class="hljs-comment">//Output:</span><br>    <span class="hljs-comment">//String:    computer</span><br>    <span class="hljs-comment">//Character: l</span><br>    <span class="hljs-comment">//Integer:   35</span><br>    <span class="hljs-comment">//Real:      1.732053</span><br><br>    <span class="hljs-comment">//character count = 79</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="format标签属性"><a href="#format标签属性" class="headerlink" title="format标签属性"></a>format标签属性</h3><p>format 标签属性是<strong>%[flags][width][.precision][length]specifier</strong>，具体讲解如下：</p>
+<p>sprintf格式的规格如下所示。[]中的部分是可选的。</p>
+<p>%[指定参数][<a href="https://baike.baidu.com/item/标识符" target="_blank" rel="noopener">标识符</a>][宽度][.精度]指示符</p>
+<p>\1. [指定参数] 处理字符方向。负号时表示从后向前处理。</p>
+<p>\2. [标识符] 填空字元。 0 的话表示空格填 0；空格是内定值，表示空格就放着。</p>
+<p>\3. [宽度]<a href="https://baike.baidu.com/item/字符" target="_blank" rel="noopener">字符</a>总宽度。为最小宽度。</p>
+<p>\4. [精度] 精确度。指在小数点后的浮点数位数。</p>
+<p>5, 转换字符</p>
+<p>%% 印出百分比符号，不转换。</p>
+<p>%c 字符输出到缓冲区，不转换。</p>
+<p>%d 整数转成十进位。</p>
+<p>%f 倍精确度数字转成浮点数。</p>
+<p>%o 整数转成八进位。</p>
+<p>%s 字符串输出到缓冲区，不转换。</p>
+<p>%x 整数转成小写十六进位。</p>
+<p>%X 整数转成大写十六进位。</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">money = <span class="hljs-number">123.1</span><br>formatted = <span class="hljs-built_in">sprintf</span> (<span class="hljs-string">"%06.2f"</span>, $money); <span class="hljs-comment">// 此时变数 $ formatted 值为 "123.10"</span><br>formatted = <span class="hljs-built_in">sprintf</span> (<span class="hljs-string">"%08.2f"</span>, $money); <span class="hljs-comment">// 此时变数 $ formatted 值为 "00123.10"</span><br>formatted = <span class="hljs-built_in">sprintf</span> (<span class="hljs-string">"%-08.2f"</span>, $money); <span class="hljs-comment">// 此时变数 $ formatted 值为 "123.1000"</span><br>formatted = <span class="hljs-built_in">sprintf</span> (<span class="hljs-string">"%.2f%%"</span>, <span class="hljs-number">0.95</span> * <span class="hljs-number">100</span>); <span class="hljs-comment">// 格式化为百分比</span><br></code></pre></td></tr></table></figure>
+
+<p>解决方法：</p>
+<p>sprintf_s和snprintf</p>
+<p>sprintf_s()是sprintf()的安全版本，通过指定<a href="https://baike.baidu.com/item/缓冲区" target="_blank" rel="noopener">缓冲区</a>长度来避免sprintf()存在的溢出风险 。在使用VS2008时如果你使用了sprintf函数，那么编译器会发出警告：使用sprintf存在风险，建议使用sprintf_s。这个安全版本的原型是：</p>
+<p><code>int sprintf_s(char *buffer,size_t sizeOfBuffer,const char *format [,argument] ... );</code></p>
+<p>不过sprintf_s()是微软私有的函数，考虑到跨平台移植，最好使用snprintf()。两者的原型基本相同：</p>
+<p><code>int snprintf(char *buffer, size_t count, const char *format [,argument] ... );</code></p>
+<p>参考：<a href="https://baike.baidu.com/item/sprintf" target="_blank" rel="noopener">https://baike.baidu.com/item/sprintf</a></p>
+<blockquote>
+<p>原文地址：</p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/31LiE7SoFYHRfws.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/09/09/C++/const%E5%B8%B8%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AE/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              const常量的存储位置
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/mpeZEnzKJQDtO35.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/08/17/Qt/QWidget%E5%AE%9E%E7%8E%B0QDialog%E7%9A%84exec()%E6%A8%A1%E6%80%81%E6%95%88%E6%9E%9C/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              QWidget实现QDialog的exec()模态效果
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
