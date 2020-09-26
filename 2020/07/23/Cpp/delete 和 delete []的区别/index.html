@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>delete 和 delete []的区别 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/07/16/odEwxCAYSZ8rjzQ.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/C/">C++</a>
+        </div>
+        <h1 class="title-wrap">delete 和 delete []的区别</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-07-22T16:00:00.000Z" itemprop="datePublished">2020-07-23</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="delete-和-delete-的区别"><a href="#delete-和-delete-的区别" class="headerlink" title="delete 和 delete []的区别"></a>delete 和 delete []的区别</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<p>c++中对new申请的内存的释放方式有delete和delete[两种方式，到底这两者有什么区别呢？</p>
+<h2 id="我们通常从教科书上看到这样的说明："><a href="#我们通常从教科书上看到这样的说明：" class="headerlink" title="我们通常从教科书上看到这样的说明："></a>我们通常从教科书上看到这样的说明：</h2><p><strong>delete 释放new分配的单个对象指针指向的内存</strong></p>
+<p><strong>delete[] 释放new分配的对象数组指针指向的内存</strong></p>
+<p>那么，按照教科书的理解，我们看下下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> *a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10</span>];<br><span class="hljs-keyword">delete</span> a;        <span class="hljs-comment">//方式1</span><br><span class="hljs-keyword">delete</span> [] a;     <span class="hljs-comment">//方式2</span><br></code></pre></td></tr></table></figure>
+
+
+<p>肯定会有很多人说方式1肯定存在内存泄漏，是这样吗？</p>
+<p>（1）<strong>针对简单类型 使用new分配后的不管是数组还是非数组形式内存空间用两种方式均可</strong>，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> *a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10</span>];<br><span class="hljs-keyword">delete</span> a;<br><span class="hljs-keyword">delete</span> [] a;<br></code></pre></td></tr></table></figure>
+
+<p>此种情况中的释放<strong>效果相同</strong>，原因在于：<strong>分配简单类型内存时，内存大小已经确定，系统可以记忆并且进行管理，在析构时，系统并不会调用析构函数，它直接通过指针可以获取实际分配的内存空间</strong>，(哪怕是一个数组内存空间,在分配过程中 系统会记录分配内存的大小等信息，此信息保存在结构体_CrtMemBlockHeader中，具体情况可参看VC安装目录下CRT\SRC\DBGDEL.cpp)</p>
+<p>（2）. 针对类Class，两种方式体现出具体差异。当你通过下列方式分配一个类对象数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Babe</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    Babe()<br>    &#123;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Create a Babe to talk with me"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    &#125;<br>    ~Babe()<br>    &#123;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Babe don't go away,listen to me"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    Babe* pbabe = <span class="hljs-keyword">new</span> Babe[<span class="hljs-number">3</span>];<br>    <span class="hljs-comment">//delete pbabe;//error，仅释放了pbabe指针指向的全部内存空间 但是只调用了pbabe[0]对象的析构函数 剩下的pbabe[1]和pbabe[2]这2个用户自行分配的对应内存空间将不能释放 从而造成内存泄漏</span><br>    <span class="hljs-keyword">delete</span>[] pbabe;<span class="hljs-comment">//调用使用类对象的析构函数释放用户自己分配内存空间并且释放了pbabe指针指向的全部内存空间</span><br>    system(<span class="hljs-string">"pause"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++">Create a babe to talk with me<br>Create a babe to talk with me<br>Create a babe to talk with me<br><span class="hljs-comment">//Babe don't go away,listen to me然后报错</span><br>Babe don<span class="hljs-number">'</span>t go away,<span class="hljs-built_in">listen</span> to me<br>Babe don<span class="hljs-number">'</span>t go away,<span class="hljs-built_in">listen</span> to me<br>Babe don<span class="hljs-number">'</span>t go away,<span class="hljs-built_in">listen</span> to me<br></code></pre></td></tr></table></figure>
+
+<p>所以总结下就是，如果ptr代表一个用new申请的内存返回的内存空间地址，即所谓的指针，那么：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">delete</span> ptr   <span class="hljs-comment">//代表用来释放内存，且只用来释放ptr指向的内存。 </span><br><span class="hljs-keyword">delete</span>[] rg   <span class="hljs-comment">//用来释放rg指向的内存，！！还逐一调用数组中每个对象的destructor！！</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>对于像int/char/long/int*/struct等等简单数据类型，由于对象没有destructor，所以用delete 和delete [] 是一样的！但是如果是C++对象数组就不同了！</strong></p>
+<p>大家都看到了，只使用delete的时候只出现一个 Babe don&#39;t go away,listen to me，而使用delete[]的时候出现3个 Babe don&#39;t go away,listen to me。不过<strong>不管使用delete还是delete[]那三个对象的在内存中都被删除，既存储位置都标记为可写</strong>，但是使用delete的时候只调用了pbabe[0]的析构函数，而使用了delete[]则调用了3个Babe对象的析构函数。</p>
+<p>你一定会问，反正不管怎样都是把存储空间释放了，有什么区别。</p>
+<p>答：关键在于调用析构函数上。此程序的类没有使用操作系统的系统资源（比如：Socket、File、Thread等），所以不会造成明显恶果。<strong>如果你的类使用了操作系统资源，单纯把类的对象从内存中删除是不妥当的，因为没有调用对象的析构函数会导致系统资源不被释放，</strong>如果是Socket则会造成Socket资源不被释放，最明显的就是端口号不被释放，系统最大的端口号是65535(216 _ 1，因为还有0)，如果端口号被占用了，你就不能上网了，呵呵。如果File资源不被释放，你就永远不能修改这个文件，甚至不能读这个文件(除非注销或重器系统)。如果线程不被释放，这它总在后台运行，浪费内存和CPU资源。这些资源的释放必须依靠这些类的析构函数。所以，在用这些类生成对象数组的时候，用delete[]来释放它们才是王道。而用delete来释放也许不会出问题，也许后果很严重，具体要看类的代码了.</p>
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/cbNotes/article/details/38900799" target="_blank" rel="noopener">https://blog.csdn.net/cbNotes/article/details/38900799</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/delete/" rel="tag">#delete</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/delete/" rel="tag">#delete[]</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/SmUIEdR81z7heOu.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/27/Cpp/%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%EF%BC%88%E5%A4%9A%E6%80%81%EF%BC%89/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              静态绑定和动态绑定（多态）
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/4LT7cjCVaWxuiAq.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/07/23/Cpp/%E6%82%AC%E7%A9%BA%E6%8C%87%E9%92%88%E4%B8%8E%E9%87%8E%E6%8C%87%E9%92%88/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              悬空指针与野指针
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
