@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>传输层_TCP和UDP | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/07/16/u3ODmxaAlhHL4sY.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+        </div>
+        <h1 class="title-wrap">传输层_TCP和UDP</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-09-27T16:00:00.000Z" itemprop="datePublished">2020-09-28</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="传输层-TCP和UDP"><a href="#传输层-TCP和UDP" class="headerlink" title="传输层_TCP和UDP"></a>传输层_TCP和UDP</h1><blockquote>
+<p>计算机网络</p>
+</blockquote>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a><strong>TCP</strong></h2><h3 id="1-TCP协议有几大计时器？"><a href="#1-TCP协议有几大计时器？" class="headerlink" title="1.    TCP协议有几大计时器？"></a><strong>1.    TCP协议有几大计时器？</strong></h3><p>1)   重传计时器</p>
+<p>在一个TCP连接中，TCP<strong>每发送一个报文段</strong>，就对此报文段<strong>设置一个超时重传计时器</strong>。若在<strong>收到</strong>了对此特定报文段的<strong>确认之前</strong>计时器<strong>截止</strong>期到，则<strong>重传</strong>此报文段，并将计时器复位。</p>
+<p>2)   持续计时器</p>
+<p>为了对付零窗口大小通知，TCP需要另一个计时器。假定<strong>接收TCP宣布</strong>了<strong>窗口大小为零</strong>。<strong>发送TCP</strong>就<strong>停止传送</strong>报文段，<strong>直到</strong>接收TCP发送<strong>确认</strong>并<strong>宣布</strong>一个<strong>非零的窗口大小</strong>。但这个<strong>确认可能会丢失</strong>。我们知道在TCP中，<strong>对确认是不需要发送确认的</strong>。若确认丢失了，接收TCP并不知道，而是会认为它已经完成任务了，并等待着发送TCP接着会发送更多的报文段。但发送TCP由于没有收到确认，就等待对方发送确认来通知窗口的大小。双方的TCP都在永远地等待着对方。要打开这种死锁，TCP为每一个连接使用一个坚持计时器。当<strong>发送TCP收到</strong>一个<strong>窗口大小为零的确认</strong>时，就启动坚持计时器。当坚持计时器<strong>期限到</strong>时，发送TCP就发送一个特殊的报文段， 叫做<strong>探测报文段</strong> 。这个报文段只有一个字节的数据。它有一个序号，但它的序号永远不需要确认；甚至在计算对其他部分的数据的确认时该序号也被忽略。探测报文段<strong>提醒对端：确认已丢失，必须重传。</strong> </p>
+<p>3)  保活计时器</p>
+<p>保活计时器使用在某些实现中，用来<strong>防止</strong>在两个TCP之间的连接<strong>出现长时期的空闲</strong>。假定客户打开了到服务器的连接，传送了一些数据，然后就保持静默了。也许这个客户出故障了。在这种情况下，这个连接将永远地处理打开状态。 收到消息，计时器复位。两小时没有收到报文段，则发送探测报文10次，75s/次，如果还无响应，则断开连接。</p>
+<p>4)  时间等待计时器</p>
+<p>时间等待计时器是在连接终止期间使用的。当TCP关闭一个连接时，它并不认为这个连接马上就真正地关闭了。在时间等待期间中，连接还处于一种<strong>中间过渡状态</strong>。这就可以<strong>使重复的FIN报文段</strong>（如果有的话）可以到达目的站因而可将其<strong>丢弃</strong>。这个计时器的值通常设置为一个<strong>报文段的寿命期待值的两倍。</strong></p>
+<h3 id="2-详细说一下TCP协议，13种状态"><a href="#2-详细说一下TCP协议，13种状态" class="headerlink" title="2.   详细说一下TCP协议，13种状态"></a><strong>2.   详细说一下TCP协议，13种状态</strong></h3><p><img src="/2020/09/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BC%A0%E8%BE%93%E5%B1%82_TCP%E5%92%8CUDP/clip_image002.jpg" alt="img"></p>
+<p><strong>三次握手：</strong></p>
+<p>1)  第一次握手：建立连接。客户端发送连接请求报文段，将SYN位置为1，Sequence Number为x；然后，客户端进入SYN_SEND状态，等待服务器的确认；</p>
+<p>2)  第二次握手：服务器收到SYN报文段。服务器收到客户端的SYN报文段，需要对这个SYN报文段进行确认，设置Acknowledgment Number为x+1(Sequence Number+1)；同时，自己自己还要发送SYN请求信息，将SYN位置为1，Sequence Number为y；服务器端将上述所有信息放到一个报文段（即SYN+ACK报文段）中，一并发送给客户端，此时服务器进入SYN_RECV状态；</p>
+<p>3)  第三次握手：客户端收到服务器的SYN+ACK报文段。然后将Acknowledgment Number设置为y+1，向服务器发送ACK报文段，这个报文段发送完毕以后，客户端和服务器端都进入ESTABLISHED状态，完成TCP三次握手。</p>
+<p><strong>四次挥手：</strong></p>
+<p>当客户端和服务器通过三次握手建立了TCP连接以后，当数据传送完毕，肯定是要断开TCP连接的啊。那对于TCP的断开连接，这里就有了神秘的“四次挥手”。</p>
+<p>1)  第一次分手：主机1（可以使客户端，也可以是服务器端），设置Sequence Number和Acknowledgment Number，向主机2发送一个FIN报文段；此时，主机1进入FIN_WAIT_1状态；这表示主机1没有数据要发送给主机2了；</p>
+<p>2)  第二次分手：主机2收到了主机1发送的FIN报文段，向主机1回一个ACK报文段，Acknowledgment Number为Sequence Number加1；主机1进入FIN_WAIT_2状态；主机2告诉主机1，我“同意”你的关闭请求；</p>
+<p>3)  第三次分手：主机2向主机1发送FIN报文段，请求关闭连接，同时主机2进入LAST_ACK状态；</p>
+<p>4)  第四次分手：主机1收到主机2发送的FIN报文段，向主机2发送ACK报文段，然后主机1进入TIME_WAIT状态；主机2收到主机1的ACK报文段以后，就关闭连接；此时，主机1等待2MSL后依然没有收到回复，则证明Server端已正常关闭，那好，主机1也可以关闭连接了。</p>
+<p>5)  六大标志位</p>
+<p>SYN，同步标志位；ACK确认标志位；PSH传送标志位；FIN结束标志位；RST重置标志位；URG紧急标志位；seq序号；ack确认号</p>
+<h3 id="3-TCP为啥挥手要比握手多一次？"><a href="#3-TCP为啥挥手要比握手多一次？" class="headerlink" title="3.   TCP为啥挥手要比握手多一次？"></a><strong>3.   TCP为啥挥手要比握手多一次？</strong></h3><p>因为TCP是全双工通信的。</p>
+<p>因为当处于LISTEN状态的服务器端收到来自客户端的SYN报文(客户端希望新建一个TCP连接)时，可以把ACK(确认应答)和SYN(同步序号)放在同一个报文里来发送给客户端。但在关闭TCP连接时，当收到对方的FIN报文时，<strong>对方仅仅表示对方已经没有数据发送给你了，但是你自己可能还有数据需要发送给对方</strong>，则等你发送完剩余的数据给对方之后，再发送FIN报文给对方来表示你数据已经发送完毕，并请求关闭连接，所以通常情况下，这里的ACK报文和FIN报文都是分开发送的。</p>
+<h3 id="4-为什么一定进行三次握手？"><a href="#4-为什么一定进行三次握手？" class="headerlink" title="4.   为什么一定进行三次握手？"></a><strong>4.   为什么一定进行三次握手？</strong></h3><p>当客户端向服务器端发送<strong>一个连接请求</strong>时，由于某种原因<strong>长时间驻留在网络节点</strong>中，无法达到服务器端，由于TCP的<strong>超时重传</strong>机制，当客户端在特定的时间内没有收到服务器端的确认应答信息，则会<strong>重新</strong>向服务器端<strong>发送连接请求</strong>，且该连接请求<strong>得到服务器端的响应并正常建立连接</strong>，进而传输数据，当<strong>数据传输完毕</strong>，并<strong>释放</strong>了此次TCP<strong>连接</strong>。若此时<strong>第一次发送的连接请求</strong>报文段延迟了一段时间后，<strong>到达</strong>了服务器端，本来这是一个早已失效的报文段，但是服务器端收到该连接请求后误以为客户端又发出了一次新的连接请求，于是服务器端向客户端发出确认应答报文段，并<strong>同意建立连接</strong>。如果没有采用三次握手建立连接，由于服务器端发送了确认应答信息，则表示新的<strong>连接已成功建立</strong>，但是客户端此时并没有向服务器端发出任何连接请求，因此客户端忽略服务器端的确认应答报文，更不会向服务器端传输数据。而服务器端却认为新的连接已经建立了，并在一直等待客户端发送数据，这样服务器端一直处于等待接收数据，直到超出计数器的设定值，则认为服务器端出现异常，并且关闭这个连接。在这个等待的过程中，<strong>浪费服务器的资源</strong>。如果采用三次握手，客户端就不会向服务器发出确认应答消息，服务器端由于没有收到客户端的确认应答信息，从而判定客户端并没有请求建立连接，从而不建立该连接。</p>
+<h3 id="5-可以采用四次握手吗？为什么？"><a href="#5-可以采用四次握手吗？为什么？" class="headerlink" title="5. 可以采用四次握手吗？为什么？"></a><strong>5. 可以采用四次握手吗？为什么？</strong></h3><p>可以。但是会降低传输的效率。</p>
+<p>四次握手是指：第二次握手：Server只发送ACK和acknowledge number；而Server的SYN和初始序列号在第三次握手时发送；原来协议中的第三次握手变为第四次握手。出于优化目的，四次握手中的二、三可以合并。</p>
+<h3 id="6-第三次握手中，如果客户端的ACK未送达服务器，会怎样？"><a href="#6-第三次握手中，如果客户端的ACK未送达服务器，会怎样？" class="headerlink" title="6. 第三次握手中，如果客户端的ACK未送达服务器，会怎样？"></a><strong>6. 第三次握手中，如果客户端的ACK未送达服务器，会怎样？</strong></h3><p><strong>Server端：</strong></p>
+<p>由于Server没有收到ACK确认，因此会重发之前的SYN+ACK（默认重发五次，之后自动关闭连接进入CLOSED状态），Client收到后会重新传ACK给Server。</p>
+<p><strong>Client端，两种情况：</strong></p>
+<ol>
+<li>在Server进行超时重发的过程中，如果Client向服务器发送数据，数据头部的ACK是为1的，所以服务器收到数据之后会读取 ACK number，进入 establish 状态</li>
+<li>在Server进入CLOSED状态之后，如果Client向服务器发送数据，服务器会以RST包（<strong>TCP异常终止（reset报文）</strong>）应答。</li>
+</ol>
+<h3 id="7-如果已经建立了连接，但客户端出现了故障怎么办？"><a href="#7-如果已经建立了连接，但客户端出现了故障怎么办？" class="headerlink" title="7. 如果已经建立了连接，但客户端出现了故障怎么办？"></a><strong>7. 如果已经建立了连接，但客户端出现了故障怎么办？</strong></h3><p>服务器每收到一次客户端的请求后都会重新复位一个计时器，时间通常是设置为2小时，若两小时还没有收到客户端的任何数据，服务器就会发送一个探测报文段，以后每隔75秒钟发送一次。若一连发送10个探测报文仍然没反应，服务器就认为客户端出了故障，接着就关闭连接。</p>
+<h3 id="8-初始序列号是什么？"><a href="#8-初始序列号是什么？" class="headerlink" title="8. 初始序列号是什么？"></a><strong>8. 初始序列号是什么？</strong></h3><p>TCP连接的一方A，随机选择一个32位的序列号（Sequence Number）作为发送数据的初始序列号（Initial Sequence Number，ISN），比如为1000，以该序列号为原点，对要传送的数据进行编号：1001、1002…三次握手时，把这个初始序列号传送给另一方B，以便在传输数据时，<strong>B可以确认什么样的数据编号是合法的</strong>；同时在进行数据传输时，<strong>A还可以确认B收到的每一个字节</strong>，如果A收到了B的确认编号（acknowledge number）是2001，就说明编号为1001-2000的数据已经被B成功接受。</p>
+<h3 id="9-为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手（CLOSE-WAIT状态意义是什么）？"><a href="#9-为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手（CLOSE-WAIT状态意义是什么）？" class="headerlink" title="9. 为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手（CLOSE_WAIT状态意义是什么）？"></a><strong>9. 为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手（CLOSE_WAIT状态意义是什么）？</strong></h3><p>因为<strong>服务器收到客户端断开连接的请求时，可能还有一些数据没有发完</strong>，这时先回复ACK，表示接收到了断开连接的请求。等到数据发完之后再发FIN，断开服务器到客户端的数据传送。</p>
+<h3 id="10-如果第二次挥手时服务器的ACK没有送达客户端，会怎样？"><a href="#10-如果第二次挥手时服务器的ACK没有送达客户端，会怎样？" class="headerlink" title="10. 如果第二次挥手时服务器的ACK没有送达客户端，会怎样？"></a><strong>10. 如果第二次挥手时服务器的ACK没有送达客户端，会怎样？</strong></h3><p>客户端没有收到ACK确认，会重新发送FIN请求。</p>
+<h3 id="11-客户端TIME-WAIT状态的意义是什么？"><a href="#11-客户端TIME-WAIT状态的意义是什么？" class="headerlink" title="11. 客户端TIME_WAIT状态的意义是什么？"></a><strong>11. 客户端TIME_WAIT状态的意义是什么？</strong></h3><p>第四次挥手时，客户端发送给服务器的ACK有可能丢失，TIME_WAIT状态就是用来重发可能丢失的ACK报文。如果Server没有收到ACK，就会重发FIN，如果<strong>Client在2*MSL的时间内收到了FIN，就会重新发送ACK并再次等待2MSL，防止Server没有收到ACK而不断重发FIN。</strong></p>
+<p>MSL(Maximum Segment Lifetime)，指一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所需的最大时间。如果直到2MSL，Client都没有再次收到FIN，那么Client推断ACK已经被成功接收，则结束TCP连接。</p>
+<h3 id="12-TCP如何实现流量控制？"><a href="#12-TCP如何实现流量控制？" class="headerlink" title="12. TCP如何实现流量控制？"></a><strong>12. TCP如何实现流量控制？</strong></h3><p><img src="/2020/09/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BC%A0%E8%BE%93%E5%B1%82_TCP%E5%92%8CUDP/20191129145400104_2106.png" alt="滑动窗口"></p>
+<p>1)    如果发送方把数据发送得过快，接收方可能会来不及接收，这就会造成数据的丢失。TCP的流量控制是利用<strong>滑动窗口</strong>机制实现的，接收方在返回的ACK中会包含自己的接收窗口的大小，以控制发送方的数据发送。</p>
+<p>2)    当某个ACK报文丢失了，就会出现A等待B确认，并且B等待A发送数据的死锁状态。为了解决这种问题，TCP引入了持续计时器（Persistence timer），当A收到（窗口大小）rwnd=0时，就启用该计时器，时间到了则发送一个1字节的探测报文，询问B是很忙还是上个ACK丢失了，然后B回应自身的接收窗口大小，返回仍为0（A重设持续计时器继续等待）或者会重发rwnd=x。</p>
+<h3 id="13-TCP的拥塞控制是怎么实现的？"><a href="#13-TCP的拥塞控制是怎么实现的？" class="headerlink" title="13. TCP的拥塞控制是怎么实现的？"></a><strong>13. TCP的拥塞控制是怎么实现的？</strong></h3><p><img src="/2020/09/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BC%A0%E8%BE%93%E5%B1%82_TCP%E5%92%8CUDP/20191129153624025_28293.png" alt="拥塞控制"></p>
+<p>拥塞控制主要由四个算法组成：<strong>慢启动（Slow Start）、拥塞避免（Congestion voidance）、快重传 （Fast Retransmit）、快恢复（Fast Recovery）</strong></p>
+<ol>
+<li>慢启动：刚开始发送数据时，先把拥塞窗口（congestion window）设置为一个最大报文段MSS的数值，每收到一个新的确认报文之后，就把拥塞窗口加1个MSS。这样每经过一个传输轮次（或者说是每经过一个往返时间RTT），拥塞窗口的大小就会加倍</li>
+</ol>
+<p><a href="https://github.com/wolverinn/Waking-Up/blob/master/_v_images/20191129155345024_11142.png" target="_blank" rel="noopener"><img src="/2020/09/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BC%A0%E8%BE%93%E5%B1%82_TCP%E5%92%8CUDP/20191129155345024_11142.png" alt="slow start"></a></p>
+<ol start="2">
+<li>拥塞避免：当拥塞窗口的大小达到慢开始门限(slow start threshold)时，开始执行拥塞避免算法，拥塞窗口大小不再指数增加，而是线性增加，即每经过一个传输轮次只增加1MSS.</li>
+</ol>
+<blockquote>
+<p>无论在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞（其根据就是没有收到确认），就要把慢开始门限ssthresh设置为出现拥塞时的发送方窗口值的一半（但不能小于2）。然后把拥塞窗口cwnd重新设置为1，执行慢开始算法。<strong>（这是不使用快重传的情况）</strong></p>
+</blockquote>
+<ol start="3">
+<li>快重传：快重传要求接收方在收到一个失序的报文段后就立即发出<strong>重复确认</strong>（为的是使发送方及早知道有报文段没有到达对方）而不要等到自己发送数据时捎带确认。快重传算法规定，发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段，而不必继续等待设置的重传计时器时间到期。</li>
+</ol>
+<p><a href="https://github.com/wolverinn/Waking-Up/blob/master/_v_images/20191129161026032_32431.png" target="_blank" rel="noopener"><img src="/2020/09/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BC%A0%E8%BE%93%E5%B1%82_TCP%E5%92%8CUDP/20191129161026032_32431.png" alt="快重传"></a></p>
+<ol start="4">
+<li>快恢复：当发送方连续收到三个重复确认时，就把慢开始门限减半，然后执行拥塞避免算法。<strong>不执行慢开始算法的原因</strong>：因为如果网络出现拥塞的话就不会收到好几个重复的确认，所以发送方认为现在网络可能没有出现拥塞。<br> 也有的快重传是把开始时的拥塞窗口cwnd值再增大一点，即等于 ssthresh + 3*MSS  。这样做的理由是：既然发送方收到三个重复的确认，就表明有三个分组已经离开了网络。这三个分组不再消耗网络的资源而是停留在接收方的缓存中。可见现在网络中减少了三个分组。因此可以适当把拥塞窗口扩大些。</li>
+</ol>
+<h3 id="14-流量控制与拥塞控制的区别？"><a href="#14-流量控制与拥塞控制的区别？" class="headerlink" title="14.  流量控制与拥塞控制的区别？"></a><strong>14.  流量控制与拥塞控制的区别？</strong></h3><p>1)  <strong>拥塞控制</strong>就是防止过多的数据注入<strong>网络</strong>中，这样可以使网络中的路由器或链路不致过载。拥塞控制是一个全局性的过程，和流量控制不同，<strong>流量控制指点对点</strong>通信量的控制。</p>
+<p>2)  所谓流量控制就是让发送发送速率不要过快，让接收方来得及接收。利用滑动窗口机制就可以实施流量控制。原理这就是运用TCP报文段中的窗口大小字段来控制，发送方的发送窗口不可以大于接收方发回的窗口大小。</p>
+<h3 id="15-TCP可靠性保证"><a href="#15-TCP可靠性保证" class="headerlink" title="15.   TCP可靠性保证"></a><strong>15.   TCP可靠性保证</strong></h3><ol>
+<li>数据包校验</li>
+<li>对失序数据包重新排序（TCP报文具有序列号）</li>
+<li>丢弃重复数据</li>
+<li>应答机制：接收方收到数据之后，会发送一个确认（通常延迟几分之一秒）；</li>
+<li>超时重发：发送方发出数据之后，启动一个定时器，超时未收到接收方的确认，则重新发送这个数据；</li>
+<li>流量控制：确保接收端能够接收发送方的数据而不会缓冲区溢出</li>
+</ol>
+<h2 id="TCP与UDP"><a href="#TCP与UDP" class="headerlink" title="TCP与UDP"></a><strong>TCP与UDP</strong></h2><h3 id="1-TCP与UDP的区别？应用场景都有哪些？"><a href="#1-TCP与UDP的区别？应用场景都有哪些？" class="headerlink" title="1.   TCP与UDP的区别？应用场景都有哪些？"></a><strong>1.   TCP与UDP的区别？应用场景都有哪些？</strong></h3><p>1)  TCP面向连接（如打电话要先拨号建立连接）；UDP是无连接的，即发送数据之前不需要建立连接</p>
+<p>2)  TCP提供可靠的服务。也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达；UDP尽最大努力交付，即不保证可靠交付。TCP通过校验和，重传控制，序号标识，滑动窗口、确认应答实现可靠传输。如丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制。</p>
+<p>3)  UDP具有较好的实时性，工作效率比TCP高，适用于对高速传输和实时性有较高的通信或广播通信。</p>
+<p>4)  每一条TCP连接只能是点到点的；UDP支持一对一，一对多，多对一和多对多的交互通信</p>
+<p>5)  TCP对系统资源要求较多，UDP对系统资源要求较少。</p>
+<p>6)  若通信数据完整性需让位与通信实时性，则应该选用 TCP 协议（如文件传输、重要状态的更新等）；反之，则使用 UDP 协议（如视频传输、实时通信等）。</p>
+<p>7)  UDP：DNS（域名系统）  SNMP（简单网络管理协议，应用层）</p>
+<p>8)  TCP面向字节流，UTP面向数据包；</p>
+<h3 id="2-为什么UDP有时比TCP更有优势"><a href="#2-为什么UDP有时比TCP更有优势" class="headerlink" title="2.   为什么UDP有时比TCP更有优势?"></a><strong>2.   为什么UDP有时比TCP更有优势?</strong></h3><p>1)  网速的提升给UDP的稳定性提供可靠网络保障，丢包率很低，如果使用应用层重传，能够确保传输的可靠性。</p>
+<p>2)  TCP为了实现网络通信的可靠性，使用了复杂的拥塞控制算法，建立了繁琐的握手过程，由于TCP内置的系统协议栈中，极难对其进行改进。</p>
+<p>3)  采用TCP，一旦发生丢包，TCP会将后续的包缓存起来，等前面的包重传并接收到后再继续发送，延时会越来越大，基于UDP对实时性要求较为严格的情况下，采用自定义重传机制，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成影响。 </p>
+<blockquote>
+<p>原文地址：<a href="https://github.com/wolverinn/Waking-Up/blob/master/Computer%20Network.md" target="_blank" rel="noopener">https://github.com/wolverinn/Waking-Up/blob/master/Computer%20Network.md</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP%E5%92%8CUDP/" rel="tag">#TCP和UDP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">#计算机网络</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/Cr7exIjQN91gZSE.jpg)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/09/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              工厂模式
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
