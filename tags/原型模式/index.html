@@ -20,7 +20,7 @@
 
   
 
-  <title>QT打开PDF文件或图片 | scorlw</title>
+  <title>标签: 原型模式 | scorlw</title>
 
   
 
@@ -76,7 +76,7 @@
 
     
 <!-- header container -->
-<header class="header-container post">
+<header class="header-container">
 
   
   
@@ -89,27 +89,17 @@
 
   
   
-
-  
-  
+    
     <div class="header-content">
-      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/14/RYanzwjv3QLqSFA.jpg)"></div>
+      <div class="post-image" style="background-image: url(https://qiniu.miiiku.xyz/src/images/banner.jpg)"></div>
       <div class="post-text">
-        <div class="type-wrap">
-          <a class="article-category-link" href="/categories/Qt/">Qt</a>
-        </div>
-        <h1 class="title-wrap">QT打开PDF文件或图片</h1>
-        <h2 class="title-sub-wrap">
-          <strong>scorlw</strong>
-          <span>发布于</span>
-          
-  <a href="javascript:;" class="article-date">
-    <time datetime="2020-07-13T16:00:00.000Z" itemprop="datePublished">2020-07-14</time>
-  </a>
-
-        </h2>
+        <h1 class="title-wrap">原型模式</h1>
+        <h2 class="title-sub-wrap">当前标签下共有1篇文章</h2>
       </div>
     </div>
+  
+
+  
   
 
   
@@ -117,70 +107,46 @@
 
   </header>
 
-    <!-- 文章 -->
+    <!-- 标签归档 -->
 
-<!-- 文章内容 -->
-
-<div class="body-container">
-  <article class="content-container article-container">
-    <div class="article-content">
-      
-      
-
-      <section class="article-entry">
-        <h1 id="QT打开PDF文件或图片等"><a href="#QT打开PDF文件或图片等" class="headerlink" title="QT打开PDF文件或图片等"></a>QT打开PDF文件或图片等</h1><h2 id="1-头文件"><a href="#1-头文件" class="headerlink" title="1.头文件"></a>1.头文件</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;QDesktopServices&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;QUrl&gt;</span></span><br></code></pre></td></tr></table></figure>
-
-<h2 id="2-利用系统自带软件打开"><a href="#2-利用系统自带软件打开" class="headerlink" title="2.利用系统自带软件打开"></a>2.利用系统自带软件打开</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">QString pdfFile=“XXX.pdf”;   <span class="hljs-comment">//完整的路径+文件名，如“C:/pdfFile.pdf”</span><br><span class="hljs-comment">//QString pdfFile = QApplication::applicationDirPath() + "/xxx.pdf";</span><br>QDesktopServices::openUrl(QUrl::fromLocalFile(pdfFile));<br></code></pre></td></tr></table></figure>
-
-      </section>
-
-      <section class="article-footer">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">#Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6/" rel="tag">#打开文件</a></li></ul>
-      </section>
-
-      <section class="article-navs">
+<!-- post list container -->
+<div class="body-container float">
+  <div class="content-container article-list">
+    <div class="card-container card-articles">
+      <div class="card-wrap">
         
-<nav class="card-container card-article-nav">
-  <div class="card-wrap">
-    
-      <div id="article-nav-newer" class="card-item img">
-        <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/07/16/9In14crbhOT6tBf.jpg)"></div>
-          
-          <a class="card-link article-nav-link" href="/2020/07/15/Cpp/set/"></a>
-          <strong class="article-nav-caption">Newer</strong>
-          <p class="article-nav-title">
-            
-              set
-            
-          </p>
-        </article>
-      </div>
-    
-    
-      <div id="article-nav-older" class="card-item img">
-        <article>
-          
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/14/2LeJGnCgrIhK7mx.jpg)"></div>
-          
-          <a class="card-link article-nav-link" href="/2020/07/13/Cpp/c++%E5%A4%84%E7%90%86%E5%AD%97%E7%AC%A6%E4%B8%B2find()%E4%B8%8Enpos/"></a>
-          <strong class="article-nav-caption">Older</strong>
-          <p class="article-nav-title">
-            
-              c++处理字符串string.find()与string::npos
-            
-          </p>
-        </article>
-      </div>
-    
-  </div>
-</nav>
+          <div class="card-item img">
+            <article>
+              
+                <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/WKXAOfpsMz5ZGaQ.png)"></div>
+              
+              
+                <a class="article-link card-link" href="/2020/10/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" itemprop="url"></a>
+              
+              <h2 class="article-title">原型模式</h2>
+              <div class="article-meta">
+                <strong>scorlw</strong>
+                <span>发布于</span>
+                
+  <a href="/2020/10/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" class="article-date">
+    <time datetime="2020-10-06T16:00:00.000Z" itemprop="datePublished">2020-10-07</time>
+  </a>
 
-      </section>
+              </div>
+              <div class="article-category">
+                <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+              </div>
+            </article>
+          </div>
+        
+      </div>
     </div>
-  </article>
+  </div>
 </div>
+
+<!-- page container -->
+
 
     <!-- footer container -->
 <footer id="footer" class="footer">
