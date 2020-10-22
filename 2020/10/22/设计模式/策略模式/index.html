@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>策略模式 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/10/03/q6pTrkj7VMilcez.png)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+        </div>
+        <h1 class="title-wrap">策略模式</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-10-21T16:00:00.000Z" itemprop="datePublished">2020-10-22</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
+<p>设计模式</p>
+</blockquote>
+<p>Strategy模式也叫策略模式是行为模式之一，它对一系列的算法加以封装，为所有算法定义一个抽象的算法接口，并通过继承该抽象算法接口对所有的算法加以封装和实现，具体的算法选择交由客户端决定（策略）。 Strategy模式主要用来平滑地处理算法的切换。</p>
+<p><img src="/2020/10/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/image-20201022231921246.png" alt="image-20201022231921246"></p>
+<p>这里的关键就是将算法的逻辑抽象接口（ DoAction）封装到一个类中（ Context)，再通过委托的方式将具体的算法实现委托给具体的 Strategy类来实现（ ConcreteStrategeA类）。<br> Strategy: </p>
+<p>策略（算法）抽象。<br> ConcreteStrategy.<br>     各种策略（算法）的具体实现。<br> Context<br>     策略的外部封装类，或者说策略的容器类。根据不同策略执行不同的行为。策略由外部环境决定。</p>
+<p>适用于：</p>
+<p>准备一组算法，并将每一个算法封装起来，使得它们可以互换。</p>
+<p>策略模式优缺点：</p>
+<p>它的优点有：</p>
+<ol>
+<li><p>策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。<br> 恰当使用继承可以把公共的代码移到父类里面，从而避免重复的代码。</p>
+</li>
+<li><p>策略模式提供了可以替换继承关系的办法。继承可以处理多种算法或行为。如果不是用策略模式，那么使用算法或行为的环境类就可能会有一些子类，每一个子类提供一个不同的算法或行为。但是，这样一来算法或行为的使用者就和算法或行为本身混在一起。决定使用哪一种算法或采取哪一种行为的逻辑就和算法或行为的逻辑混合在一起，从而不可能再独立演化。继承使得动态改变算法或行为变得不可能。</p>
+</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Strategy</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">crypt</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br><span class="hljs-keyword">protected</span>:<br><span class="hljs-keyword">private</span>:<br>&#125;;<br><br><span class="hljs-comment">//对称加密：加密密钥和解密密钥是一样的。速度快，加密大数据块文件</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AES</span> :</span> <span class="hljs-keyword">public</span> Strategy<br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">crypt</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"AES"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    &#125;<br><span class="hljs-keyword">protected</span>:<br><span class="hljs-keyword">private</span>:<br>&#125;;<br><br><span class="hljs-comment">//非对称加密：加密密钥和解密密钥是不一样的，采用密钥对（公钥与私钥）私钥加密，公钥解密</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DES</span> :</span> <span class="hljs-keyword">public</span> Strategy<br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">crypt</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"DES"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    &#125;<br><span class="hljs-keyword">protected</span>:<br><span class="hljs-keyword">private</span>:<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Context</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setStrategy</span><span class="hljs-params">(Strategy* strategy)</span></span><br><span class="hljs-function">    </span>&#123;<br>        m_strategy = strategy;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">myoperator</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        m_strategy-&gt;crypt();<br>    &#125;<br><span class="hljs-keyword">private</span>:<br>    Strategy* m_strategy;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    DES* des = new DES;</span><br><span class="hljs-comment">    des-&gt;crypt();</span><br><span class="hljs-comment">    delete des;</span><br><span class="hljs-comment">    */</span><br><br>    Strategy* strategy = <span class="hljs-keyword">new</span> DES;<br>    Context* context = <span class="hljs-keyword">new</span> Context;<br>    context-&gt;setStrategy(strategy);<br>    context-&gt;myoperator();<br>    <span class="hljs-keyword">delete</span> context;<br>    <span class="hljs-keyword">delete</span> strategy;<br><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Hello world!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">DES<br>Hello world!<br></code></pre></td></tr></table></figure>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">#策略模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">#设计模式</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/MdQaLqncV5fSwoT.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/10/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              责任链模式
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
