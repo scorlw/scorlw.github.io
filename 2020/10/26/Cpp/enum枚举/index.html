@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>enum枚举 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/10/03/FvXOIBJaTAKhSnU.png)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/Cpp/">Cpp</a>
+        </div>
+        <h1 class="title-wrap">enum枚举</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-10-25T16:00:00.000Z" itemprop="datePublished">2020-10-26</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="enum枚举"><a href="#enum枚举" class="headerlink" title="enum枚举"></a>enum枚举</h1><blockquote>
+<p>c++</p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>enum是计算机编程语言中的一种数据类型。枚举类型：在实际问题中，有些变量的取值被限定在一个有限的范围内。例如，一个星期内只有七天，一年只有十二个月，一个班每周有六门课程等等。如果把这些量说明为<a href="https://baike.baidu.com/item/整型/4813071" target="_blank" rel="noopener">整型</a>，字符型或其它类型显然是不妥当的。为此，C语言提供了一种称为“枚举”的类型。在“枚举”类型的定义中列举出所有可能的取值，被说明为该“枚举”类型的变量取值不能超过定义的范围。应该说明的是，枚举类型是一种基本数据类型，而不是一种构造类型，因为它不能再分解为任何基本类型。</p>
+<h2 id="定义说明"><a href="#定义说明" class="headerlink" title="定义说明"></a>定义说明</h2><ol>
+<li>枚举类型定义的一般形式为：</li>
+</ol>
+<p>enum 枚举名{ <a href="https://baike.baidu.com/item/枚举值" target="_blank" rel="noopener">枚举值</a>表 };</p>
+<p>在枚举值表中应罗列出所有可用值。这些值也称为枚举元素。</p>
+<p>例如：</p>
+<p>该枚举名为weekday，枚举值共有7个，即一周中的七天。凡被说明为weekday类型变量的取值只能是七天中的某一天。</p>
+<ol start="2">
+<li>枚举变量的说明 </li>
+</ol>
+<p>如同结构体（struct）和共用体（union）一样，枚举变量也可用不同的方式说明，即先定义后说明，同时定义说明或直接说明。</p>
+<p>设有变量a,b,c被说明为上述的weekday，可采用下述任一种方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">enum</span> weekday&#123;sun,mon,tue,wed,thu,fri,sat&#125;;<br><span class="hljs-keyword">enum</span> weekday a,b,c;<br><span class="hljs-comment">//或者为：</span><br><span class="hljs-keyword">enum</span> weekday&#123;sun,mon,tue,wed,thu,fri,sat&#125;;<br>weekday a,b,c;<br><span class="hljs-comment">//或者为：</span><br><span class="hljs-keyword">enum</span> weekday&#123;sun,mon,tue,wed,thu,fri,sat&#125;a,b,c;<br><span class="hljs-comment">//或者为：</span><br><span class="hljs-keyword">enum</span> &#123;sun,mon,tue,wed,thu,fri,sat&#125;a,b,c;<br></code></pre></td></tr></table></figure>
+
+<h2 id="代码示意"><a href="#代码示意" class="headerlink" title="代码示意"></a>代码示意</h2><p><a href="http://c.biancheng.net/cplus/" target="_blank" rel="noopener">C++</a> 允许程序员创建自己的数据类型，比如本节要将的枚举类型。枚举数据类型是一种由程序员定义的数据类型，其合法值是与它们关联的一组命名整数常量。</p>
+<p> 之所以被称为枚举类型，就是因为命名常量是作为数据类型定义的一部分而枚举或列出的，以下是<strong>枚举类型声明的示例：</strong></p>
+<p><code>enum Roster {Tom, Sharon, Bill, Teresa, John};</code></p>
+<p>默认情况下，编译器设置第一个枚举量为 0，下一个为 1，以此类推。在上述示例中，Tom 的值将是 0，Sharon 的值为 1，等等。最后一个枚举量 John 的值为 4。</p>
+<p><strong>定义 Roster 数据类型的变量：</strong></p>
+<p><code>Roster student;</code></p>
+<p><strong>赋值：</strong></p>
+<p><code>student = Sharon;</code></p>
+<p><strong>测试变量的值：</strong></p>
+<p><code>if (student == Sharon)</code></p>
+<p><strong>注：</strong></p>
+<p>1.</p>
+<p>即使枚举数据类型中的值实际存储为整数，也不能总是将整数值替换为符号名称。例如，不能使用下面的语句将 Sharon 赋值给 student：</p>
+<p><code>student = 1; //错误</code></p>
+<p>但是，可以使用整数值而不是符号名称来测试枚举变量。例如，以下两个 if 语句是等效的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (student == Bill)<br><span class="hljs-keyword">if</span> (student == <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<p>2.</p>
+<p>还可以使用关系运算符来比较两个枚举变量。例如，以下 if 语句确定存储在 student1 中的值是否小于存储在 student2 中的值：</p>
+<p><code>if (student1 &lt;student2)</code></p>
+<p>3.</p>
+<p>如前所述，默认情况下，枚举列表中的符号将被赋给整数值 0、1、2 等等。如果这不合适，则可以指定要赋给的值，如以下示例所示：</p>
+<p><code>enum Department { factory = 1, sales = 2, warehouse = 4 };</code></p>
+<p>请记住，如果为枚举符号赋值，则它们必须是整数。以下赋值语句将产生错误：</p>
+<p><code>enum Department { factory = 1.1, sales = 2.2, warehouse = 4.4 }; //错误</code></p>
+<p>4.</p>
+<p>如果在赋值时省略了一个或多个符号，则它们将被赋给一个默认值，来看以下 2 个示例：</p>
+<p><code>enum Colors { red, orange, yellow = 9, green, blue };</code></p>
+<p>在该示例中，命名常量 red 将被赋值为 0，orange 将为 1，yellow 将为 9，green 将为 10，blue 将为 11。</p>
+<p><code>enum Rooms { livingroom = 1, den, bedroom, kitchen };</code></p>
+<p>在该示例中，livingroom 被赋值为 1，den 将为 2，bedroom 将为 3，kitchen 将为 4。</p>
+<p>5.</p>
+<p>枚举数据类型的目的之一是符号名称有助于使程序自我解释。但是，由于这些名称不 是字符串，它们仅在程序中使用。在使用 Roster 数据类型的示例中，以下两个语句将输出 一个 2，而不是名称 Sharon：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">Roster student1 = Sharon;<br><span class="hljs-built_in">cout</span> &lt;&lt; student1;<br></code></pre></td></tr></table></figure>
+
+<p>6.</p>
+<p>因为枚举数据类型的符号名称与整数值相关联，所以它们可以在 switch 语句中使用，如下面的程序所示，该程序还演示了可以使用枚举的数据类型，而不实际创建该类型的任何变量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-comment">// Declare the enumerated type</span><br><span class="hljs-keyword">enum</span> Roster &#123; Tom = <span class="hljs-number">1</span>, Sharon, Bill, Teresa, John &#125;;<br><span class="hljs-comment">// Sharon - John will be assigned default values 2-5.</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> who;<br>    <span class="hljs-built_in">cin</span> &gt;&gt; who;<br>    <span class="hljs-keyword">switch</span> (who)<br>    &#123;<br>        <span class="hljs-keyword">case</span> Tom :<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Tom's birthday is January 3.\n"</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> Sharon :<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Sharon's birthday is April 22.\n"</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> Bill :<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Bill's birthday is December 19.\n"</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> Teresa :<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Teresa's birthday is February 2.\n"</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> John :<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"John's birthday is June 17.\n"</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span> :<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Invalid selection\n"</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-number">2</span><br>Sharon<span class="hljs-symbol">'s</span> birthday <span class="hljs-keyword">is</span> April <span class="hljs-number">22</span>.<br></code></pre></td></tr></table></figure>
+
+<p>7.</p>
+<p>代码测试：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-keyword">enum</span> Roster &#123;Tom, Sharon, Bill, Teresa, John&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//两种定义方法</span><br>    Roster student;<br>    <span class="hljs-keyword">enum</span> Roster student1;<br>    <br>    student = Sharon;<br>    <span class="hljs-keyword">if</span> (student == Sharon)<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"k1"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//k1</span><br>    student1 = Sharon;<br>    <span class="hljs-keyword">if</span> (student1 == Sharon)<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"k1.1"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//k1.1</span><br>    <br>    <span class="hljs-keyword">int</span> Tom = <span class="hljs-number">12</span>;<span class="hljs-comment">//可以定义同名的变量，使用情况如下：</span><br>    <span class="hljs-comment">//1.直接使用Tom赋值</span><br>    <span class="hljs-comment">//student = Tom;//erroe:invalid conversion from 'int' to 'Roster'</span><br>    <span class="hljs-comment">//2.加上域运算符可以正常使用</span><br>    student = Roster::Tom;<br>    <br>    <span class="hljs-keyword">if</span> (student == Tom)<span class="hljs-comment">//优先使用全局的Tom，即12</span><br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"k2"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//不打印</span><br>    <span class="hljs-keyword">if</span> (student == Roster::Tom)<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"k2"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//k2</span><br>    <span class="hljs-keyword">int</span> awaw = <span class="hljs-number">2</span>;<br>    student = Bill;<br>    <span class="hljs-keyword">if</span> (student == awaw)<span class="hljs-comment">//但是可以使用整型来进行判断</span><br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"k3"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//k3</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Hello world!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">/*输出</span><br><span class="hljs-comment">k1</span><br><span class="hljs-comment">k1.1</span><br><span class="hljs-comment">k2</span><br><span class="hljs-comment">k3</span><br><span class="hljs-comment">Hello world!</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原文地址：<a href="https://baike.baidu.com/item/ENUM/10934073?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/ENUM/10934073?fr=aladdin</a></p>
+<p><a href="http://c.biancheng.net/view/1367.html" target="_blank" rel="noopener">http://c.biancheng.net/view/1367.html</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">#c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/enum%E6%9E%9A%E4%B8%BE/" rel="tag">#enum枚举</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/iMWTDJgLseNQ6kY.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/11/11/Qt/QTableWidget%E8%AF%A6%E8%A7%A3/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              QTableWidget详解
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/W5JtGj4aUwTXl6v.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/10/23/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              中介者模式
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>

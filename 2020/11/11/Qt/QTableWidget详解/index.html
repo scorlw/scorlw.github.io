@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>QTableWidget详解 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/10/03/iMWTDJgLseNQ6kY.png)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/Qt/">Qt</a>
+        </div>
+        <h1 class="title-wrap">QTableWidget详解</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-11-10T16:00:00.000Z" itemprop="datePublished">2020-11-11</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="QTableWidget详解"><a href="#QTableWidget详解" class="headerlink" title="QTableWidget详解"></a>QTableWidget详解</h1><blockquote>
+<p>Qt</p>
+</blockquote>
+<blockquote>
+<p>转载自<a href="http://blog.sina.com.cn/s/blog_a6fb6cc90101dd5u.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_a6fb6cc90101dd5u.html</a></p>
+</blockquote>
+<p>在Qt的开发过程中，时常会用到表单（QTableWidget）这个控件，网上的资料不少，但是都是最基本的，有一些比较经常遇到的问题也说得不太清楚。所以，今天就在这里总结一下！</p>
+<p> 以下为个人模拟Windows资源管理器的一个表单。</p>
+<h2 id="一、设置表单样式"><a href="#一、设置表单样式" class="headerlink" title="一、设置表单样式"></a><strong>一、设置表单样式</strong></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">table_widget-&gt;setColumnCount(<span class="hljs-number">4</span>); <span class="hljs-comment">//设置列数</span><br><br>table_widget-&gt;horizontalHeader()-&gt;setDefaultSectionSize(<span class="hljs-number">150</span>); <br>table_widget-&gt;horizontalHeader()-&gt;setClickable(<span class="hljs-literal">false</span>); <span class="hljs-comment">//设置表头不可点击（默认点击后进行排序）</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//设置表头内容</span><br>QStringList header;<br>header&lt;&lt;tr(<span class="hljs-string">"name"</span>)&lt;&lt;tr(<span class="hljs-string">"last modify time"</span>)&lt;&lt;tr(<span class="hljs-string">"type"</span>)&lt;&lt;tr(<span class="hljs-string">"size"</span>);<br>table_widget-&gt;setHorizontalHeaderLabels(header);<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//设置表头字体加粗</span><br>QFont font = <span class="hljs-keyword">this</span>-&gt;horizontalHeader()-&gt;font();<br>font.setBold(<span class="hljs-literal">true</span>);<br>table_widget-&gt;horizontalHeader()-&gt;setFont(font);<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++">table_widget-&gt;horizontalHeader()-&gt;setStretchLastSection(<span class="hljs-literal">true</span>); <span class="hljs-comment">//设置充满表宽度</span><br>table_widget-&gt;verticalHeader()-&gt;setResizeMode(QHeaderView::ResizeToContents);<br>table_widget-&gt;verticalHeader()-&gt;setDefaultSectionSize(<span class="hljs-number">10</span>); <span class="hljs-comment">//设置行高</span><br>table_widget-&gt;setFrameShape(QFrame::NoFrame); <span class="hljs-comment">//设置无边框</span><br>table_widget-&gt;setShowGrid(<span class="hljs-literal">false</span>); <span class="hljs-comment">//设置不显示格子线</span><br>table_widget-&gt;verticalHeader()-&gt;setVisible(<span class="hljs-literal">false</span>); <span class="hljs-comment">//设置垂直头不可见</span><br>table_widget-&gt;setSelectionMode(QAbstractItemView::ExtendedSelection); <span class="hljs-comment">//可多选（Ctrl、Shift、 Ctrl+A都可以）</span><br>table_widget-&gt;setSelectionBehavior(QAbstractItemView::SelectRows); <span class="hljs-comment">//设置选择行为时每次选择一行</span><br>table_widget-&gt;setEditTriggers(QAbstractItemView::NoEditTriggers); <span class="hljs-comment">//设置不可编辑</span><br>table_widget-&gt;horizontalHeader()-&gt;resizeSection(<span class="hljs-number">0</span>,<span class="hljs-number">150</span>); <span class="hljs-comment">//设置表头第一列的宽度为150</span><br>table_widget-&gt;horizontalHeader()-&gt;setFixedHeight(<span class="hljs-number">25</span>); <span class="hljs-comment">//设置表头的高度</span><br>table_widget-&gt;setStyleSheet(<span class="hljs-string">"selection-background-color:lightblue;"</span>); <span class="hljs-comment">//设置选中背景色</span><br>table_widget-&gt;horizontalHeader()-&gt;setStyleSheet(<span class="hljs-string">"QHeaderView::section&#123;background:skyblue;&#125;"</span>); <span class="hljs-comment">//设置表头背景色</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//设置水平、垂直滚动条样式</span><br>table_widget-&gt;horizontalScrollBar()-&gt;setStyleSheet(<span class="hljs-string">"QScrollBar&#123;background:transparent; height:10px;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::handle&#123;background:lightgray; border:2px solid transparent; border-radius:5px;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::handle:hover&#123;background:gray;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::sub-line&#123;background:transparent;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::add-line&#123;background:transparent;&#125;"</span>);<br><br>table_widget-&gt;verticalScrollBar()-&gt;setStyleSheet(<span class="hljs-string">"QScrollBar&#123;background:transparent; width: 10px;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::handle&#123;background:lightgray; border:2px solid transparent; border-radius:5px;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::handle:hover&#123;background:gray;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::sub-line&#123;background:transparent;&#125;"</span><br>  <span class="hljs-string">"QScrollBar::add-line&#123;background:transparent;&#125;"</span>);<br></code></pre></td></tr></table></figure>
+
+<p>  好了，样式设置完成，效果如下所示：</p>
+<p><img src="/2020/11/11/Qt/QTableWidget%E8%AF%A6%E8%A7%A3/image-20201112115545131.png" alt="image-20201112115545131"></p>
+<h3 id="问题一：鼠标点击的选项会出现虚框，在Qt官网找到一篇博客专门介绍的，直接上代码！"><a href="#问题一：鼠标点击的选项会出现虚框，在Qt官网找到一篇博客专门介绍的，直接上代码！" class="headerlink" title="问题一：鼠标点击的选项会出现虚框，在Qt官网找到一篇博客专门介绍的，直接上代码！"></a>问题一：鼠标点击的选项会出现虚框，在Qt官网找到一篇博客专门介绍的，直接上代码！</h3><p> （1）实现如下一个类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"no_focus_delegate.h"</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">NoFocusDelegate::paint</span><span class="hljs-params">(QPainter* painter, <span class="hljs-keyword">const</span> QStyleOptionViewItem &amp; option, <span class="hljs-keyword">const</span> QModelIndex &amp;index)</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br> <span class="hljs-function">QStyleOptionViewItem <span class="hljs-title">itemOption</span><span class="hljs-params">(option)</span></span>;<br> <span class="hljs-keyword">if</span> (itemOption.state &amp; QStyle::State_HasFocus)<br> &#123;<br>   itemOption.state = itemOption.state ^ QStyle::State_HasFocus;<br> &#125;<br> QStyledItemDelegate::paint(painter, itemOption, index);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p> （2）表格构造中添加如下代码</p>
+<p>  <code>table_widget-&gt;setItemDelegate(new NoFocusDelegate());</code></p>
+<p><img src="/2020/11/11/Qt/QTableWidget%E8%AF%A6%E8%A7%A3/image-20201112115741935.png" alt="image-20201112115741935"></p>
+<p>OK，虚线边框去除。</p>
+<h3 id="问题二：当表格只有一行的时候，则表头会出现塌陷问题"><a href="#问题二：当表格只有一行的时候，则表头会出现塌陷问题" class="headerlink" title="问题二：当表格只有一行的时候，则表头会出现塌陷问题"></a>问题二：当表格只有一行的时候，则表头会出现塌陷问题</h3><p><img src="/2020/11/11/Qt/QTableWidget%E8%AF%A6%E8%A7%A3/image-20201112115830150.png" alt="image-20201112115830150"></p>
+<p>摸索了很长时间，才得以解决：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//点击表时不对表头行光亮（获取焦点） </span><br>table_widget-&gt;horizontalHeader()-&gt;setHighlightSections(<span class="hljs-literal">false</span>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="二、多选并获取所选行"><a href="#二、多选并获取所选行" class="headerlink" title="二、多选并获取所选行"></a><strong>二、多选并获取所选行</strong></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">this</span>-&gt;setSelectionMode(QAbstractItemView::ExtendedSelection); <span class="hljs-comment">//设置多选（可以Ctral+A全选Ctral+Shift多选）获取所选行号：</span><br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">TableWidget::getSelectedRow</span><span class="hljs-params">(QSet&amp;set_row)</span></span><br><span class="hljs-function"></span>&#123;<br>  QList items = <span class="hljs-keyword">this</span>-&gt;selectedItems();<br>  <span class="hljs-keyword">int</span> item_count = items.count();<br>  <span class="hljs-keyword">if</span>(item_count &lt;= <span class="hljs-number">0</span>)<br>  &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>  &#125;<br>  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i<br>  &#123;<br>    <span class="hljs-comment">//获取选中的行</span><br>    <span class="hljs-keyword">int</span> item_row = <span class="hljs-keyword">this</span>-&gt;row(items.at(i));<br>    set_row.insert(item_row);<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="三、操作表单（添加、删除行等）"><a href="#三、操作表单（添加、删除行等）" class="headerlink" title="三、操作表单（添加、删除行等）"></a><strong>三、操作表单（添加、删除行等）</strong></h2><p> （1）动态插入行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> row_count = table_widget-&gt;rowCount(); <span class="hljs-comment">//获取表单行数</span><br>table_widget-&gt;insertRow(row_count); <span class="hljs-comment">//插入新行</span><br><br>QTableWidgetItem *item = <span class="hljs-keyword">new</span> QTableWidgetItem();<br>QTableWidgetItem *item1 = <span class="hljs-keyword">new</span> QTableWidgetItem();<br>QTableWidgetItem *item2 = <span class="hljs-keyword">new</span> QTableWidgetItem();<br>QTableWidgetItem *item3 = <span class="hljs-keyword">new</span> QTableWidgetItem();<br><br><span class="hljs-comment">//设置对应的图标、文件名称、最后更新时间、对应的类型、文件大小</span><br>item-&gt;setIcon(icon); <span class="hljs-comment">//icon为调用系统的图标，以后缀来区分  </span><br>item-&gt;setText(name);<br>item1-&gt;setText(last_modify_time);<br>item2-&gt;setText(type); <span class="hljs-comment">//type为调用系统的类型，以后缀来区分</span><br>item3-&gt;setText(<span class="hljs-built_in">size</span>);<br><br>table_widget-&gt;setItem(row_count, <span class="hljs-number">0</span>, item);<br>table_widget-&gt;setItem(row_count, <span class="hljs-number">1</span>, item1);  <br>table_widget-&gt;setItem(row_count, <span class="hljs-number">2</span>, item2);<br>table_widget-&gt;setItem(row_count, <span class="hljs-number">3</span>, item3);<br><br><span class="hljs-comment">//设置样式为灰色</span><br><span class="hljs-function">QColor <span class="hljs-title">color</span><span class="hljs-params">(<span class="hljs-string">"gray"</span>)</span></span>;<br>item1-&gt;setTextColor(color);<br>item2-&gt;setTextColor(color);<br>item3-&gt;setTextColor(color);<br></code></pre></td></tr></table></figure>
+
+<p> （2）在指定位置插入行</p>
+<p> 其实跟（1）相似，（1）的前提是获取到表格行数</p>
+<p><code>table_widget-&gt;insertRow(row); //插入新行,row为插入的位置</code></p>
+<h2 id="四、单击表头触发的事件"><a href="#四、单击表头触发的事件" class="headerlink" title="四、单击表头触发的事件"></a><strong>四、单击表头触发的事件</strong></h2><p> （1）连接表头的信号和槽</p>
+<p><code>connect(horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(onHeaderClicked(int)));</code></p>
+<p>  （2）实现槽函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">TableWidget::onHeaderClicked</span><span class="hljs-params">(<span class="hljs-keyword">int</span> column)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-comment">//column为所点击的表头的某列</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="五、打开某行进行编辑"><a href="#五、打开某行进行编辑" class="headerlink" title="五、打开某行进行编辑"></a><strong>五、打开某行进行编辑</strong></h2><p> 既然模拟Window那么就模仿的像一点，Windows可以修改名称，那么Qt也必然可以实现</p>
+<p> <img src="/2020/11/11/Qt/QTableWidget%E8%AF%A6%E8%A7%A3/image-20201112120332567.png" alt="image-20201112120332567"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//获得当前节点并获取编辑名称</span><br>QTableWidgetItem *item = table_widget-&gt;item(edit_row, <span class="hljs-number">0</span>); <span class="hljs-comment">//edit_row为想要编辑的行号</span><br>table_widget-&gt;setCurrentCell(edit_row, <span class="hljs-number">0</span>);<br>table_widget-&gt;openPersistentEditor(item); <span class="hljs-comment">//打开编辑项</span><br>table_widget-&gt;editItem(item);<br><br><span class="hljs-comment">//关闭编辑项</span><br>table_widget-&gt;closePersistentEditor(item);<br></code></pre></td></tr></table></figure>
+
+<h2 id="六、右键菜单"><a href="#六、右键菜单" class="headerlink" title="六、右键菜单"></a><strong>六、右键菜单</strong></h2><p> （1）创建菜单、菜单项  </p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">void TableWidget::create<span class="hljs-constructor">Actions()</span><br>&#123;<br> <span class="hljs-comment">//创建菜单项</span><br>pop_menu = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QMenu()</span>;<br>action_name = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br>action_size = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br>action_type = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br>action_date = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br><br>action_open = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;  <br>action_download = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br>action_flush = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br><br>action_delete = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br>action_rename = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br>action_create_folder = <span class="hljs-keyword">new</span> <span class="hljs-constructor">QAction(<span class="hljs-params">this</span>)</span>;<br> <br>action_open-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"打开"</span>)</span>);<br>action_download-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"下载"</span>)</span>);<br>action_flush-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"刷新"</span>)</span>);<br>action_delete-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"删除"</span>)</span>);<br>action_rename-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"重命名"</span>)</span>);<br>action_create_folder-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"新建文件夹"</span>)</span>);<br>action_name-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"名称"</span>)</span>);<br>action_size-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"大小"</span>)</span>);<br>action_type-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"项目类型"</span>)</span>);<br>action_date-&gt;set<span class="hljs-constructor">Text(QString(<span class="hljs-string">"修改日期"</span>)</span>);<br><br><span class="hljs-comment">//设置快捷键</span><br>action_flush-&gt;set<span class="hljs-constructor">Shortcut(QKeySequence::Refresh)</span>;<br><br><span class="hljs-comment">//设置文件夹图标</span><br>action_create_folder-&gt;set<span class="hljs-constructor">Icon(<span class="hljs-params">icon</span>)</span>;<br>QObject::connect(action_create_folder,<span class="hljs-constructor">SIGNAL(<span class="hljs-params">triggered</span>()</span>),this,<span class="hljs-constructor">SLOT(<span class="hljs-params">createFolder</span>()</span>));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p> （2）重新实现contextMenuEvent </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">TableWidget::contextMenuEvent</span><span class="hljs-params">(QContextMenuEvent *event)</span></span><br><span class="hljs-function"></span>&#123;<br>  pop_menu-&gt;<span class="hljs-built_in">clear</span>(); <span class="hljs-comment">//清除原有菜单</span><br>  QPoint <span class="hljs-built_in">point</span> = event-&gt;pos(); <span class="hljs-comment">//得到窗口坐标</span><br><br>  QTableWidgetItem *item = <span class="hljs-keyword">this</span>-&gt;itemAt(<span class="hljs-built_in">point</span>);<br>  <span class="hljs-keyword">if</span>(item != <span class="hljs-literal">NULL</span>)<br>  &#123;<br>    pop_menu-&gt;addAction(action_download);<br>    pop_menu-&gt;addAction(action_flush);<br>    pop_menu-&gt;addSeparator();<br>    pop_menu-&gt;addAction(action_delete);<br>    pop_menu-&gt;addAction(action_rename);<br>    pop_menu-&gt;addSeparator();<br>    pop_menu-&gt;addAction(action_create_folder);<br><br>    sort_style = pop_menu-&gt;addMenu(<span class="hljs-string">"排序"</span>);<br>    sort_style-&gt;addAction(action_name);<br>    sort_style-&gt;addAction(action_size);<br>    sort_style-&gt;addAction(action_type);<br>    sort_style-&gt;addAction(action_date);<br><br>    <span class="hljs-comment">//菜单出现的位置为当前鼠标的位置</span><br>    pop_menu-&gt;exec(QCursor::pos());<br>    event-&gt;accept();<br>  &#125; <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>  OK,大功告成！</p>
+<p><img src="/2020/11/11/Qt/QTableWidget%E8%AF%A6%E8%A7%A3/image-20201112120816772.png" alt="image-20201112120816772"></p>
+<h2 id="七、信号"><a href="#七、信号" class="headerlink" title="七、信号"></a><strong>七、信号</strong></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cellActivated</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row, <span class="hljs-keyword">int</span> column)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cellChanged</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row, <span class="hljs-keyword">int</span> column)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cellClicked</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row, <span class="hljs-keyword">int</span> column)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cellDoubleClicked</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row, <span class="hljs-keyword">int</span> column)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cellEntered</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row, <span class="hljs-keyword">int</span> column)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cellPressed</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row, <span class="hljs-keyword">int</span> column)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">itemActivated</span><span class="hljs-params">(QTableWidgetItem *item)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">itemChanged</span><span class="hljs-params">(QTableWidgetItem *item)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">itemClicked</span><span class="hljs-params">(QTableWidgetItem *item)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">itemDoubleClicked</span><span class="hljs-params">(QTableWidgetItem *item)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">itemEntered</span><span class="hljs-params">(QTableWidgetItem *item)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">itemPressed</span><span class="hljs-params">(QTableWidgetItem *item)</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">itemSelectionChanged</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">currentItemChanged</span><span class="hljs-params">(QTableWidgetItem *current, QTableWidgetItem *previous)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">currentCellChanged</span><span class="hljs-params">(<span class="hljs-keyword">int</span> currentRow, <span class="hljs-keyword">int</span> currentColumn, <span class="hljs-keyword">int</span> previousRow, <span class="hljs-keyword">int</span> previousColumn)</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>关于界面的文件（夹）图标和类型如何获取？对于文件而言，不同扩展名的文件至少也有100种以上，如果图标和类型固定写死的话必不可行，所以，这里提供以下两种方式获取。</p>
+<ul>
+<li><a href="http://blog.sina.com.cn/s/blog_a6fb6cc90101dx99.html" target="_blank" rel="noopener">Qt之QFileIconProvider（获取文件图标、类型）</a>.</li>
+<li><a href="http://blog.sina.com.cn/s/blog_a6fb6cc90101h2ew.html" target="_blank" rel="noopener">Qt之QFileIconProvider续（获取文件图标、类型）</a>. </li>
+</ul>
+<p>更多关于QTableView的资料请参考：</p>
+<ul>
+<li><a href="http://blog.sina.com.cn/s/blog_a6fb6cc90101hhse.html" target="_blank" rel="noopener">Qt之模型/视图（实时更新数据）</a>.</li>
+<li><a href="http://blog.sina.com.cn/s/blog_a6fb6cc90101i8it.html" target="_blank" rel="noopener">Qt之QTableView</a>.</li>
+</ul>
+<p>以上都是在接触Qt以来总结的一些小经验，希望对大家有用！不积跬步无以至千里，不积小流无以成江河。。。</p>
+<p><strong>注：</strong></p>
+<p>技术在于交流、沟通，转载请注明出处并保持作品的完整性。</p>
+<p>作者：[╰☆奋斗ing❤孩子`](<a href="http://blog.sina.com.cn/liang19890820" target="_blank" rel="noopener">http://blog.sina.com.cn/liang19890820</a>) 原文：<a href="http://blog.sina.com.cn/s/blog_a6fb6cc90101dd5u.html。" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_a6fb6cc90101dd5u.html。</a></p>
+<hr>
+<p>之后的东西是我自己的一些小补充。</p>
+<h2 id="一、动态插入新行后的滚动条问题"><a href="#一、动态插入新行后的滚动条问题" class="headerlink" title="一、动态插入新行后的滚动条问题"></a><strong>一、动态插入新行后的滚动条问题</strong></h2><p><strong>问题：</strong>动态插入一行数据后，我希望表格可以显示到我新插入的这一行来，所以写了代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MainWindow::addInfoTableWidget</span><span class="hljs-params">(dbdate db)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//增加新行</span><br>    <span class="hljs-keyword">int</span> RowCont;<br>    RowCont=ui-&gt;infoTableWidget-&gt;rowCount();<br>    ui-&gt;infoTableWidget-&gt;insertRow(RowCont);<br><br>    <span class="hljs-comment">//插入元素</span><br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">0</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.number)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">1</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.weight)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">2</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.length)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">3</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.<span class="hljs-built_in">width</span>)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">4</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.<span class="hljs-built_in">height</span>)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">5</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.volume)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">6</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(db.barCodeInfo));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">7</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(db.time));<br><br>    <span class="hljs-comment">//根据内容调整表格</span><br>    ui-&gt;infoTableWidget-&gt;resizeColumnsToContents();<br><br>    <span class="hljs-comment">//设置滚动条滚动到最大值</span><br>    <span class="hljs-keyword">int</span> t = ui-&gt;infoTableWidget-&gt;verticalScrollBar()-&gt;maximum();<br>    ui-&gt;infoTableWidget-&gt;verticalScrollBar()-&gt;setValue(t);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>结果如下图：</p>
+<p><img src="/2020/11/11/Qt/QTableWidget%E8%AF%A6%E8%A7%A3/image-20201112170640561.png" alt="image-20201112170640561"></p>
+<p>总是有一段剩余。</p>
+<p><strong>原因：</strong>之前的代码实际上并没有运行完成，所以在获得t的时候仍然是获得的没有新行时的值。</p>
+<p><strong>方案：</strong>增加一个小的延时函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MainWindow::addInfoTableWidget</span><span class="hljs-params">(dbdate db)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//增加新行</span><br>    <span class="hljs-keyword">int</span> RowCont;<br>    RowCont=ui-&gt;infoTableWidget-&gt;rowCount();<br>    ui-&gt;infoTableWidget-&gt;insertRow(RowCont);<br><br>    <span class="hljs-comment">//插入元素</span><br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">0</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.number)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">1</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.weight)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">2</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.length)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">3</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.<span class="hljs-built_in">width</span>)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">4</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.<span class="hljs-built_in">height</span>)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">5</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(QString::number(db.volume)));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">6</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(db.barCodeInfo));<br>    ui-&gt;infoTableWidget-&gt;setItem(RowCont,<span class="hljs-number">7</span>,<span class="hljs-keyword">new</span> QTableWidgetItem(db.time));<br><br>    <span class="hljs-comment">//根据内容调整表格</span><br>    ui-&gt;infoTableWidget-&gt;resizeColumnsToContents();<br><br>    <span class="hljs-comment">//增加5ms延时</span><br>    QTime _Timer = QTime::currentTime().addMSecs(<span class="hljs-number">5</span>);<br>    <span class="hljs-keyword">while</span>( QTime::currentTime() &lt; _Timer )<br>        QCoreApplication::processEvents(QEventLoop::AllEvents, <span class="hljs-number">100</span>);<br><br>    <span class="hljs-comment">//设置滚动条滚动到最大值</span><br>    <span class="hljs-keyword">int</span> t = ui-&gt;infoTableWidget-&gt;verticalScrollBar()-&gt;maximum();<br>    ui-&gt;infoTableWidget-&gt;verticalScrollBar()-&gt;setValue(t);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>原文地址：</p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QTableWidget/" rel="tag">#QTableWidget</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">#Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BB%9A%E5%8A%A8%E6%9D%A1/" rel="tag">#滚动条</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/FvXOIBJaTAKhSnU.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/10/26/Cpp/enum%E6%9E%9A%E4%B8%BE/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              enum枚举
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
