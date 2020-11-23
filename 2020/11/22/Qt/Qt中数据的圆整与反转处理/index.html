@@ -140,7 +140,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//QString data_s = QString::number(data);//使用这种方式会丢失精度，double默认显示六位</span><br>QString data_s = ui-&gt;dataEdit-&gt;<span class="hljs-built_in">text</span>();<br>qDebug() &lt;&lt; data_s;<br>QString r;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; data_s.length(); ++i)<br>&#123;<br>    r = data_s[i] + r;<span class="hljs-comment">//注意顺序</span><br>&#125;<br>qDebug() &lt;&lt; r;<br>ui-&gt;Reverse_label-&gt;setNum(r.toDouble());<br></code></pre></td></tr></table></figure>
 
 <p>注：暂时没有找到直接修改double精度的方法，找到的都是将其转换为字符串然后设置精度的。</p>
-<p>完整代码见：</p>
+<p>完整代码见：<a href="https://download.csdn.net/download/scorlw/13159968" target="_blank" rel="noopener">https://download.csdn.net/download/scorlw/13159968</a></p>
 
       </section>
 
