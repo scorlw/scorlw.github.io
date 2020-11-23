@@ -20,7 +20,7 @@
 
   
 
-  <title>QListView显示某文件夹下的文件 | scorlw</title>
+  <title>Qt中数据的圆整与反转处理 | scorlw</title>
 
   
 
@@ -93,18 +93,18 @@
   
   
     <div class="header-content">
-      <div class="post-image" style="background-image: url(https://i.loli.net/2020/06/09/sA2ufiYnbqpBDW6.jpg)"></div>
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/10/03/HPVweaOj8ZuNyvL.png)"></div>
       <div class="post-text">
         <div class="type-wrap">
           <a class="article-category-link" href="/categories/Qt/">Qt</a>
         </div>
-        <h1 class="title-wrap">QListView显示某文件夹下的文件</h1>
+        <h1 class="title-wrap">Qt中数据的圆整与反转处理</h1>
         <h2 class="title-sub-wrap">
           <strong>scorlw</strong>
           <span>发布于</span>
           
   <a href="javascript:;" class="article-date">
-    <time datetime="2020-05-26T16:00:00.000Z" itemprop="datePublished">2020-05-27</time>
+    <time datetime="2020-11-21T16:00:00.000Z" itemprop="datePublished">2020-11-22</time>
   </a>
 
         </h2>
@@ -128,18 +128,24 @@
       
 
       <section class="article-entry">
-        <h1 id="QListView显示某文件夹下的文件"><a href="#QListView显示某文件夹下的文件" class="headerlink" title="QListView显示某文件夹下的文件"></a>QListView显示某文件夹下的文件</h1><h2 id="1-获取特定文件夹的文件目录"><a href="#1-获取特定文件夹的文件目录" class="headerlink" title="1.获取特定文件夹的文件目录"></a>1.获取特定文件夹的文件目录</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">QStringList <span class="hljs-title">getFileNames</span><span class="hljs-params">(<span class="hljs-keyword">const</span> QString &amp;path)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function">QDir <span class="hljs-title">dir</span><span class="hljs-params">(path)</span></span>;<br>    QStringList nameFilters;<br>    nameFilters &lt;&lt; <span class="hljs-string">"*.jpg"</span> &lt;&lt; <span class="hljs-string">"*.png"</span>;<br>    QStringList files = dir.entryList(nameFilters, QDir::Files|QDir::Readable, QDir::Name);<br>	<span class="hljs-keyword">return</span> files;<br>&#125;<br></code></pre></td></tr></table></figure>
+        <h1 id="Qt中数据的圆整与反转处理"><a href="#Qt中数据的圆整与反转处理" class="headerlink" title="Qt中数据的圆整与反转处理"></a>Qt中数据的圆整与反转处理</h1><blockquote>
+<p>Qt</p>
+</blockquote>
+<p>数据的圆整有去尾法、四舍五入法与进一法，同时有时候需要对数据做反转的操作。</p>
+<h2 id="一、核心代码"><a href="#一、核心代码" class="headerlink" title="一、核心代码"></a>一、核心代码</h2><p>经过测试，Qt5中，将double赋值给int的时候采用的是去尾法。</p>
+<p>所以代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">switch</span> (dataRound)<br>&#123;<br>    <span class="hljs-comment">//不操作</span><br>    <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>        result = data;<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-comment">//去尾法</span><br>    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>        result = res_temp;<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-comment">//四舍五入法</span><br>    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>        result = qRound(data);<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-comment">//进一法</span><br>    <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>        result = res_temp + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-comment">//默认不操作</span><br>    <span class="hljs-keyword">default</span>:<br>        result = data;<br>        <span class="hljs-keyword">break</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="2-QListView的初始化与布局"><a href="#2-QListView的初始化与布局" class="headerlink" title="2.QListView的初始化与布局"></a>2.QListView的初始化与布局</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">QStringListModel *model;<br>model = <span class="hljs-keyword">new</span> QStringListModel(<span class="hljs-keyword">this</span>);<br>model-&gt;setStringList(files);<br>dialog_removePCD_ui-&gt;listView_CurrentID-&gt;setModel(model);<br></code></pre></td></tr></table></figure>
+<p>数据的反转可以通过字符串反转的方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//QString data_s = QString::number(data);//使用这种方式会丢失精度，double默认显示六位</span><br>QString data_s = ui-&gt;dataEdit-&gt;<span class="hljs-built_in">text</span>();<br>qDebug() &lt;&lt; data_s;<br>QString r;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; data_s.length(); ++i)<br>&#123;<br>    r = data_s[i] + r;<span class="hljs-comment">//注意顺序</span><br>&#125;<br>qDebug() &lt;&lt; r;<br>ui-&gt;Reverse_label-&gt;setNum(r.toDouble());<br></code></pre></td></tr></table></figure>
 
-<h2 id="3-获取当前选中行"><a href="#3-获取当前选中行" class="headerlink" title="3.获取当前选中行"></a>3.获取当前选中行</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> row=listview-&gt;currentIndex().row();<br></code></pre></td></tr></table></figure>
-
-<p>如果没有选中，默认row为-1</p>
+<p>注：暂时没有找到直接修改double精度的方法，找到的都是将其转换为字符串然后设置精度的。</p>
+<p>完整代码见：</p>
 
       </section>
 
       <section class="article-footer">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QListView/" rel="tag">#QListView</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">#Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%A4%B9/" rel="tag">#文件夹</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">#Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" rel="tag">#数据处理</a></li></ul>
       </section>
 
       <section class="article-navs">
@@ -147,32 +153,17 @@
 <nav class="card-container card-article-nav">
   <div class="card-wrap">
     
-      <div id="article-nav-newer" class="card-item img">
-        <article>
-          
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/C51yABcf9bPdRsY.jpg)"></div>
-          
-          <a class="card-link article-nav-link" href="/2020/05/27/lua/codeblocks%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%92%8C%E8%B0%83%E7%94%A8%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93(dll)/"></a>
-          <strong class="article-nav-caption">Newer</strong>
-          <p class="article-nav-title">
-            
-              codeblocks中创建和调用动态链接库(dll)
-            
-          </p>
-        </article>
-      </div>
-    
     
       <div id="article-nav-older" class="card-item img">
         <article>
           
-            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/06/09/5aDZUCfJK7oqhT1.jpg)"></div>
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/WfmQJ14RrdDgKaj.png)"></div>
           
-          <a class="card-link article-nav-link" href="/2020/05/27/lua/Codeblocks%E8%B0%83%E7%94%A8lua/"></a>
+          <a class="card-link article-nav-link" href="/2020/11/16/Qt/Qt%E9%80%9A%E8%BF%87http%E5%8F%91%E9%80%81json%E4%BF%A1%E6%81%AF/"></a>
           <strong class="article-nav-caption">Older</strong>
           <p class="article-nav-title">
             
-              Codeblocks调用lua
+              Qt通过http发送json信息
             
           </p>
         </article>
