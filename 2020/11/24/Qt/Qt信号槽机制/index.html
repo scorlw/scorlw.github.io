@@ -164,8 +164,17 @@
 <p>Qt::QueuedConnection：槽函数在控制回到接收者所在线程的事件循环时被调用，槽函数运行于信号接收者所在线程。发送信号之后，槽函数不会立刻被调用，等到接收者的当前函数执行完，进入事件循环之后，槽函数才会被调用。多线程环境下一般用这个。</p>
 <p>Qt::BlockingQueuedConnection：槽函数的调用时机与Qt::QueuedConnection一致，不过发送完信号后发送者所在线程会阻塞，直到槽函数运行完。接收者和发送者绝对不能在一个线程，否则程序会死锁。在多线程间需要同步的场合可能需要这个。</p>
 <p>Qt::UniqueConnection：这个flag可以通过按位或（|）与以上四个结合在一起使用。当这个flag设置时，当某个信号和槽已经连接时，再进行重复的连接就会失败。也就是避免了重复连接。</p>
+<h3 id="4-Qt信号与槽使用不当，使程序崩溃"><a href="#4-Qt信号与槽使用不当，使程序崩溃" class="headerlink" title="4.Qt信号与槽使用不当，使程序崩溃"></a>4.Qt信号与槽使用不当，使程序崩溃</h3><p>在调整程序的过程中出现APPCRASH等错误，可能由以下原因产生：</p>
+<p>1.在槽函数中错误使用了锁，导致资源的死锁；</p>
+<p>2.跨线程使用Qt信号和槽，信号发送时间间隔小于槽函数处理时间时，造成程序崩溃。</p>
+<p> 原因分析</p>
+<p>跨线程使用Qt信号和槽时，connect默认是QueuedConnection，队列连接方式。</p>
+<p>信号传递给槽函数的参数，分配内存后放入队列，如果槽函数处理不过来，就会造成队列不停增长，消耗的内存不停增加，最后程序崩溃。</p>
+<p>处理方法</p>
+<p>处理方法各种各样，原则是保证信号发送间隔不大于槽函数处理时间</p>
 <blockquote>
 <p>原文地址：<a href="https://kevin-org.blog.csdn.net/article/details/86155060?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai" target="_blank" rel="noopener">https://kevin-org.blog.csdn.net/article/details/86155060?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai</a></p>
+<p><a href="https://blog.csdn.net/u010168781/article/details/82688113" target="_blank" rel="noopener">https://blog.csdn.net/u010168781/article/details/82688113</a></p>
 </blockquote>
 
       </section>
@@ -178,6 +187,21 @@
         
 <nav class="card-container card-article-nav">
   <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/a8HQ3idBKUVMmCZ.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/11/30/Qt/QT%E5%86%99TXT%E6%96%87%E4%BB%B6/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              QT写TXT文件
+            
+          </p>
+        </article>
+      </div>
     
     
       <div id="article-nav-older" class="card-item img">
