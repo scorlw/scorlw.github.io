@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>QT 对QString字符串的操作 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/10/03/4bRijNGuq2aZz1I.png)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/Qt/">Qt</a>
+        </div>
+        <h1 class="title-wrap">QT 对QString字符串的操作</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2021-01-04T16:00:00.000Z" itemprop="datePublished">2021-01-05</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="QT-对QString字符串的操作"><a href="#QT-对QString字符串的操作" class="headerlink" title="QT 对QString字符串的操作"></a>QT 对QString字符串的操作</h1><blockquote>
+<p>Qt</p>
+</blockquote>
+<p>QString是QT提供的字符串类，相应的也就提供了很多很方便对字符串的处理方法。这里把这些对字符串的操作做一个整理和总结。</p>
+<p><strong>1. 将一个字符串追加到另一个字符串的末尾</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str1 = <span class="hljs-string">"hello "</span>;<br>QString str2 = <span class="hljs-string">"world"</span>;<br>str1.append(str2);                   <span class="hljs-comment">// str1 = "hello world"</span><br>str1.append(<span class="hljs-string">" !"</span>);                   <span class="hljs-comment">// str1 = "hello world !"</span><br><span class="hljs-comment">// 对字符串直接 + 另一个字符串也可以实现，但是不对原本的字符串进行操作</span><br>QString str3 = str1 + str2 + <span class="hljs-string">" !"</span>;   <span class="hljs-comment">// str3 = "hello world !"   str1 = "hello "</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>2. 从字符串中查找某个字符串</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString x = <span class="hljs-string">"sticky question"</span>;<br>QString y = <span class="hljs-string">"sti"</span>;<br><span class="hljs-keyword">int</span> iPos = x.indexOf(y);              <span class="hljs-comment">// 返回0</span><br><span class="hljs-comment">// 函数indexOf()会返回要查找的字符串在字符串中第一次出现的位置</span><br><span class="hljs-comment">// 如果没有要查找的字符串，返回-1</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>3.从字符串中查找某个字符串最后出现的位置</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString strPath = <span class="hljs-string">".C://Users/XXX/Desktop/111.txt"</span>;<br><span class="hljs-keyword">int</span> iPos = strPath.lastIndexOf(<span class="hljs-string">"."</span>);  <span class="hljs-comment">// iPos值为26</span><br><span class="hljs-comment">// 函数indexOf()会返回要查找的字符串在字符串中最后一次出现的位置</span><br><span class="hljs-comment">// 如果没有要查找的字符串，返回-1</span><br><span class="hljs-comment">// 一般用于获取一个文件路径后，判断文件的后缀名</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>4. 用某个字符填满字符串</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"Hello"</span>;<br>str.fill(<span class="hljs-string">'x'</span>);             <span class="hljs-comment">// str == "xxxxx"</span><br>str.fill(<span class="hljs-string">'A'</span>, <span class="hljs-number">2</span>);          <span class="hljs-comment">// str == "AA"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>5. 判断字符串是否为空</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString().isEmpty();            <span class="hljs-comment">// 返回 true</span><br>QString(<span class="hljs-string">""</span>).isEmpty();          <span class="hljs-comment">// 返回 true</span><br>QString(<span class="hljs-string">" "</span>).isEmpty();         <span class="hljs-comment">// 返回 false</span><br>QString(<span class="hljs-string">"abc"</span>).isEmpty();       <span class="hljs-comment">// 返回 false</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>6. 判断字符串是否存在</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString().isNull();             <span class="hljs-comment">// 返回 true</span><br>QString(<span class="hljs-string">""</span>).isNull();           <span class="hljs-comment">// 返回 false</span><br>QString(<span class="hljs-string">"abc"</span>).isNull();        <span class="hljs-comment">// 返回 false</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>7. 从左向右截取字符串</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"Hello World !"</span>;<br>QString str1 = str.left(<span class="hljs-number">5</span>);         <span class="hljs-comment">// str1 = "Hello"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>8. 从中间截取字符串</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"I love C++!"</span>;<br>QString str1 = str.mid(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>);       <span class="hljs-comment">// str1 == "love"</span><br>QString str2 = str.mid(<span class="hljs-number">2</span>);          <span class="hljs-comment">// str2 == "love C++!"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>9. 截取字符串中最右边几个字符</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"I love C++!"</span>;<br>QString str1 = str.right(<span class="hljs-number">4</span>);        <span class="hljs-comment">// str = I love C++! str1 = "C++!"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>10. 删除字符串中的最后几个字符</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"Hello World !"</span>;<br>str.chop(<span class="hljs-number">8</span>);                        <span class="hljs-comment">// str = "Hello"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>11. 删除字符串中间某个字符</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"Hello World!"</span>;<br>str.remove(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>);                   <span class="hljs-comment">// 从5开始删除，删除6个字符；str = "Hello!"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>12. 指定位置插入字符串</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"Hello!"</span>;<br>str.insert(<span class="hljs-number">5</span>, QString(<span class="hljs-string">" World"</span>));   <span class="hljs-comment">// str = "Hello World!"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>13. 用几个字符替换字符串中的几个字符</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString x = <span class="hljs-string">"Say yes!"</span>;<br>QString y = <span class="hljs-string">"no"</span>;<br>x.replace(<span class="hljs-number">4</span>, <span class="hljs-number">3</span>, y);                 <span class="hljs-comment">// x = "Say no!"</span><br>x.replace(<span class="hljs-string">"yes"</span>, <span class="hljs-string">"no"</span>);             <span class="hljs-comment">// x = "Say no!"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>14.字符串补零到指定位</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"A6"</span>;<br><span class="hljs-comment">//如果要把str补全到8位，空位用0补全</span><br>QString str1 = QString(<span class="hljs-string">"%1"</span>).arg(str, <span class="hljs-number">8</span>, QLatin1Char(<span class="hljs-string">'0'</span>));    <span class="hljs-comment">//str1 = "000000A6"</span><br><span class="hljs-comment">//arg里第一个参数是要补全的字符串，第二个参数是要补全到的位数，第三个参数是用什么字符补全，可以不是0的其他字符</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>15.整型十进制转为十六进制字符串并补零到指定位</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> n = <span class="hljs-number">66</span>;<br><span class="hljs-comment">//如果要把n转换为十六进制并补全到8位</span><br>QString str = QString(<span class="hljs-string">"%1"</span>).arg(n, <span class="hljs-number">8</span>, <span class="hljs-number">16</span>, QLatin1Char(<span class="hljs-string">'0'</span>));   <span class="hljs-comment">// str = "00000042"</span><br><span class="hljs-comment">//arg里第一个参数是十进制整型的数，第二个参数是要补全到的位数，第三个参数是要转换的进制，可以是十六进制也可以是十进制</span><br><span class="hljs-comment">//第四个参数是用什么字符补全，可以不是0的其他字符</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>16. 以某个字符切割字符串</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString csv = <span class="hljs-string">"forename,middlename,surname,phone"</span>;<br>QString path = <span class="hljs-string">"/usr/local/bin/myapp"</span>;<br><span class="hljs-comment">//section()会把字符串以第一个参数的符号切割分成数个字符串，后面两个参数是得到的字符串的开始和结束的位置</span><br>QString str;<br>str = csv.section(<span class="hljs-string">','</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>);       <span class="hljs-comment">// str = "surname"</span><br>str = path.section(<span class="hljs-string">'/'</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>);      <span class="hljs-comment">// str = "bin"</span><br>str = path.section(<span class="hljs-string">'/'</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>);      <span class="hljs-comment">// str = "bin/myapp"</span><br>str = path.section(<span class="hljs-string">'/'</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, QString::SectionSkipEmpty);      <span class="hljs-comment">// str = "myapp"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>17. 以某个字符切割字符串另一种方法</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"a,,b,c"</span>;<br>QStringList list1 = str.split(<span class="hljs-string">','</span>);<br><span class="hljs-comment">// list1: [ "a", "", "b", "c" ]</span><br>QStringList list2 = str.split(<span class="hljs-string">','</span>, QString::SkipEmptyParts);<br><span class="hljs-comment">// list2: [ "a", "b", "c" ]</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>18. 检查字符串是否以某个字符串开头或结尾</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">"http://www.baidu.com"</span>;<br>str.startsWith(<span class="hljs-string">"http:"</span>);            <span class="hljs-comment">// 返回true</span><br>str.endsWith(<span class="hljs-string">"cn"</span>);                 <span class="hljs-comment">// 返回false</span><br><span class="hljs-comment">//这个方法比left()和right()要简单快速，通常用来检查路径或者网址或者文件后缀</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>19. 比较两个字符串是否相等</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str1 = <span class="hljs-string">"xxx"</span>;<br>QString str2 = <span class="hljs-string">"XXX"</span>;<br><span class="hljs-comment">//localeAwareCompare()会比较两个参数的大小，如果str1小于str2,返回小于0的数，等于返回0，大于返回大于0的数</span><br>QString::localeAwareCompare(str1, str2)          <span class="hljs-comment">// 返回 -1</span><br><br><span class="hljs-comment">//localeAwareCompare()的比较区分大小写，想要不区分大小写，可以使用toLower()或toUpper()使字符串全变成小写或大写</span><br><span class="hljs-keyword">if</span>(QString::localeAwareCompare(str1.toUpper(), str2) == <span class="hljs-number">0</span>)<br>&#123;<br>    qDebug() &lt;&lt; <span class="hljs-string">"str1和str2相等"</span>;                <span class="hljs-comment">// 返回0，输出：str1和str2相等</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>20. 去除字符串两侧的空白字符(空白字符包括空格、Tab以及换行符，而不仅仅是空格)</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">QString str = <span class="hljs-string">" xxx "</span>;<br>QString str1 = str.trimmed();            <span class="hljs-comment">// str1的值为"xxx"</span><br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/Sakuya__/article/details/87866030" target="_blank" rel="noopener">https://blog.csdn.net/Sakuya__/article/details/87866030</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QString/" rel="tag">#QString</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">#Qt</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/hDEytq9nQdCUJuB.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2021/01/05/Qt/QStringList%E4%BD%BF%E7%94%A8/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              QStringList使用
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/a8HQ3idBKUVMmCZ.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2020/11/30/Qt/QT%E5%86%99TXT%E6%96%87%E4%BB%B6/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              QT写TXT文件
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2021 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>

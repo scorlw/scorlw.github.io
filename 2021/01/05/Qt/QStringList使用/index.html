@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="scorlw">
+  
+
+  
+
+  
+
+  <title>QStringList使用 | scorlw</title>
+
+  
+
+  
+    <link rel="icon" href="/xiaoxin.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/monokai.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          scorlw
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/10/03/hDEytq9nQdCUJuB.png)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/Qt/">Qt</a>
+        </div>
+        <h1 class="title-wrap">QStringList使用</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2021-01-04T16:00:00.000Z" itemprop="datePublished">2021-01-05</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="QStringList使用"><a href="#QStringList使用" class="headerlink" title="QStringList使用"></a>QStringList使用</h1><blockquote>
+<p>Qt</p>
+</blockquote>
+<h3 id="QStringList-初始化"><a href="#QStringList-初始化" class="headerlink" title="QStringList 初始化"></a>QStringList 初始化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++">  QStringList qstrList;<br>  qstrList&lt;&lt;<span class="hljs-string">"Android"</span> &lt;&lt; <span class="hljs-string">"Qt Creator"</span> &lt;&lt; <span class="hljs-string">"Java"</span> &lt;&lt; <span class="hljs-string">"C++"</span>;<br>  <span class="hljs-function">QStringListIterator <span class="hljs-title">strIterator</span><span class="hljs-params">(qstrList)</span></span>;<br>  <span class="hljs-keyword">while</span> (strIterator.hasNext())<br>        qDebug() &lt;&lt; strIterator.next() &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-comment">/*结果：</span><br><span class="hljs-comment">"Android" </span><br><span class="hljs-comment"></span><br><span class="hljs-comment">"Qt Creator" </span><br><span class="hljs-comment"></span><br><span class="hljs-comment">"Java" </span><br><span class="hljs-comment"></span><br><span class="hljs-comment">"C++" </span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+<p>这里我们用QStringList添加QString字符串，用 <strong>&lt;&lt;</strong>来添加字符串，相当于Java中List的add()方法.</p>
+<h4 id="我们先学习一下QList的方法"><a href="#我们先学习一下QList的方法" class="headerlink" title="我们先学习一下QList的方法"></a>我们先学习一下QList的方法</h4><p><strong>1.增加字符串 append()</strong> </p>
+<p>QStringList可以通过append()，或使用<strong>&lt;&lt;</strong> 来添加List元素，如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">qstrList.append(<span class="hljs-string">"python"</span>);<br>qstrList &lt;&lt; <span class="hljs-string">"PHP"</span> ;<br>strIterator.toFront();<br><span class="hljs-keyword">while</span> (strIterator.hasNext())<br>    qDebug() &lt;&lt; strIterator.next() &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//"Android" "Qt Creator" "Java" "C++"</span><br><br><span class="hljs-function">QStringListIterator <span class="hljs-title">strIterator1</span><span class="hljs-params">(qstrList)</span></span>;<br><span class="hljs-keyword">while</span> (strIterator1.hasNext())<br>    qDebug() &lt;&lt; strIterator1.next() &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//"Android" "Qt Creator" "Java" "C++" "python" "PHP"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>strIterator传入的可能是QStringList 的深拷贝，所以不能随着qstrList的变化而变化。</p>
+<p><strong>2.插入字符串 insert()</strong> </p>
+<p>插入字符串insert方法可以将字符串插入到我们指定的list的位置：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">qstrList.insert(<span class="hljs-number">0</span>,<span class="hljs-string">"C#"</span>);<br><span class="hljs-comment">//"C#" "Android" "Qt Creator" "Java" "C++" "python" "PHP"</span><br></code></pre></td></tr></table></figure>
+
+<p>第一个参数为我们要插入的位置，后面的参数表示我们要插入的值。 </p>
+<p><strong>3.替换字符串 replace()</strong> </p>
+<p>通过replace()方法我们可以替换掉list中某一位置的值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">qstrList.replace(<span class="hljs-number">0</span>,<span class="hljs-string">"Web"</span>);<br><span class="hljs-comment">//"Web" "Android" "Qt Creator" "Java" "C++" "python" "PHP"</span><br></code></pre></td></tr></table></figure>
+
+<p>第一个参数为我们要替换的位置，后面的参数表示我们要替换的值。 </p>
+<p><strong>4.删除字符串 removeAt(), removeFirst(), removeLast(), and removeOne()</strong> </p>
+<p>我们可以根据方法名，推断出个方法的具体作用，根据实际需要选着对应的方法： </p>
+<p>这里说一下removeOne()方法，他表示删除一个具体的值，参数为我们list里的内容，其定义是：<br>bool removeOne(const T &amp;value) ，返回值为bool类型，我们写一下用法的例子</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">bool</span> isflag = qstrList.removeOne(<span class="hljs-string">"C#"</span>);<span class="hljs-comment">//删除一个指定的元素，删除成功返回true，删除失败返回fasle</span><br>qDebug() &lt;&lt; isflag &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//false</span><br><span class="hljs-keyword">int</span> n = qstrList.removeAll(<span class="hljs-string">"Java"</span>);<span class="hljs-comment">//删除所有的指定的元素，返回删除的元素个数</span><br>qDebug() &lt;&lt; n &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">//1</span><br>qstrList.removeAt(<span class="hljs-number">2</span>);<span class="hljs-comment">//删除第三个元素</span><br>qstrList.removeFirst();<span class="hljs-comment">//删除第一个元素</span><br>qstrList.removeLast();<span class="hljs-comment">//删除最后一个元素</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="接下来我们学习一下QStringList的方法"><a href="#接下来我们学习一下QStringList的方法" class="headerlink" title="接下来我们学习一下QStringList的方法"></a>接下来我们学习一下QStringList的方法</h4><p><strong>1. 合并字符串使用join( )</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">QString str = qstrList.join(<span class="hljs-string">","</span>);<br><span class="hljs-comment">// str == "Android,Qt Creator,Java,C++"</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>2. 拆分字符串</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">QString str = <span class="hljs-string">"Android,Qt Creator, ,Java,C++"</span>;<br>QStringList list1 = str.split(<span class="hljs-string">","</span>);<br><span class="hljs-comment">// list1: [ "Android", "Qt Creator"," ", "Java", "C++" ]</span><br>QStringList list2 = str.split(<span class="hljs-string">","</span>, QString::SkipEmptyParts);<br><span class="hljs-comment">// list2:[ "Android", "Qt Creator", "Java", "C++" ]</span><br></code></pre></td></tr></table></figure>
+
+<p>也就是说如果有QString：：SkipEmptyParts，空项不会出现在结果。默认情况下，空项被保留</p>
+<p><strong>3. 索引</strong> </p>
+<p>IndexOf（）函数返回给定字符串的第一个出现的索引。 </p>
+<p>而lastIndexOf（）函数，返回字符串的最后一次出现的索引。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">QStringList qstrList;<br>qstrList&lt;&lt;<span class="hljs-string">"Java"</span> &lt;&lt; <span class="hljs-string">"Android"</span> &lt;&lt; <span class="hljs-string">"Qt Creator"</span> &lt;&lt; <span class="hljs-string">"Java"</span> &lt;&lt; <span class="hljs-string">"C++"</span>;<br><span class="hljs-keyword">int</span> index = qstrList.indexOf(<span class="hljs-string">"Java"</span>);<span class="hljs-comment">//返回 0</span><br><span class="hljs-keyword">int</span> index = qstrList.indexOf(<span class="hljs-string">"Java"</span>);<span class="hljs-comment">//返回 3</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>4. 替换replaceInStrings（）</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">QStringList files;<br>files &lt;&lt; <span class="hljs-string">"$file/src/moc/moc.y"</span> &lt;&lt;  <span class="hljs-string">"$file/src/moc/moc.l"</span> &lt;&lt;  <span class="hljs-string">"$file/include/qconfig.h"</span>;<br>files.replaceInStrings(<span class="hljs-string">"$file"</span>, <span class="hljs-string">"/usr/file"</span>);<br><span class="hljs-comment">// files: [ "/usr/file/src/moc/moc.y", ...]</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>5. 过滤filter（）</strong> </p>
+<p>可以让你提取一个新的列表只包含这些字符串包含一个特定的字符串（或匹配特定正则表达式）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++">QStringList <span class="hljs-built_in">list</span>;<br><span class="hljs-built_in">list</span> &lt;&lt; "Bill Murray" &lt;&lt; "John Doe" &lt;&lt; "Bill Clinton";<br>QStringList result;<br>result = <span class="hljs-built_in">list</span>.filter("Bill");<br>// result: ["Bill Murray", "Bill Clinton"]<br>//比较字符串的时候 <br>//Qt::CaseSensitive  搜索区分大小写<br>//Qt::CaseInSensitive   不区分大小写<br>result = <span class="hljs-built_in">list</span>.filter("bill",Qt::CaseInSensitive);<br>// result: ["Bill Murray", "Bill Clinton"]<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><strong>QStringList类提供字符串列表。</strong> </p>
+<p><strong>QStringList继承自QList &lt; QString &gt;。与QList一样，QStringList是隐式共享的。它提供了快速的基于索引的访问，以及快速插入和删除。将字符串列表作为值参数传递是快速和安全的。</strong> </p>
+<p><strong>QList的所有功能也适用于QStringList。例如，您可以使用isEmpty（）来测试列表是否为空，您可以调用诸如append（）、prepend（）、insert（）、replace（）、removeAll（）、removeAt（）、removeFirst（）和removeOne（）来修改QStringList的函数。</strong> </p>
+<p><strong>此外，QStringList提供了一些方便的函数，使字符串的处理列表变得更容易</strong></p>
+<blockquote>
+<p>原文地址：<a href="https://blog.csdn.net/qq_33485434/article/details/81027820" target="_blank" rel="noopener">https://blog.csdn.net/qq_33485434/article/details/81027820</a></p>
+</blockquote>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QStringList/" rel="tag">#QStringList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">#Qt</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
+          
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/4bRijNGuq2aZz1I.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2021/01/05/Qt/QT%20%E5%AF%B9QString%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              QT 对QString字符串的操作
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2021 <a href="/" target="_blank">scorlw</a></p>
+
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
