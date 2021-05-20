@@ -20,7 +20,7 @@
 
   
 
-  <title>归档 | scorlw</title>
+  <title>Linux学习笔记 | scorlw</title>
 
   
 
@@ -76,7 +76,16 @@
 
     
 <!-- header container -->
-<header class="header-container">
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
 
   
   
@@ -84,21 +93,23 @@
   
   
     <div class="header-content">
-      <div class="post-image" style="background-image: url(https://i.loli.net/2021/05/20/9w7X3lsFo28cqti.png)"></div>
+      <div class="post-image" style="background-image: url(https://i.loli.net/2020/10/03/fxulKWyZQz6H7Ms.png)"></div>
       <div class="post-text">
-        <h1 class="title-wrap">归档</h1>
-        <h2 class="title-sub-wrap">共有124篇文章</h2>
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/Linux/">Linux</a>
+        </div>
+        <h1 class="title-wrap">Linux学习笔记</h1>
+        <h2 class="title-sub-wrap">
+          <strong>scorlw</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2021-05-19T16:00:00.000Z" itemprop="datePublished">2021-05-20</time>
+  </a>
+
+        </h2>
       </div>
     </div>
-  
-
-  
-  
-
-  
-  
-
-  
   
 
   
@@ -106,47 +117,66 @@
 
   </header>
 
-    <!-- 归档 -->
+    <!-- 文章 -->
 
-<!-- post list container -->
-<div class="body-container float">
-  <div class="content-container article-list">
-    <div class="card-container card-articles">
-      <div class="card-wrap">
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="Linux学习一"><a href="#Linux学习一" class="headerlink" title="Linux学习一"></a>Linux学习一</h1><p>VMware 15 Pro安装CentOS 8的教程请看：<a href="https://blog.csdn.net/weixin_45682081/article/details/104706609" target="_blank" rel="noopener">VMware安装CentOS 8.1（CentOS 8系列可参考）详细教程_godxiaolong的博客-CSDN博客_centos8 vmware安装</a></p>
+<h2 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h2><p>虚拟机中的网络连接方式基本有三种，桥接、NAT、Host-Only，且VMware还会自动生成vmnet1和vmnet8。</p>
+<h3 id="桥接："><a href="#桥接：" class="headerlink" title="桥接："></a>桥接：</h3><p>桥接就是通过一台或几台设备将几个网络串起来形成连接。这边主要介绍虚拟机所采用的桥接方式，虚拟出来的操作系统就像是局域网中的一独立的主机，它可以通过路由器网线访问网内任何一台机器。不过虚拟机需要占用你同一个网段的一个 IP 地址，当且仅当虚拟机和实体机在同一个网段，两者才可以进行通信，如：<em>虚拟机 IP：192.168.1.101，实体机 IP：192.168.1.100</em>。</p>
+<h3 id="NAT："><a href="#NAT：" class="headerlink" title="NAT："></a>NAT：</h3><p>NAT模式实际是虚拟了一个网卡出来，虚拟机直接使用链接这个虚拟网卡，每次访问和交互通过这个虚拟网卡交换数据。虚拟机发送数据给实体机：虚拟机系统-&gt;虚拟网卡-&gt;实体机系统（可以发现是不经过真实网卡的流程简单很多）；虚拟机访问外网：虚拟机系统-&gt;虚拟网卡-&gt;实体机系统-&gt;真实网卡-&gt;路由器-&gt;外网。</p>
+<h3 id="Host-only"><a href="#Host-only" class="headerlink" title="Host-only:"></a>Host-only:</h3><p>在 Host-Only 模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。其实 Host-Only 网络和 NAT 网络很相似，不同的地方就是 Host-Only 网络没有 NAT 服务，所以虚拟网络不能连接到 Internet 。主机和虚拟机之间的通信是通过 VMware Network Adepter VMnet1 虚拟网卡来实现的。</p>
+<p>参考：<a href="https://blog.csdn.net/wuhuimin521/article/details/80033378" target="_blank" rel="noopener">桥接、NAT、Host-only上网方式的区别”_wuhuimin521的博客-CSDN博客_host-only</a></p>
+<h2 id="Linux网络配置"><a href="#Linux网络配置" class="headerlink" title="Linux网络配置"></a>Linux网络配置</h2><p>在Linux中，可以采用ifconfig命令来进行网络信息的查看以及修改。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">ifconfig eth0 <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.156</span> <span class="hljs-comment">//给第一块网卡设置其ip地址</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>eth是网卡的文件名，0表示第一块网卡；</li>
+<li>在Host—Only与NAT模式下，需要设置ip地址与主机的地址在同一个频段。</li>
+<li></li>
+</ul>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">#CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">#Linux</a></li></ul>
+      </section>
+
+      <section class="article-navs">
         
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item img">
+        <article>
           
-          <div class="card-item img">
-            <article>
-              
-                <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/fxulKWyZQz6H7Ms.png)"></div>
-              
-              
-                <a class="article-link card-link" href="/2021/05/20/Linux/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" itemprop="url"></a>
-              
-              <h2 class="article-title">Linux学习笔记</h2>
-              <div class="article-meta">
-                <strong>scorlw</strong>
-                <span>发布于</span>
-                
-  <a href="/2021/05/20/Linux/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" class="article-date">
-    <time datetime="2021-05-19T16:00:00.000Z" itemprop="datePublished">2021-05-20</time>
-  </a>
-
-              </div>
-              <div class="article-category">
-                <a class="article-category-link" href="/categories/Linux/">Linux</a>
-              </div>
-            </article>
-          </div>
-        
+            <div class="card-cover" style="background-image: url(https://i.loli.net/2020/10/03/hDEytq9nQdCUJuB.png)"></div>
+          
+          <a class="card-link article-nav-link" href="/2021/01/05/Qt/QStringList%E4%BD%BF%E7%94%A8/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              QStringList使用
+            
+          </p>
+        </article>
       </div>
-    </div>
+    
   </div>
+</nav>
+
+      </section>
+    </div>
+  </article>
 </div>
-
-<!-- page container -->
-
-
 
     <!-- footer container -->
 <footer id="footer" class="footer">
