@@ -128,7 +128,7 @@
       
 
       <section class="article-entry">
-        <h1 id="Linux学习一"><a href="#Linux学习一" class="headerlink" title="Linux学习一"></a>Linux学习一</h1><p>VMware 15 Pro安装CentOS 8的教程请看：<a href="https://blog.csdn.net/weixin_45682081/article/details/104706609" target="_blank" rel="noopener">VMware安装CentOS 8.1（CentOS 8系列可参考）详细教程_godxiaolong的博客-CSDN博客_centos8 vmware安装</a></p>
+        <h1 id="Linux安装与网络配置"><a href="#Linux安装与网络配置" class="headerlink" title="Linux安装与网络配置"></a>Linux安装与网络配置</h1><p>VMware 15 Pro安装CentOS 8的教程请看：<a href="https://blog.csdn.net/weixin_45682081/article/details/104706609" target="_blank" rel="noopener">VMware安装CentOS 8.1（CentOS 8系列可参考）详细教程_godxiaolong的博客-CSDN博客_centos8 vmware安装</a></p>
 <h2 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h2><p>虚拟机中的网络连接方式基本有三种，桥接、NAT、Host-Only，且VMware还会自动生成vmnet1和vmnet8。</p>
 <h3 id="桥接："><a href="#桥接：" class="headerlink" title="桥接："></a>桥接：</h3><p>桥接就是通过一台或几台设备将几个网络串起来形成连接。这边主要介绍虚拟机所采用的桥接方式，虚拟出来的操作系统就像是局域网中的一独立的主机，它可以通过路由器网线访问网内任何一台机器。不过虚拟机需要占用你同一个网段的一个 IP 地址，当且仅当虚拟机和实体机在同一个网段，两者才可以进行通信，如：<em>虚拟机 IP：192.168.1.101，实体机 IP：192.168.1.100</em>。</p>
 <h3 id="NAT："><a href="#NAT：" class="headerlink" title="NAT："></a>NAT：</h3><p>NAT模式实际是虚拟了一个网卡出来，虚拟机直接使用链接这个虚拟网卡，每次访问和交互通过这个虚拟网卡交换数据。虚拟机发送数据给实体机：虚拟机系统-&gt;虚拟网卡-&gt;实体机系统（可以发现是不经过真实网卡的流程简单很多）；虚拟机访问外网：虚拟机系统-&gt;虚拟网卡-&gt;实体机系统-&gt;真实网卡-&gt;路由器-&gt;外网。</p>
@@ -140,8 +140,130 @@
 <ul>
 <li>eth是网卡的文件名，0表示第一块网卡；</li>
 <li>在Host—Only与NAT模式下，需要设置ip地址与主机的地址在同一个频段。</li>
-<li></li>
 </ul>
+<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>命令 [-选项] [参数]    例：ls -la /etc</p>
+<p>说明：1. 个别命令不遵循此格式</p>
+<p>​            2.当有多个选项时，可以写在一起</p>
+<p>​            3.简化选项与完整选项：-a 等于 –all</p>
+<h3 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h3><h4 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h4><p><strong>ls</strong></p>
+<p>英文原意：list 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls //查看该目录下的文件<br>ls -a //all查看该目录下的所有文件（包括隐藏文件）<br>ls -l //long查看该目录下文件的所有信息<br>ls -lh //long humanity人性化查看文件所有信息，l与h可以互换位置，主要体现在文件大小方面<br>ls -d //显示目录属性<br>ls -i //查看当前目录下文件的i节点<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -lh<br>-rw-r--r--. 1 root root 1.9K 5月  20 18:25 initial-setup-ks.cfg<br>权限 引用次数 所有者 所属用户组 大小 修改日期 文件名<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">-rw-r--r--<br>第一位：-表示二进制文件，d表示目录，l表示软链接文件<br>后面三组分别表示对应用户的操作权限：<br>u：所有者 g：所属组 o：其他人<br>r：读 w：写 x：执行<br></code></pre></td></tr></table></figure>
+
+<p><strong>mkdir</strong></p>
+<p>英文原意：make directories 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir -p [目录名] //创建新目录，-p为递归创建，直接创建目录可以舍去<br></code></pre></td></tr></table></figure>
+
+<p><strong>cd</strong></p>
+<p>英文原意：change directory 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd [目录] //跳转到指定目录<br>cd .. //回到上一级目录<br></code></pre></td></tr></table></figure>
+
+<p><strong>pwd</strong></p>
+<p>英文原意：print working directory 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pwd //显示当前目录<br></code></pre></td></tr></table></figure>
+
+<p><strong>rmdir</strong></p>
+<p>英文原意：remove empty directories 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rmdir [目录名] //删除空目录<br></code></pre></td></tr></table></figure>
+
+<p><strong>cp</strong></p>
+<p>英文原意：copy 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -rp [原文件或目录] [目标目录] //拷贝文件或目录<br>cp -r //复制目录<br>cp -p //保留文件属性<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>可以一次复制多个文件或目录到目标目录</li>
+<li>可以将文件新的名字写在目标目录中，实现复制的同时改名</li>
+<li>-p选项可以实现在不改变文件最后修改时间等属性的情况下复制文件</li>
+</ol>
+<p><strong>mv</strong></p>
+<p>英文原意：move 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv [原文件或目录][目标目录] //剪切文件、改名<br></code></pre></td></tr></table></figure>
+
+<p><strong>rm</strong></p>
+<p>英文原意：remove 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm -rf [文件或目录] //删除文件或目录<br>rm -r 删除目录<br>rm -f 强制执行<br></code></pre></td></tr></table></figure>
+
+<h4 id="文件处理命令-1"><a href="#文件处理命令-1" class="headerlink" title="文件处理命令"></a>文件处理命令</h4><p><strong>touch</strong></p>
+<p>英文原意：touch 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">touch [文件名] //创建空文件，可以同时创建多个，名称里有空格的话可以用引号引起来表示是一个文件名，但不建议文件名中带有空格<br></code></pre></td></tr></table></figure>
+
+<p><strong>cat</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat [文件名] //显示文件内容<br>cat -n [文件名] //显示行号<br></code></pre></td></tr></table></figure>
+
+<p><strong>tac</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tac [文件名] //显示文件内容（反向列示）<br></code></pre></td></tr></table></figure>
+
+<p><strong>more</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">more [文件名] //分页显示文件内容<br>//空格或f 翻页<br>//enter 换行<br>//q 退出<br></code></pre></td></tr></table></figure>
+
+<p><strong>less</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">less [用户名] //分页显示文件内容（可向上翻页）<br>//上述more的操作均可以使用<br>//使用上箭头与pageup可以实现向上滚动/翻页<br>//less状态下使用   /[内容]   可以实现搜索，使用n实现搜索项的向下查找<br>/[内容]：向下搜索[内容]的功能<br>?[内容]：向上搜索[内容]的功能<br>n：重复前一个搜索（与 / 或 ? 有关）<br>N：反向重复前一个搜索（与 / 或 ? 有关）<br>b 向上翻一页<br>d 向后翻半页<br>h 显示帮助界面<br>Q 退出less 命令<br>u 向前滚动半页<br>y 向前滚动一行<br>空格键 滚动一页<br>回车键 滚动一行<br>[pagedown]： 向下翻动一页<br>[pageup]： 向上翻动一页<br></code></pre></td></tr></table></figure>
+
+<p><strong>head</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">head -n [行数] [文件] //显示文件前面几行，不写行数默认显示前十行<br></code></pre></td></tr></table></figure>
+
+<p><strong>tail</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">tail -n [行数] [文件] //显示文件前面几行，不写行数默认显示前十行<br>-f //动态显示文件末尾内容<br></code></pre></td></tr></table></figure>
+
+<h4 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h4><p><strong>ln</strong></p>
+<p>英文原意：link 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln -s [原文件] [目标文件] //生成链接文件<br>//ex：<br>ln -s /etc/issue /tmp/issue.soft<br>//创建文件issue的软链接<br>ln /etc/issue /tmp/issue.hard<br>//创建文件issue的硬链接<br></code></pre></td></tr></table></figure>
+
+<p><strong>软链接：类似于Windows中的快捷方式</strong></p>
+<ol>
+<li>文件权限为：lrwxrwxrwx，因为软链接的权限不代表原文件的权限</li>
+<li>文件大小较小，因为其只是符号链接</li>
+<li>/tmp/issue.soft -&gt; /etc/issue，箭头指向原文件</li>
+</ol>
+<p><strong>硬链接</strong></p>
+<ol>
+<li>相当于拷贝cp -p + 同步更新</li>
+<li>原文件被删除也可以继续访问</li>
+<li>通过i节点识别</li>
+<li>不能跨分区</li>
+<li>不能针对目录使用</li>
+</ol>
+<h3 id="权限管理命令"><a href="#权限管理命令" class="headerlink" title="权限管理命令"></a>权限管理命令</h3><p><strong>chmod</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">chmod [&#123;ugoa&#125;&#123;+-=&#125;&#123;rwx&#125;] [文件或目录] //修改文件或目录权限<br>chmod [mode=421] [文件或目录] //修改文件或目录权限<br>-R //递归修改<br><br>//权限的数字表示：<br>r=4 w=2 x=1<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>权限等级</th>
+<th>权限含义</th>
+<th>对文件的含义</th>
+<th>对目录的含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>读权限</td>
+<td>可以查看文件的内容</td>
+<td>可以列出目录中的内容</td>
+</tr>
+<tr>
+<td>w</td>
+<td>写权限</td>
+<td>可以修改文件内容</td>
+<td>可以在目录中创建、删除文件</td>
+</tr>
+<tr>
+<td>x</td>
+<td>执行权限</td>
+<td>可以执行文件</td>
+<td>可以进入目录</td>
+</tr>
+</tbody></table>
 
       </section>
 
