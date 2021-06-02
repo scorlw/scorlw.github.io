@@ -141,11 +141,11 @@
 <li>eth是网卡的文件名，0表示第一块网卡；</li>
 <li>在Host—Only与NAT模式下，需要设置ip地址与主机的地址在同一个频段。</li>
 </ul>
-<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>命令 [-选项] [参数]    例：ls -la /etc</p>
+<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><h2 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h2><p>命令 [-选项] [参数]    例：ls -la /etc</p>
 <p>说明：1. 个别命令不遵循此格式</p>
 <p>​            2.当有多个选项时，可以写在一起</p>
 <p>​            3.简化选项与完整选项：-a 等于 –all</p>
-<h3 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h3><h4 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h4><p><strong>ls</strong></p>
+<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><h3 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h3><p><strong>ls</strong></p>
 <p>英文原意：list 执行权限：所有用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls //查看该目录下的文件<br>ls -a //all查看该目录下的所有文件（包括隐藏文件）<br>ls -l //long查看该目录下文件的所有信息<br>ls -lh //long humanity人性化查看文件所有信息，l与h可以互换位置，主要体现在文件大小方面<br>ls -d //显示目录属性<br>ls -i //查看当前目录下文件的i节点<br></code></pre></td></tr></table></figure>
 
@@ -186,7 +186,7 @@
 <p>英文原意：remove 执行权限：所有用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm -rf [文件或目录] //删除文件或目录<br>rm -r 删除目录<br>rm -f 强制执行<br></code></pre></td></tr></table></figure>
 
-<h4 id="文件处理命令-1"><a href="#文件处理命令-1" class="headerlink" title="文件处理命令"></a>文件处理命令</h4><p><strong>touch</strong></p>
+<h3 id="文件处理命令-1"><a href="#文件处理命令-1" class="headerlink" title="文件处理命令"></a>文件处理命令</h3><p><strong>touch</strong></p>
 <p>英文原意：touch 执行权限：所有用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">touch [文件名] //创建空文件，可以同时创建多个，名称里有空格的话可以用引号引起来表示是一个文件名，但不建议文件名中带有空格<br></code></pre></td></tr></table></figure>
 
@@ -214,7 +214,7 @@
 <p>执行权限：所有用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">tail -n [行数] [文件] //显示文件前面几行，不写行数默认显示前十行<br>-f //动态显示文件末尾内容<br></code></pre></td></tr></table></figure>
 
-<h4 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h4><p><strong>ln</strong></p>
+<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><p><strong>ln</strong></p>
 <p>英文原意：link 执行权限：所有用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln -s [原文件] [目标文件] //生成链接文件<br>//ex：<br>ln -s /etc/issue /tmp/issue.soft<br>//创建文件issue的软链接<br>ln /etc/issue /tmp/issue.hard<br>//创建文件issue的硬链接<br></code></pre></td></tr></table></figure>
 
@@ -232,7 +232,7 @@
 <li>不能跨分区</li>
 <li>不能针对目录使用</li>
 </ol>
-<h3 id="权限管理命令"><a href="#权限管理命令" class="headerlink" title="权限管理命令"></a>权限管理命令</h3><p><strong>chmod</strong></p>
+<h2 id="权限管理命令"><a href="#权限管理命令" class="headerlink" title="权限管理命令"></a>权限管理命令</h2><p><strong>chmod</strong></p>
 <p>执行权限：所有用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">chmod [&#123;ugoa&#125;&#123;+-=&#125;&#123;rwx&#125;] [文件或目录] //修改文件或目录权限<br>chmod [mode=421] [文件或目录] //修改文件或目录权限<br>-R //递归修改<br><br>//权限的数字表示：<br>r=4 w=2 x=1<br></code></pre></td></tr></table></figure>
 
@@ -264,6 +264,146 @@
 <td>可以进入目录</td>
 </tr>
 </tbody></table>
+<p><strong>注：决定一个文件是否可以被删除的是其目录的权限。</strong></p>
+<p><strong>chown</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">chown [用户] [文件或目录] //改变文件或目录的所有者<br></code></pre></td></tr></table></figure>
+
+<p><strong>chgrp</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">chgrp [用户] [文件或目录] //改变文件或目录的所属组<br></code></pre></td></tr></table></figure>
+
+<p><strong>umask</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">umask [mode=421] //修改新建文件或目录的缺省权限<br>-S //以rwx的形式显示新建文件或目录的缺省权限<br></code></pre></td></tr></table></figure>
+
+<p><strong>注：新建的文件一般没有可执行权限</strong></p>
+<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><p><strong>find</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs shell">find [搜索范围] [匹配条件] //文件搜索<br><br>find /etc -name init //在目录/etc中查找文件init（精确搜索）区分大小写<br>find /etc -name *init* //可以实现模糊搜索的效果<br>find /etc -iname init //不区分大小写搜索<br><br>*：任意数量（可以是0）字符<br>?：单个字符<br><br>find / -size +204800 //在根目录下查找大于100MB的文件<br>//+n 大于n   -n 小于n   n 等于n <br>//Linux下存储数据的最小单位是数据块，1数据块=512字节=0.5KB<br><br>find /home -user laoli //在home目录下查找所有者为laoli的文件<br>-group //根据所属组查找<br><br>find /etc -cmin -5 //在etc目录下查找5分钟内被修改过属性的文件和目录<br>-amin //访问时间 access<br>-cmin //文件属性 change<br>-mmin //文件内容 modify<br><br>find /etc -size +163840 -a -size -204800 //在etc下查找大于80MB且小于100MB的文件<br>-a //两个条件同时满足<br>-o //两个条件满足其一即可<br><br>find /etc -name inittab -exec ls -l &#123;&#125; \;<br>//在/etc下查找inittab文件并显示其详细信息<br>-exec/-ok 命令&#123;&#125;\; //对搜索结果执行操作，-ok会进行询问<br><br>-type //根据文件类型查找<br>//f 文件   d 目录   l 软链接文件<br><br>-inum //根据i节点查找<br></code></pre></td></tr></table></figure>
+
+<p><strong>locate</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">locate [文件名] //在文件资料库里查找文件<br>//locate为定期更新的资料库，可以比find更加快速的查找到满足条件的文件，类似于Windows里的everything<br>//问题1：新建立的文件可能没有被收录到资料库中，所以可能出现查找不到的情况<br>//可以使用updatedb命令进行手动更新<br>//问题2：/tmp目录下的文件不被收录，所以查找不到<br></code></pre></td></tr></table></figure>
+
+<p><strong>which</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">which [命令] //搜索命令所在的目录及别名信息<br></code></pre></td></tr></table></figure>
+
+<p><strong>whereis</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">whereis [命令] //搜索命令所在目录与帮助文档所在的路径<br></code></pre></td></tr></table></figure>
+
+<p><strong>grep</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep [指定字符] [文件] //在文件中搜索字符串匹配的行并输出<br>-i //不区分大小写<br>-v //排除指定字符串<br><br>grep mysql /root/install.log //在install.log文件中查找包含mysql的行<br>grep -v ^# /etc/inittab //^表示行首，#常用于注释。在inittab文件中查找不以#开头的行<br></code></pre></td></tr></table></figure>
+
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><p><strong>man</strong></p>
+<p>英文原意：manual   执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">man [命令或配置文件] //查看命令或配置文件的帮助信息<br>//man查找配置文件的帮助信息时，直接写配置文件名，不需要加绝对路径（加路径则显示文件的所有内容<br><br>//在Linux中，有一些命令与配置文件重名，例如passwd，默认使用man查询的是命令<br>//可以使用man 5 passwd来进行配置文件的查询<br>//1代表命令，5代表配置文件<br><br>whatis [命令] //查看命令的简短信息<br>apropos [配置文件] //查看配置文件的简短信息<br>[命令] --help //查看命令的选项<br>//info和man差不多<br></code></pre></td></tr></table></figure>
+
+<p><strong>help</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">help [命令] //获得Shell内置命令的帮助信息<br></code></pre></td></tr></table></figure>
+
+<h2 id="用户管理命令"><a href="#用户管理命令" class="headerlink" title="用户管理命令"></a>用户管理命令</h2><p><strong>useradd</strong></p>
+<p>执行权限：root</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">useradd [用户名] //添加新用户<br></code></pre></td></tr></table></figure>
+
+<p><strong>passwd</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">passwd [用户名] //修改该用户的密码<br>//root可以修改任何用户的密码，普通用户只能修改自己的密码<br>//root可以使用简单密码作为用户的密码，用户不可以<br></code></pre></td></tr></table></figure>
+
+<p><strong>who</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">who //查看登录用户信息<br>//登陆用户名   登录终端（tty表示本地终端，pts表示远程终端   登录时间   IP地址<br></code></pre></td></tr></table></figure>
+
+<p><strong>w</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">w //查看登录用户的详细信息<br></code></pre></td></tr></table></figure>
+
+<h2 id="压缩解压命令"><a href="#压缩解压命令" class="headerlink" title="压缩解压命令"></a>压缩解压命令</h2><p><strong>gzip</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">gzip [文件] //压缩文件为.gz格式<br></code></pre></td></tr></table></figure>
+
+<p><strong>gunzip</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">gunzip [压缩文件] //解压缩.gz格式的压缩文件<br>//也可以使用gzip -d<br></code></pre></td></tr></table></figure>
+
+<p><strong>tar</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar [选项] [压缩后的文件名] [目录] //打包目录为.tar.gz格式<br>-c //打包<br>-x //解包<br>-v //显示详细信息<br>-f //指定文件名<br>-z //打包同时压缩或解压缩.gz文件（与c选项或x选项有关）<br>-j //打包同时压缩或解压缩.bz2文件（与c选项或x选项有关）<br></code></pre></td></tr></table></figure>
+
+<p><strong>zip</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">zip [选项] [压缩后文件名] [文件或目录] //压缩文件或目录为zip格式，相对于gzip，可以保留原始文件<br>-r //压缩目录<br></code></pre></td></tr></table></figure>
+
+<p><strong>unzip</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">unzip [压缩文件] //解压.zip格式的压缩文件<br></code></pre></td></tr></table></figure>
+
+<p><strong>bzip2</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">bzip2 [选项] [文件] //压缩文件为.bz2格式-k //产生压缩文件后保留原文件//bzip2的压缩比较大<br></code></pre></td></tr></table></figure>
+
+<p><strong>bunzip2</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">bunzip2 [选项] [文件] //解压缩文件为.bz2格式-k //解压缩文后保留原文件<br></code></pre></td></tr></table></figure>
+
+<h2 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h2><p><strong>write</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">write &lt;用户名&gt; //给在线用户发消息，以Ctrl+D保存结束<br></code></pre></td></tr></table></figure>
+
+<p><strong>wall</strong></p>
+<p>英文原意：write all 执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wall [message]  //发送广播信息（给所有在线用户）<br></code></pre></td></tr></table></figure>
+
+<p><strong>ping</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">ping [选项] [IP地址]<br>-c //指定发送次数<br></code></pre></td></tr></table></figure>
+
+<p><strong>ifconfig</strong></p>
+<p>英文原意：interface configure 执行权限：root</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ifconfig [网卡名称] [IP地址] //查看和设置网卡信息<br></code></pre></td></tr></table></figure>
+
+<p><strong>mail</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mail [用户名] //查看发送电子邮件（用户未在线也可以收到）<br></code></pre></td></tr></table></figure>
+
+<p><strong>last</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">last //列出目前与过去登入系统的用户信息<br></code></pre></td></tr></table></figure>
+
+<p><strong>lastlog</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">lastlog //查看所有用户上次登录时间<br>lastlog -u [uid] //查看该uid用户上次登录时间<br></code></pre></td></tr></table></figure>
+
+<p><strong>traceroute</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">traceroute //显示数据包到主机间的路径<br></code></pre></td></tr></table></figure>
+
+<p><strong>netstat</strong></p>
+<p>英文原意：net state   执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">netstat [选项] //显示网络相关信息<br>-t //TCP协议<br>-u //UDP协议<br>-l //监听<br>-r //路由<br>-n //显示IP地址和端口号<br></code></pre></td></tr></table></figure>
+
+<p><strong>setup</strong></p>
+<p>执行权限：root</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">setup //配置网络<br>//配置完后需要使用service network restart进行设备的重启<br></code></pre></td></tr></table></figure>
+
+<p><strong>mount</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mount -t [文件系统] [设备文件名] [挂载点]<br>mount -t iso9660 /dev/sr0 /mnt/cdrom //挂在光盘<br></code></pre></td></tr></table></figure>
+
+<h2 id="关机重启命令"><a href="#关机重启命令" class="headerlink" title="关机重启命令"></a>关机重启命令</h2><p><strong>shutdown</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">shutdown [选项] [时间] //关机或重启<br>-c //取消前一个关机命令<br>-h //关机<br>-r //重启<br><br>//其他关机命令<br>//halt<br>//poweroff<br>//init 0<br><br>//其他重启命令<br>//reboot<br>//init 6<br></code></pre></td></tr></table></figure>
+
+<p><strong>logout</strong></p>
+<p>执行权限：所有用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">logout //退出登录命令<br></code></pre></td></tr></table></figure>
+
+
+
 
       </section>
 
